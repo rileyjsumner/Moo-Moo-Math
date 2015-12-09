@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static String INSERT_OR_EDIT = "/user.jsp";
-    private static String LIST_USER = "/listUser.jsp";
+    private static final String INSERT_OR_EDIT = "/user.jsp";
+    private static final String LIST_USER = "/listUser.jsp";
 
     public UserController() {
         super();
@@ -24,7 +24,7 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward="";
         String action = request.getParameter("action");
-
+        
         if (action.equalsIgnoreCase("delete")){
         
         }
