@@ -8,7 +8,7 @@
     <description></description>
     <display-name>UserController</display-name>
     <servlet-name>UserController</servlet-name>
-    <servlet-class>com.daniel.controller.UserController</servlet-class>
+    <servlet-class>com.Servlet.UserController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserController</servlet-name>

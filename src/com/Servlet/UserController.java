@@ -1,9 +1,7 @@
 package com.Servlet;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String INSERT_OR_EDIT = "/user.jsp";
-    private static final String LIST_USER = "/listUser.jsp";
 
     public UserController() {
         super();
@@ -25,8 +21,22 @@ public class UserController extends HttpServlet {
         String forward="";
         String action = request.getParameter("action");
         
-        if (action.equalsIgnoreCase("delete")){
-        
+        System.out.println("ACTION IS: " + action);
+        Enumeration<String> names = request.getParameterNames();
+        while(names.hasMoreElements()){
+        	System.out.println(names.nextElement());
+        }
+        //action = action.trim();
+        if (action.equalsIgnoreCase("login")){
+        	forward="/Login.jsp";
+        }
+        else if (action.equalsIgnoreCase("LoginForm")){
+        	if(request.getParameter("Username")=="Nixon"){
+        		forward="/CreateAccount.jsp";
+        	}
+        	else{
+        		forward="/Login.jsp";
+        	}
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -34,13 +44,7 @@ public class UserController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("dob"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String userid = request.getParameter("userid");
-        RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
+        RequestDispatcher view = request.getRequestDispatcher("/Login.jsp");
         view.forward(request, response);
     }
 }

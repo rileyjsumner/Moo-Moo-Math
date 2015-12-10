@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>Index</title>
 </head>
 <body>
 <h1>HELLO</h1>
+<jsp:forward page="/UserController?action=Login" />
 </body>
 </html>

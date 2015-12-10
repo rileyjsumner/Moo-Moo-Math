@@ -12,14 +12,21 @@
 <title>Log in</title>
 </head>
 <body>
-    <form method="GET" action='loginform' name="frmAddUser">
+<script>
+function newAccount() {
+	document.location.href = "CreateAccount.jsp";
+}
+</script>
+    <form method="GET" action="UserController?action=LoginForm" name="UserController">
         User name : <input
             type="text" name="User name"
-            value="<c:out value="${user.Username}" />" /> <br /> 
+            value="${Username}" /> <br /> 
         Password : <input
             type="text" name="password"
-            value="<c:out value="${user.Password}" />" /> <br />
+            value="${Password}" /> <br />
         <input type="submit" value="Submit" />
     </form>
+    <h1> </h1>
+    <button type="button" onclick="newAccount()">Create Account</button>
 </body>
 </html>
