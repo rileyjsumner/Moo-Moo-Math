@@ -611,6 +611,34 @@ public class RandomNumber
                         }
                         else
                         {System.out.println("Incorrect");}
+                        i = num.nextInt(9);
+                    j = num.nextInt(9);
+                    k = num.nextInt(9);
+                    l = num.nextInt(9);
+                    m = num.nextInt(9);
+                    n = num.nextInt(9);
+                    a2 = (i/10) + (j/100) + (k/1000);
+                    b2 = (l/10) + (m/100) + (n/1000);
+                    e1 = "." + i + j + k;
+                    h1 = "." + l + m + n;
+                    String[] x3 = {"largest", "smallest"};
+                    o = num.nextInt(1);
+                    i1 = "Which number is the " + x3[o] + "?\n" + e1 + " or " + h1 + " ";
+                    // Which number is (largest or smallest)? .xyz or .abc
+                    System.out.println(i1);
+                    p2 = ans.nextDouble();
+                        if (o == 0 && a2 > b2 && a2 == p2)
+                        {
+                            addPoints(10);
+                            System.out.println("Correct!");
+                        }
+                        else if (o == 1 && a2 < b2 && b2 == p2)
+                        {
+                            addPoints(10);
+                            System.out.println("Correct!");
+                        }
+                        else
+                        {System.out.println("Incorrect");}
                 }
             case 46: // Geometry
                 points = 0;
