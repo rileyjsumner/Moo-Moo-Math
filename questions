@@ -2,6 +2,7 @@ package Tutorial;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
 public class RandomNumber 
 {
     static int points = 0;
@@ -579,10 +580,89 @@ public class RandomNumber
             break;
             case 45: // Decimals
             case 46: // Geometry
+                points = 0;
+                while (points < 100)
+                {
+                    String q3[] = {"Joe", "Steve", "Billy", "Jack", "Bob", "Ben", "Sarah", "Sally", "Amelia", "Susan", "Madison", "Hannah"};
+                    a = num.nextInt(11);
+                    r1 = q3[a];
+                    b = num.nextInt(9) + 1;
+                    c = num.nextInt(19) + 1;
+                    d = num.nextInt(9) + 1;
+                    e = c * d;
+                    f = b * e;
+                    f1 = null;
+                        if (a <= 5)
+                        {f1 = "his";}
+                        else
+                        {f1 = "her";}
+                    // (name) wants to put tile in his/her house. The room is x * y. Tile costs $z. How much will the whole room cost?
+                    z1 = r1 + " wants to put tile in " + f1 + " living room. The room is " + c + " feet by " + d + " feet. ";
+                    y1 = "Tile is $" + b + " a square foot. How much will the entire room cost? $";
+                    System.out.print(z1 + y1);
+                    l = ans.nextInt();
+                        if (l == f)
+                        {
+                            addPoints(10);
+                            System.out.println("Correct!");
+                        }
+                        else
+                        {System.out.println("Incorrect");}
+                }
+            break;
             case 47: // Mixed Fractions
             case 51: // Ratios
-            case 52: // Multiply
+                points = 0;
+                while (points < 100)
+                {
+                    a = num.nextInt(9) + 1;
+                    b = num.nextInt(9) + 1;
+                    c = num.nextInt(9) + 1;
+                    d = num.nextInt(9) + 1;
+                    boolean[] j3 = {true, false, true, false, true, false, true, false, true};
+                    j = num.nextInt(8) + 1;
+                    e = 0;
+                    f = 0;
+                        if (j3[j] == true)
+                        {e = c; f = c;}
+                        else if (j3[j] == false)
+                        {e = c; f = d;}
+                    g = a * e;
+                    h = b * f;
+                    // is x:y equivalent to a:b?
+                    System.out.print("Are these two ratios equivalent?: \n" + a + ":" + g + " and " + b + ":" + h);
+                    c1 = ans2.nextLine();
+                        if (c1.equals(toLowerCase("yes")) && j3[j] == true)
+                        {
+                            addPoints(10);
+                            System.out.println("Correct!");
+                        }
+                        else if (c1.equals(toLowerCase("no")) && j3[j] == false)
+                        {
+                            addPoints(10);
+                            System.out.println("Correct!");
+                        }
+                        else
+                        {System.out.println("Incorrect");}
+                    i = num.nextInt(10) * 10;
+                    k = num.nextInt(99) + 1;
+                    // What is x% of y?
+                    System.out.print("What is " + i + "% of " + k+ "? ");
+                    d2 = ans.nextDouble();
+                    l2 = ((double)i/100) * k;
+                        if (d2 == l2)
+                        {
+                            addPoints(10);
+                            System.out.println("Correct!");
+                        }
+                        else
+                        {System.out.println("Incorrect");}
+                }
+            break;
+            case 52: // Multiply fractions
+            break;
             case 53: // Divide fractions
+            break;
             case 54: // Add Decimals
                 points = 0;
                 while (points < 100)
