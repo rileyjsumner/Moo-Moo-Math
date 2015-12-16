@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form method="GET" action='CreateAccountform' name="frmAddUser">
+<form method="Post" action='UserController' name="CreateAccount">
         User name : <input
             type="text" name="User name"
             value="${NewUser.Username}" /> <br /> 

@@ -17,7 +17,7 @@ function newAccount() {
 	document.location.href = "CreateAccount.jsp";
 }
 </script>
-    <form method="GET" action="UserController?action=LoginForm" name="UserController">
+    <form method="POST" action="UserController?action=LoginForm" name="UserController">
         User name : <input
             type="text" name="User name"
             value="${Username}" /> <br /> 
