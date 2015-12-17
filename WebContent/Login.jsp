@@ -12,11 +12,6 @@
 <title>Log in</title>
 </head>
 <body>
-<script>
-function newAccount() {
-	document.location.href = "CreateAccount.jsp";
-}
-</script>
     <form method="POST" action="UserController?action=LoginForm" name="UserController">
         User name : <input
             type="text" name="User name"
@@ -27,6 +22,6 @@ function newAccount() {
         <input type="submit" value="Submit" />
     </form>
     <h1> </h1>
-    <button type="button" onclick="newAccount()">Create Account</button>
+    <button type="button" onclick="document.location.href = 'CreateAccount.jsp';">Create Account</button>
 </body>
 </html>
