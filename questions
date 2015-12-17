@@ -739,8 +739,50 @@ public class RandomNumber
                 }
             break;
             case 52: // Multiply fractions
+                points = 0;
+                a4 = new Fraction();
+                b4 = new Fraction();
+                while (points < 100)
+                {
+                    a4.n = num.nextInt(3) + 2;
+                    a4.d = num.nextInt(2) + 5;
+                    b4.n = num.nextInt(3) + 2;
+                    b4.d = num.nextInt(2) + 5;
+                    a4.simplify();
+                    b4.simplify();
+                    System.out.print("What is " + a4.getString() + " * " + b4.getString() + "? ");
+                    n1 = ans2.nextLine();
+                    o1 = a4.mulFrac(b4).getString();
+                    correctString(n1, o1);
+                }
             break;
             case 53: // Divide fractions
+                points = 0;
+                a4 = new Fraction();
+                b4 = new Fraction();
+                while (points < 100)
+                {
+                    a = num.nextInt(4) + 2; a4.n = a;
+                    b = num.nextInt(4) + 5; a4.d = b;
+                    c = num.nextInt(4) + 1; b4.n = c;
+                    d = num.nextInt(4) + 6; b4.d = d;
+                    a4.simplify();
+                    b4.simplify();
+                    t1 = null;
+                    if ((a / b) >= (c / d))
+                    {
+                        System.out.print("What is " + a4.getString() + " / " + b4.getString() + "? ");
+                        t1 = a4.divFrac(b4).getString();
+                    }
+                    else if ((a / b) < (c / d))
+                    {
+                        System.out.print("What is " + b4.getString() + " / " + a4.getString() + "? ");
+                        t1 = b4.divFrac(a4).getString();
+                    }
+                    t1 = a4.divFrac(b4).getString();
+                    u1 = ans2.nextLine();
+                    correctString(t1, u1);
+                }
             break;
             case 54: // Add Decimals
                 points = 0;
