@@ -166,7 +166,25 @@ public class RandomNumber
                 points = 0;
                 while (points < 100)
                 {
-                    
+                    int in = 0, cm = 0, ft = 0, mm = 0, yd = 0, tbsp = 0, tsp = 0, pint = 0, qrt = 0, qurt = 0, gal = 0, oz = 0, lb = 0;
+                    a = num.nextInt(19) + 1;
+                    a1 = "How many feet can you make with " + a + " inches? ";
+                    b1 = "How many centimeters can you make with " + a + " millimeters? ";
+                    c1 = "How many tablespoons can you make with " + a + " teaspoons? ";
+                    d1 = "How many gallons can you make with " + a + " quarts? ";
+                    e1 = "How many quarts can you make with " + a + " pints? ";
+                    f1 = "How many pounds can you make with " + a + " ounces? ";
+                    String[] v3 = {a1, b1, c1, d1, e1, f1};
+                    b = num.nextInt(5);
+                    System.out.print(v3[b]);
+                    c = getInt(); e = 0;
+                        if (b == 0){e = a / 12;}
+                        else if (b == 1){e = a / 10;}
+                        else if (b == 2){e = a / 3;}
+                        else if (b == 3){e = a / 4;}
+                        else if (b == 4){e = a / 2;}
+                        else if (b == 5){e = a / 16;}
+                    correctInt(e, c);
                 }
             case 21: // 3 digit addition
                 points = 0;
@@ -233,8 +251,6 @@ public class RandomNumber
                         {System.out.println("Incorrect. The correct answer is yes");}
                         else if (b3 == false && p1.equals("yes"))
                         {System.out.println("Incorrect. The correct answer is no");}
-                        else
-                        {System.out.println("Incorrect");}
                 }
             break;
             case 24: // Patterns
