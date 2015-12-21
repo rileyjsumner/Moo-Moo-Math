@@ -15,10 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.DbUtil.DbUtil;
 
-
 public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
     public UserController() {
         super();
     }
@@ -86,7 +84,8 @@ public class UserController extends HttpServlet {
                     set.next();
                     String Real_Password = set.getString(1);
                     if(Password.equals(Real_Password)){
-                    	forward="/Correct.jsp";
+                    	
+                    	forward="/Home.jsp";
                     }
                 	
     			} catch (SQLException e) {
@@ -101,9 +100,10 @@ public class UserController extends HttpServlet {
     		
     	}
     	else if(action.equals("CreateAccount")){
-    		String Username=request.getParameter("User name");
+    		String Username=request.getParameter("User Name");
     		String Password = request.getParameter("Password");
-    		String VPassword = request.getParameter("Verify Password");
+    		String FName = request.getParameter("First Name");
+    		String LName = request.getParameter("Last Name");
     		System.out.println("Got here");
     		Connection con= DbUtil.getConnection();
     		try {
