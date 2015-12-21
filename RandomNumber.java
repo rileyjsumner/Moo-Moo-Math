@@ -868,13 +868,13 @@ public class RandomNumber
                     t = num.nextInt(10) + 1;
                     i = num.nextInt(10) + 1;
                     j = num.nextInt(10) + 1;
-                    w2 = p + ((double)j/10);
-                    v2 = t + ((double)i/10);
+                    s2 = p + ((double)j/10);
+                    z2 = t + ((double)i/10);
                     // What is x.0 + y.0?
-                    System.out.print("What is " + w2 + " + " + v2 + "? ");
-                    c2 = getDub();
-                    u2 = w2 + v2;
-                    correctDouble(u2, c2);
+                    System.out.print("What is " + s2 + " + " + z2 + "? ");
+                    i2 = getDub();
+                    m2 = s2 + z2;
+                    correctDouble(m2, i2);
                 }
             break;
             case 55: // Subtract Decimals
@@ -885,13 +885,13 @@ public class RandomNumber
                     t = num.nextInt(10) + 1;
                     i = num.nextInt(10) + 1;
                     j = num.nextInt(10) + 1;
-                    w2 = p + ((double)j/10);
+                    x2 = p + ((double)j/10);
                     v2 = t + ((double)i/10);
                     // What is x.0 - y.0?
-                    System.out.print("What is " + w2 + " - " + v2 + "? ");
-                    c2 = getDub();
-                    u2 = (w2 - v2);
-                    correctDouble(u2, c2);
+                    System.out.print("What is " + x2 + " - " + v2 + "? ");
+                    j2 = getDub();
+                    u2 = (x2 - v2);
+                    correctDouble(u2, j2);
                 }
             break;
             case 56: // Multiply Decimals
@@ -919,19 +919,19 @@ public class RandomNumber
                     t = num.nextInt(10) + 1;
                     i = num.nextInt(10) + 1;
                     j = num.nextInt(10) + 1;
-                    w2 = p + ((double)j/10);
+                    y2 = p + ((double)j/10);
                     v2 = t + ((double)i/10);
                     double [] divisors = new double [2];
-                    divisors[0] = w2;
+                    divisors[0] = y2;
                     divisors[1] = v2;
-                    t2 = w2 * v2;
+                    t2 = y2 * v2;
                     m = num.nextInt(1);
                     // What is x.0 / y.0?
                     System.out.print("What is " + t2 + " / " + divisors[m] + "? ");
                     c2 = getDub();
                     k2 = divisors[m];
-                    u2 = t2 / k2;
-                    correctDouble(u2, c2);
+                    o2 = t2 / k2;
+                    correctDouble(o2, c2);
                 }
             break;
         }
