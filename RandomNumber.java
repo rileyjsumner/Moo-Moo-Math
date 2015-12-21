@@ -158,9 +158,7 @@ public class RandomNumber
             case 15: // Data and Graphs
                 points = 0;
                 while (points < 100)
-                {
-                    
-                }
+                {}
             break;
             case 16: // Measurement
                 points = 0;
@@ -257,15 +255,41 @@ public class RandomNumber
                 points = 0;
                 while (points < 100)
                 {
-                    
+                    String[] f3 = {"triangle", "square", "rectangle", "pentagon", "hexagon", "circle", "star", "heart", "upsidedown triangle", "diamond"};
+                    String[] z3 = {"red", "orange", "yellow", "green", "blue", "violet", "white", "black", "pink", "grey", "brown"};
+                        a = num.nextInt(9);
+                        b = num.nextInt(9);
+                        c = num.nextInt(9);
+                        d = num.nextInt(10);
+                        e = num.nextInt(10);
+                        f = num.nextInt(10);
+                    String[] y3 = {z3[d] + " " + f3[a], z3[e] + " " + f3[b], z3[f] + " " + f3[c]};
+                    a1 = y3[0] + ", " +  y3[1] + ", " + y3[2];
+                    System.out.println(a1 + ", " + a1 + ", " + a1);
+                    System.out.print("What color is the next shape? ");
+                    b1 = ans2.nextLine();
+                        if (b1.equals(z3[d]))
+                        {
+                            addPoints(10);
+                            System.out.println("Correct");
+                        }
+                        else
+                        {System.out.println("Incorrect. The correct answer is " + z3[d]);}
+                    System.out.print("What is the next shape? ");
+                    c1 = ans2.nextLine();
+                        if (c1.equals(f3[a]))
+                        {
+                            addPoints(10);
+                            System.out.println("Correct");
+                        }
+                        else
+                        {System.out.println("Incorrect. The correct answer is " + f3[a]);}
                 }
             break;
             case 25: // Data and Graphs
                 points = 0;
                 while (points < 100)
-                {
-                    
-                }
+                {}
             break;
             case 26: // Probability
                 points = 0;
