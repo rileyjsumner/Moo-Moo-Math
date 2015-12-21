@@ -914,7 +914,7 @@ public class RandomNumber
             case 57: // Divide decimals
                 points = 0;
                 while (points < 100)
-                {
+                { 
                     p = num.nextInt(10) + 1;
                     t = num.nextInt(10) + 1;
                     i = num.nextInt(10) + 1;
