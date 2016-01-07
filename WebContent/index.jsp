@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1>HELLO</h1>
-<jsp:forward page="/UserController?action=Login" />
+<jsp:forward page="Home.jsp" />
 </body>
 </html>
