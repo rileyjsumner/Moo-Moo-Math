@@ -12,7 +12,7 @@
 <title>Log in</title>
 </head>
 <body>
-<form method="POST" action="j_security_check">
+<form style="font-family:Verdana, sans-serif" method=post action="j_security_check">
 <table>
 	<tr>
 		<td colspan="2">Login</td>
@@ -26,7 +26,8 @@
 		<td><input type="password" name="j_password" ></td>
 	</tr>
 	<tr>
-		<td colspan="2"><input type="submit" value="Go" /></td>
+		<td colspan="2"><input type="submit" value="Go" />
+                <input type="reset" value="Reset"></td>
 	</tr>
 </table>
 </form>

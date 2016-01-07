@@ -1,2 +1,7 @@
 /build/
+<<<<<<< HEAD
 WebContent/META-INF/context.xml
+=======
+/nbproject/private/
+/nbbuild/
+>>>>>>> c21415b9d2bdf18b0b825e4aadec1efb062825d5
