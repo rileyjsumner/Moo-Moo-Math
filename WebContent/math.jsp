@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
-        <title>Home</title>
+        <title>1st Grade Math</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" href = "main.css">
@@ -28,6 +28,7 @@
             }
             function toGrade(grade){
                 setCookie("Grade",grade,1);
+                document.location.href = 'Home.jsp';
                 document.location.href = 'math.jsp';
             }
         </script>
@@ -48,6 +49,24 @@
             </div>
             <div class = "text-center">
                 <h1>Sniper Team Dango Math</h1>
+                <p id ="p2">Grade Math</p>
+                <script>
+                    var grade=0;
+                    grade = getCookie("Grade");
+                    var name="You sneaky...";
+                    if(grade==="1"){
+                        name="First Grade";
+                    }else if(grade==="2"){
+                        name="Second Grade";
+                    }else if(grade==="3"){
+                        name="Third Grade";
+                    }else if(grade==="4"){
+                        name="Fourth Grade";
+                    }else if(grade==="5"){
+                        name="Fifth Grade";
+                    }
+                    document.getElementById("p2").innerHTML=name;
+                </script>
             </div>
         </div>
         <div class = "content">

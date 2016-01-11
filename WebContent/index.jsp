@@ -8,6 +8,8 @@
 </head>
 <body>
 <h1>HELLO</h1>
-<jsp:forward page="Home.jsp" />
+<script>
+    document.location.href="Home.jsp";
+</script>
 </body>
 </html>

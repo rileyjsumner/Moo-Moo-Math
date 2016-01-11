@@ -17,7 +17,7 @@
   <security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Kek</web-resource-name>
-			<url-pattern>/Home.jsp</url-pattern>
+			<url-pattern>/secondgrade.html</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>
@@ -35,7 +35,7 @@
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
-			<form-login-page>/login.jsp</form-login-page>
+			<form-login-page>/Login.jsp</form-login-page>
 			<form-error-page>/login-failed.html</form-error-page>
 		</form-login-config>
 	</login-config>
