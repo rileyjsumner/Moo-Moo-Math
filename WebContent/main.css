@@ -1,14 +1,14 @@
+.hoon {
+    background-color: gray;
+}
 .content input {
     border-radius: 15px;
     background-color: #33FF00;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
-    border: 5px solid #009900;
     padding: 5px;
+    border: 4px solid;
     font-weight: bold;
-}
-.content {
-    background-color: #555
 }
 html {
     font-family: sans-serif;

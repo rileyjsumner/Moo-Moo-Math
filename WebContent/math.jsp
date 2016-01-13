@@ -31,6 +31,21 @@
                 document.location.href = 'Home.jsp';
                 document.location.href = 'math.jsp';
             }
+            function addButton (name, bgCol, bdCol, lesson) {
+                var element = document.createElement("input");
+                element.setAttribute("type", "button");
+                element.setAttribute("value", name);
+                element.onclick = function (){
+                    setCookie("lesson", lesson, 1);
+                    document.location.href = "lesson.jsp";
+                };
+                element.style.backgroundColor = bgCol;
+                element.style.borderColor = bdCol;
+                element.style.borderWidth = "4px";
+                element.style.borderStyle = "solid";
+                document.getElementById("kek").appendChild(element);
+            }
+            
         </script>
         <div class = "jumbotron">
             <div class = "text-right">
@@ -82,6 +97,37 @@
                         <input type = "button" style = "background-color:#00BCBC; border: 4px solid #008787" onclick = "toGrade(5)" value = "5th Grade"/>
                         <input type = "button" style = "background-color:#FFDAB9; border: 4px solid #E7C6A5" onclick = "document.location.href = 'Profile.jsp'" value = "Profile"/>
                         <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "content">
+            <div class = "text-center">
+                <div class = "row">
+                    <div style = "background-color: gray;">
+                        <div class = "hoon" id = "kek">
+                            <p style = "background-color: gray;"></p>
+                            <script>
+                                var grade = getCookie("Grade");
+                                if (grade === "1")
+                                {
+                                    addButton("Number Patterns", "#FF5D36", "FF3A0B", 1.1);
+                                    addButton("Addition", "FF5236", "FF1D0B", 1.2);
+                                    addButton("Subtraction", "FF4536", "FF1D0B", 1.3);
+                                    addButton("Geometry", "FF3636", "FF0B0B", 1.4);
+                                    addButton("Measurement", "FC3644", "FB0B1D", 1.5);
+                                }
+                                else if (grade === "2")
+                                {
+                                    addButton("3 Digit Addition", "#FF8C36", "FF730B", 1.1);
+                                    addButton("2 Digit Subtraction", "FF9136", "FF7A0B", 1.2);
+                                    addButton("Number Patterns", "FF9736", "FF800B", 1.3);
+                                    addButton("Patterns", "FF9C36", "FF860B", 1.4);
+                                    addButton("Probability", "FFA036", "FF8C0B", 1.5);
+                                }
+                            </script>
+                            <p></p>
+                        </div>
                     </div>
                 </div>
             </div>
