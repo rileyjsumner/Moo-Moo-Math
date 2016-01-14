@@ -125,6 +125,34 @@
                                     addButton("Patterns", "FF9C36", "FF860B", 1.4);
                                     addButton("Probability", "FFA036", "FF8C0B", 1.5);
                                 }
+                                else if (grade === "3")
+                                {
+                                    addButton("Multiplication", "#FF8C36", "FF730B", 3.1);
+                                    addButton("Division", "FF9136", "FF7A0B", 3.2);
+                                    addButton("Fractions", "FF9736", "FF800B", 3.3);
+                                    addButton("Logical Reasoning", "FF9C36", "FF860B", 3.4);
+                                    addButton("Money", "FFA036", "FF8C0B", 3.5);
+                                    addButton("Geometry", "red", "red", 3.6);
+                                }
+                                else if (grade === "4")
+                                {
+                                    addButton("Equations", "#FF8C36", "FF730B", 4.1);
+                                    addButton("Adding Fractions", "FF9146", "FF7A0B", 4.2);
+                                    addButton("Subtracting Fractions", "FF9746", "FF800B", 4.3);
+                                    addButton("What's my Rule?", "FF9C46", "FF860B", 4.4);
+                                    addButton("Decimals", "FFA046", "FF8C0B", 4.5);
+                                    addButton("Geometry", "red", "red", 4.6);
+                                }
+                                else if (grade === "5")
+                                {
+                                    addButton("Equations", "#FF8C36", "FF730B", 5.1);
+                                    addButton("Adding Fractions", "FF9146", "FF7A0B", 5.2);
+                                    addButton("Subtracting Fractions", "FF9746", "FF800B", 5.3);
+                                    addButton("What's my Rule?", "FF9C46", "FF860B", 5.4);
+                                    addButton("Decimals", "FFA046", "FF8C0B", 5.5);
+                                    addButton("Geometry", "red", "red", 5.6);
+                                    addButton("Divide Decimals", "red", "red", 5.7);
+                                }
                             </script>
                             <p></p>
                         </div>

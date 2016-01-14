@@ -10,11 +10,21 @@
     border: 4px solid;
     font-weight: bold;
 }
+.lessons input {
+    border-radius: 15px;
+    background-color: #33FF00;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    padding: 5px;
+    border: 4px solid;
+    font-weight: bold;
+}
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%}
 body {
+    border: #555;
     margin: 0;
     -webkit-font-smoothing: subpixel-antialiased;
 }
