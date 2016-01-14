@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>SimpleJspServletDB</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>UserController</display-name>
+    <servlet-name>UserController</servlet-name>
+    <servlet-class>com.Servlet.UserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserController</servlet-name>
+    <url-pattern>/UserController</url-pattern>
+  </servlet-mapping>
+  <security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Kek</web-resource-name>
+			<url-pattern>/secondgrade.html</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+
+		<auth-constraint>
+			<role-name>tomcat</role-name>
+		</auth-constraint>
+
+		<user-data-constraint>
+			<!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/Login.jsp</form-login-page>
+			<form-error-page>/login-failed.html</form-error-page>
+		</form-login-config>
+	</login-config>
+</web-app>
