@@ -8,7 +8,8 @@ public class Converter
     static double correctAnsDub;
     static String correctAnsStr;
     static int points;
-    public static String newQuestion(int unit) {
+    public static String newQuestion(int unit) 
+    {
         int     a,  b,  c,  d,  e,  f,  g,  h,  i,  j,  k,  l,  m,  n,  o,  p,  q,  r,  s,  t,  u,  v,  w,  x,  y,  z;
         String a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1, v1, w1, x1, y1, z1;
         double a2, b2, c2, d2, e2, f2, g2, h2, i2, j2, k2, l2, m2, n2, o2, p2, q2, r2, s2, t2, u2, v2, w2, x2, y2, z2;
@@ -131,7 +132,6 @@ public class Converter
                     x1 = "I have " + a + " red marbles, " + b + " blue marbles, and " + c + " green marbles. ";
                     y1 = "What is the probability I pick a " + d3[d] + " marble? ";
                     returnStr = (x1 + y1);
-                    l1 = ans2.nextLine();
                     e = a + b + c;
                     z1 = null;
                         if (d == 0)
@@ -140,7 +140,6 @@ public class Converter
                         {z1 = b + "/" + e;}
                         else if (d == 2)
                         {z1 = c + "/" + e;}
-                    correctString(z1, l1);
                 }
             break;
             case 31: // Multiplication
@@ -149,9 +148,7 @@ public class Converter
                     
                     // What is x * y?
                     returnStr = ("What is " + f + " * " + g + "? ");
-                    v = getInt();
                     h = f * g;
-                    correctInt(h, v);
             break;
             case 32: // Division
                 f = num.nextInt(10) + 1;
@@ -164,9 +161,7 @@ public class Converter
                     x = num.nextInt(1);
                     // What is x / y?
                     returnStr = ("What is " + g + " / " + h3[x] + "? ");
-                    v = getInt();
                     h = g / h3[x];
-                    correctInt(h, v);
             break;
             case 33: // Fractions
                 a = num.nextInt(4);
@@ -188,9 +183,7 @@ public class Converter
                         {g1 = "She";}
                     q1 = (q3[c] + " has " + b + r3[d] + ". " + v1 + " eats " + a + " of them. What fraction did " + g1 + " eat? ");
                     returnStr = (q1);
-                    z1 = ans2.nextLine();
                     x1 = a + "/" + b;
-                    correctString(x1, z1);
             break;
             case 34: // Logical Reasoning
                 a = num.nextInt(9);
@@ -202,17 +195,15 @@ public class Converter
                     // What is the highest number you can make from: a, b, c, d, e, f?
                     a1 = a + " " + b + " " + c + " " + d  + " " + e + " " + f;
                     returnStr = ("What is the highest number you can make from these digits?: \n" + a1 + " ");
-                    g1 = ans2.nextLine();
-                    int h3[] = {a, b, c, d, e, f};
-                    Arrays.sort(h3);
-                        h = h3[h3.length-1];
-                        i = h3[h3.length-2];
-                        j = h3[h3.length-3];
-                        k = h3[h3.length-4];
-                        l = h3[h3.length-5];
-                        m = h3[h3.length-6];
+                    int j3[] = {a, b, c, d, e, f};
+                    Arrays.sort(j3);
+                        h = j3[j3.length-1];
+                        i = j3[j3.length-2];
+                        j = j3[j3.length-3];
+                        k = j3[j3.length-4];
+                        l = j3[j3.length-5];
+                        m = j3[j3.length-6];
                     b1 =  h + "" +  i + j + k + l + m;
-                        correctString(g1, b1);
                     n = num.nextInt(15);
                     o = num.nextInt(15);
                     p = n + o;
@@ -223,16 +214,7 @@ public class Converter
                         {q = o - n;}
                     // The sum of 2 numbers is x, the difference is y. What are the numbers?
                     returnStr = ("The sum of 2 numbers is " + p + ". The difference of the 2 numbers is " + q + ". \nWhat is number 1? ");
-                    r = getInt();
                     returnStr = ("What is number 2? ");
-                    s = getInt();
-                        if ((r == n || r == o) && (s == n || s == o))
-                        {
-                            returnStr = ("Correct!");
-                            addPoints(10);
-                        }
-                        else
-                        {returnStr = ("Incorrect. The correct answers are " + n + " and " + o + ".");}
                     t = num.nextInt(150);
                     u = num.nextInt(10) + 5;
                     v = num.nextInt(98) - u;
@@ -263,8 +245,6 @@ public class Converter
                     z = t - a;
                     x = t + a;
                     returnStr = ("I am greater than " + z + ", but less than " + x + ". ");
-                    y = getInt();
-                    correctInt(t, y);
             break;
             case 35: // Money
                 a = num.nextInt(5);
@@ -278,18 +258,13 @@ public class Converter
                     j1 = "I have " + a + " quarter" + (a > 1?"s":"") + ", " + b + " dime" + (b > 1?"s":"") + ", " + c + " nickel" + (c > 1?"s":"") + " and " + d + " penn" + (c > 1?"ies":"y") + ". How many cents do I have? ¢";
                     // I have q quarters, d dimes, n nickles, and p pennies. How much do I have?
                     returnStr = (j1);
-                    e2 = getDub();
                     f2 = q2 + n2 + e2 + r2;
-                    correctDouble(f2, e2);
             break;
             case 36: // Geometry
                 a = num.nextInt(9) + 1;
                     b = num.nextInt(9) + 1;
                     s1 = "A shape is " + a + " inches by " + b + " inches. What is the area in square inches? ";
-                    c = a * b;
                     returnStr = (s1);
-                    d = getInt();
-                    correctInt(c, d);
             case 41: // Equations
                 c = num.nextInt(10) + 1;
                     t = num.nextInt(10) + 1;
@@ -298,8 +273,6 @@ public class Converter
                     l = t + c;
                     // What is x + n if n = y?
                     returnStr = ("What is " + c + " + " + alpha[h] + " if " + alpha[h] + " = " + t + "? ");
-                    e = getInt();
-                    correctInt(l, e);
             break;
             case 42: // Adding Fractions
                 a4 = new Fraction();
@@ -311,9 +284,7 @@ public class Converter
                     a4.simplify();
                     b4.simplify();
                     returnStr = ("What is " + a4.getString() + " + " + b4.getString() + "? ");
-                    n1 = ans2.nextLine();
                     o1 = a4.addFrac(b4).getString();
-                    correctString(o1, n1);
             case 43: // Subtracting Fractions
                 a4 = new Fraction();
                 b4 = new Fraction();
@@ -334,8 +305,6 @@ public class Converter
                         returnStr = ("What is " + b4.getString() + " - " + a4.getString() + "? ");
                         o1 = b4.subFrac(a4).getString();
                     }
-                    n1 = ans2.nextLine();
-                    correctString(o1, n1);
             case 44: // What's my rule?
                 r = num.nextInt(39) + 10;
                     s = num.nextInt(39) + 10;
@@ -343,61 +312,57 @@ public class Converter
                     y = num.nextInt(39) + 10;
                     z = num.nextInt(39) + 10;
                     n = num.nextInt(10) + 1;
-                    boolean[] r3 = {true, false, false, true, false, false, true, false, false, false};
+                    boolean[] x3 = {true, false, false, true, false, false, true, false, false, false};
                     b = num.nextInt(9);
                         returnStr = ("   in    *   out   ");
                         returnStr = ("*******************");
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + r + "   *    " + (r+n) + "    ");}
                         else
                         {returnStr = ("    " + r + "   *    " + (r+n) + "    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + s + "   *    " + (s+n) + "    ");}
                         else
                         {returnStr = ("    *    *    " + (s+n) + "    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + t + "   *    " + (t+n) + "    ");}
                         else
                         {returnStr = ("    " + y + "   *    *    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + z + "   *    " + (z+n) + "    ");}
                         else
                         {returnStr = ("    " + z + "   *    *    ");}
                     // What's my rule?
                     returnStr = ("What's my rule? +");
-                    a = getInt();
-                    correctInt(n, a);
                     // What's my rule?
                         returnStr = ("   in    *   out   ");
                         returnStr = ("*******************");
                         n = num.nextInt(10) + 1;
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + r + "   *    " + (r-n) + "    ");}
                         else
                         {returnStr = ("    " + r + "   *    " + (r-n) + "    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + s + "   *    " + (s-n) + "    ");}
                         else
                         {returnStr = ("    *    *    " + (s-n) + "    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + t + "   *    " + (t-n) + "    ");}
                         else
                         {returnStr = ("    " + y + "   *    *    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + z + "   *    " + (z-n) + "    ");}
                         else
                         {returnStr = ("    " + z + "   *    *    ");}
                     returnStr = ("What's my rule? -");
-                    a = getInt();
-                    correctInt(n, a);
                     returnStr = ("   in    *   out   ");
                     returnStr = ("*******************");
                     r = num.nextInt(8) + 1;
@@ -407,29 +372,27 @@ public class Converter
                     z = num.nextInt(8) + 1;
                     n = num.nextInt(10) + 1;
                     b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + r + "   *    " + (r*n) + "    ");}
                         else
                         {returnStr = ("    " + r + "   *    " + (r*n) + "    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + s + "   *    " + (s*n) + "    ");}
                         else
                         {returnStr = ("    *   *    " + (s*n) + "    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + t + "   *    " + (t*n) + "    ");}
                         else
                         {returnStr = ("    " + y + "   *    *    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + z + "   *    " + (z*n) + "    ");}
                         else
                         {returnStr = ("    " + z + "   *    *    ");}
                     // What's my Rule?
                     returnStr = ("What's my rule? *");
-                    a = getInt();
-                    correctInt(n, a);
                     returnStr = ("   in    *   out   ");
                     returnStr = ("*******************");
                     n = num.nextInt(10) + 1;
@@ -444,29 +407,27 @@ public class Converter
                     z = num.nextInt(4) + 5;
                     z = z * n;
                     b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + r + "   *    " + (r/n) + "    ");}
                         else
                         {returnStr = ("    " + r + "   *    " + (r/n) + "    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + s + "   *    " + (s/n) + "    ");}
                         else
                         {returnStr = ("    *    *    " + (s/n) + "    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + t + "   *    " + (t/n) + "    ");}
                         else
                         {returnStr = ("    " + y + "   *    *    ");}
                         b = num.nextInt(9);
-                        if (r3[b] == true)
+                        if (x3[b] == true)
                         {returnStr = ("    " + z + "   *    " + (z/n) + "    ");}
                         else
                         {returnStr = ("    " + z + "   *    *    ");}
                     // What's my rule?
                     returnStr = ("What's my rule? /");
-                    a = getInt();
-                    correctInt(n, a);
             break;
             case 45: // Decimals
                 a = num.nextInt(9);
@@ -476,20 +437,12 @@ public class Converter
                     e = num.nextInt(9);
                     f = num.nextInt(9);
                     a1 = a + "" + b + "" + c + "." + d  + "" + e + "" + f;
-                    int f3[] = {a, b, c, d, e, f};
+                    int c3[] = {a, b, c, d, e, f};
                     // What number is in the __ths place?
                     String[] d3 = {"hundreds", "tens", "ones", "tenths", "hundredths", "thousandths"};
                     g = num.nextInt(5);
                     d1 = "What number is in the " + d3[g] + " place? \n" + a1 + ": ";
                     returnStr = (d1);
-                    h = getInt();
-                        if (f3[g] == h)
-                        {
-                            addPoints(10);
-                            returnStr = ("Correct!");
-                        }
-                        else
-                        {returnStr = ("Incorrect. The correct answer is " + f3[g]);}
                     i = num.nextInt(9);
                     j = num.nextInt(9);
                     k = num.nextInt(9);
@@ -502,15 +455,15 @@ public class Converter
                     b2 = Math.round(b2 * 1000d);
                     a2 = a2 / 1000; b2 = b2 / 1000;
                     e1 = "." + i + j + k; h1 = "." + l + m + n;
-                    String[] x3 = {"largest", "smallest"};
+                    String[] n3 = {"largest", "smallest"};
                     o = num.nextInt(1);
-                    i1 = "Which number is the " + x3[o] + "?\n" + e1 + " or " + h1 + " ";
+                    i1 = "Which number is the " + n3[o] + "?\n" + e1 + " or " + h1 + " ";
                     // Which number is (largest or smallest)? .xyz or .abc
                     returnStr = (i1);
             case 46: // Geometry
-                String q3[] = {"Joe", "Steve", "Billy", "Jack", "Bob", "Ben", "Sarah", "Sally", "Amelia", "Susan", "Madison", "Hannah"};
+                String m3[] = {"Joe", "Steve", "Billy", "Jack", "Bob", "Ben", "Sarah", "Sally", "Amelia", "Susan", "Madison", "Hannah"};
                     a = num.nextInt(11);
-                    r1 = q3[a];
+                    r1 = m3[a];
                     b = num.nextInt(9) + 1;
                     c = num.nextInt(19) + 1;
                     d = num.nextInt(9) + 1;
@@ -525,21 +478,19 @@ public class Converter
                     z1 = r1 + " wants to put tile in " + f1 + " living room. The room is " + c + " feet by " + d + " feet. ";
                     y1 = "Tile is $" + b + " a square foot. How much will the entire room cost? $";
                     returnStr = (z1 + y1);
-                    l = getInt();
-                    correctInt(f, l);
             break;
             case 51: // Ratios
                 a = num.nextInt(9) + 1;
                     b = num.nextInt(9) + 1;
                     c = num.nextInt(9) + 1;
                     d = num.nextInt(9) + 1;
-                    boolean[] j3 = {true, false, true, false, true, false, true, false, true};
+                    boolean[] a3 = {true, false, true, false, true, false, true, false, true};
                     j = num.nextInt(8) + 1;
                     e = 0;
                     f = 0;
-                        if (j3[j] == true)
+                        if (a3[j] == true)
                         {e = c; f = c;}
-                        else if (j3[j] == false)
+                        else if (a3[j] == false)
                         {e = c; f = d;}
                     g = a * e;
                     h = b * f;
@@ -549,11 +500,8 @@ public class Converter
                     k = num.nextInt(99) + 1;
                     // What is x% of y?
                     returnStr = ("What is " + i + "% of " + k + "? ");
-                    d2 = getDub();
                     l2 = ((double)(i)/100) * k;
                     g2 = Math.round(l2 * 10d);
-                    h2 = d2 * 10;
-                    correctDouble(h2, g2);
             break;
             case 52: // Multiply fractions
                 a4 = new Fraction();
@@ -565,9 +513,7 @@ public class Converter
                     a4.simplify();
                     b4.simplify();
                     returnStr = ("What is " + a4.getString() + " * " + b4.getString() + "? ");
-                    n1 = ans2.nextLine();
                     o1 = a4.mulFrac(b4).getString();
-                    correctString(o1, n1);
             break;
             case 53: // Divide fractions
                 a4 = new Fraction();
@@ -590,8 +536,6 @@ public class Converter
                         t1 = b4.divFrac(a4).getString();
                     }
                     t1 = a4.divFrac(b4).getString();
-                    u1 = ans2.nextLine();
-                    correctString(t1, u1);
             break;
             case 54: // Add Decimals
                 p = num.nextInt(10) + 1;
@@ -602,9 +546,7 @@ public class Converter
                     z2 = t + ((double)i/10);
                     // What is x.0 + y.0?
                     returnStr = ("What is " + s2 + " + " + z2 + "? ");
-                    i2 = getDub();
                     m2 = s2 + z2;
-                    correctDouble(m2, i2);
             break;
             case 55: // Subtract Decimals
                p = num.nextInt(10) + 1;
@@ -615,9 +557,7 @@ public class Converter
                     v2 = t + ((double)i/10);
                     // What is x.0 - y.0?
                     returnStr = ("What is " + x2 + " - " + v2 + "? ");
-                    j2 = getDub();
                     u2 = (x2 - v2);
-                    correctDouble(u2, j2);
             break;
             case 56: // Multiply Decimals
                p = num.nextInt(10) + 1;
@@ -628,9 +568,7 @@ public class Converter
                     v2 = t + ((double)i/10);
                     // What is x.0 * y.0?
                     returnStr = ("What is " + w2 + " * " + v2 + "? ");
-                    c2 = getDub();
                     u2 = w2 * v2;
-                    correctDouble(u2, c2);
             break;
             case 57: // Divide decimals
                 p = num.nextInt(10) + 1;
@@ -646,12 +584,10 @@ public class Converter
                     m = num.nextInt(1);
                     // What is x.0 / y.0?
                     returnStr = ("What is " + t2 + " / " + divisors[m] + "? ");
-                    c2 = getDub();
                     k2 = divisors[m];
                     o2 = t2 / k2;
-                    correctDouble(o2, c2);
             break;
         }
-        return
+        return "ok";
     }
 }

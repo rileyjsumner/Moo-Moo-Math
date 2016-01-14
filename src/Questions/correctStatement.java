@@ -1,9 +1,10 @@
 package Questions;
 
-import static Questions.Converter;
-
 public class correctStatement 
 {
+    static int points = 0;
+    public static void addPoints(int _points)
+    {points += _points;}
     public static void correctInt(int x, int y)
     {
         if (x == y)
