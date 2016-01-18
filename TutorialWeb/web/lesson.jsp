@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Questions.Converter"%>
 <html>
     <head>
         <title>Home</title>
@@ -47,7 +48,7 @@
                 </div>
             </div>
             <div class = "text-center">
-                <h1>Sniper Team Dango Math</h1>
+                <h1>Oh Dang! Studios Math</h1>
             </div>
         </div>
         <div class = "content">
@@ -69,7 +70,7 @@
         </div>
         <div>
             <script>
-                
+                newQuestion(lesson);
             </script>
         </div>
     </body>

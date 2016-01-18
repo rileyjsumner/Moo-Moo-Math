@@ -1,7 +1,7 @@
 
-package Tutorial;
+package Questions;
 
-public class Fraction 
+public class Fraction
 {
     public int n, d;
     public Fraction()

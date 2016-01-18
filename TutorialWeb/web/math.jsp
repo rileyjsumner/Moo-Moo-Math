@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class = "text-center">
-                <h1>Sniper Team Dango Math</h1>
+                <h1>Oh Dang Studios! Math</h1>
                 <p id ="p2">Grade Math</p>
                 <script>
                     var grade=0;
