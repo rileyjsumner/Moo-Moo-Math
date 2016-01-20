@@ -12,13 +12,13 @@
     </head>
     <body>
         <script>
-            function setCookie(cname, cvalue, exdays) {
+            function setCookie(cname, cvalue, exdays){
                 var d = new Date();
                 d.setTime(d.getTime() + (exdays*24*60*60*1000));
                 var expires = "expires="+d.toUTCString();
                 document.cookie = cname + "=" + cvalue + "; " + expires;
             }
-            function getCookie(cname) {
+            function getCookie(cname){
                 var name = cname + "=";
                 var ca = document.cookie.split(';');
                 for(var i=0; i<ca.length; i++) {
@@ -70,37 +70,104 @@
             </div>
         </div>
         <div>
-            
             <script>
                 var grade = parseInt(getCookie("Grade"));
                 var lesson = parseInt(getCookie("Lesson"));
-                if(grade === "NaN" || lesson === "NaN"){
-                    document.location.href = 'login-failed.html';
-                }
-                else{
-                    var kek = getCookie("Grade") + getCookie("Lesson")+"Stage";
-                    if(getCookie(kek) === ""){
+                if(grade === "NaN" || lesson === "NaN")
+                {document.location.href = 'login-failed.html';}
+                else
+                {
+                    var kek = getCookie("Grade") + getCookie("Lesson") + "Stage";
+                    if(getCookie(kek) === "")
+                    {
                         setCookie(kek, "Lesson",1);
                     }
-                switch(grade)
-                {
-                    case 1:
-                        switch(lesson)
-                        {
-                            case 1:
-                                if(<%%>)
+                    switch(grade)
+                    {
+                        case 1:
+                            switch(lesson)
+                            {
+                                case 1:
                                 break;
-                        }
-                    break;
-                    case 2:
-                    break;
-                    case 3:
-                    break;
-                    case 4:
-                    break;
-                    case 5:
-                    break;
-                }
+                                case 2:
+                                break;
+                                case 3:
+                                break;
+                                case 4:
+                                break;
+                                case 5:
+                                break;
+                            }
+                        break;
+                        case 2:
+                            switch(lesson)
+                            {
+                                case 1:
+                                break;
+                                case 2:
+                                break;
+                                case 3:
+                                break;
+                                case 4:
+                                break;
+                                case 5:
+                                break;
+                            }
+                        break;
+                        case 3:
+                            switch(lesson)
+                            {
+                                case 1:
+                                break;
+                                case 2:
+                                break;
+                                case 3:
+                                break;
+                                case 4:
+                                break;
+                                case 5:
+                                break;
+                                case 6:
+                                break;
+                            }
+                        break;
+                        case 4:
+                            switch(lesson)
+                            {
+                                case 1:
+                                break;
+                                case 2:
+                                break;
+                                case 3:
+                                break;
+                                case 4:
+                                break;
+                                case 5:
+                                break;
+                                case 6:
+                                break;
+                            }
+                        break;
+                        case 5:
+                            switch(lesson)
+                            {
+                                case 1:
+                                break;
+                                case 2:
+                                break;
+                                case 3:
+                                break;
+                                case 4:
+                                break;
+                                case 5:
+                                break;
+                                case 6:
+                                break;
+                                case 7:
+                                break;
+                            }
+                        break;
+                    }
                 }
             </script>
         </div>
