@@ -4,9 +4,11 @@ import java.util.Arrays;
 import java.util.Random;
 public class Converter 
 {
-    static int    correctAnsInt;
-    static double correctAnsDub;
-    static String correctAnsStr;
+    static int    correctAnsInt;  //0
+    static double correctAnsDub;  //1
+    static String correctAnsStr;  //2
+    static boolean correctAnsBool;//3
+    static int correctAnsType;
     static int points;
     public static String newQuestion(int unit) 
     {
@@ -19,24 +21,39 @@ public class Converter
         switch (unit)
         {
             case 11: // Counting and number patterns
+                g = num.nextInt(3);
+                switch(g){
+                    case 0:
                     a = num.nextInt(100);
-                    c = a + 1;
-                    // What number comes after x? 
+                    correctAnsInt = a + 1;
+                    // What number comes after x?
                     returnStr = ("What number comes after " + a + "? ");
-                    a = num.nextInt(9) + 1;
-                    b = num.nextInt(99) + 1;
-                    // When counting by x's, what number comes after y?
-                    returnStr = ("When counting by " + a + "'s, what number comes after " + b + "? ");
-                    c = a + b;
-                    a = num.nextInt(100) + 1;
-                    b = num.nextInt(10) + 1;
-                    // What number comes next? x, y, z, ?
-                    returnStr = ("What number comes next in the sequence? ");
-                    returnStr = (a + ", " + (a + b) + ", " + (a + b * 2) + ", " + (a + b * 3) + ", " + (a + b * 4) + ", ");
-                    c = a + b * 5;
-                    // Odd or Even?
-                    a = num.nextInt(100) + 1;
-                    returnStr = ("Is this number even? (yes or no) " + a);
+                    correctAnsType = 0;
+                    break;
+                    case 1:
+                        a = num.nextInt(9) + 1;
+                        b = num.nextInt(99) + 1;
+                        // When counting by x's, what number comes after y?
+                        returnStr = ("When counting by " + a + "'s, what number comes after " + b + "? ");
+                        correctAnsInt = a + b;
+                        correctAnsType = 0;
+                    break;
+                    case 2:
+                        a = num.nextInt(100) + 1;
+                        b = num.nextInt(10) + 1;
+                        // What number comes next? x, y, z, ?
+                        returnStr = "What number comes next in the sequence?" + "\n "+a + ", " + (a + b) + ", " + (a + b * 2) + ", " + (a + b * 3) + ", " + (a + b * 4) + ", ";
+                        correctAnsInt = a + b * 5;
+                        correctAnsType = 0;
+                        break;
+                    case 3:
+                        // Odd or Even?
+                        a = num.nextInt(100) + 1;
+                        returnStr = ("Is this number even? (yes or no) " + a);
+                        correctAnsBool = (a%2==0);
+                        correctAnsType = 3;
+                        break;
+                }
             break;
             case 12: // Addition
                 c = num.nextInt(10) + 10;

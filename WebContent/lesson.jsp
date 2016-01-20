@@ -68,8 +68,27 @@
             </div>
         </div>
         <div>
+            
             <script>
-                
+                var grade = parseInt(getCookie("Grade"));
+                var lesson = parseInt(getCookie("Lesson"));
+                if(grade === "NaN" || lesson === "NaN"){
+                    document.location.href = 'login-failed.html';
+                }
+                else{
+                    var kek = getCookie("Grade") + getCookie("Lesson")+"Stage";
+                    if(getCookie(kek) === ""){
+                        setCookie(kek, "Lesson",1);
+                    }
+                switch(grade){
+                    case 1:
+                        switch(lesson){
+                            case 1:
+                                if
+                                break;
+                        }
+                }
+                }
             </script>
         </div>
     </body>
