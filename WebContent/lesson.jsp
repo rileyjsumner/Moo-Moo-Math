@@ -1,4 +1,6 @@
+<%@page import="Questions.Converter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% Converter converter = new Converter();%>
 <html>
     <head>
         <title>Home</title>
@@ -80,13 +82,24 @@
                     if(getCookie(kek) === ""){
                         setCookie(kek, "Lesson",1);
                     }
-                switch(grade){
+                switch(grade)
+                {
                     case 1:
-                        switch(lesson){
+                        switch(lesson)
+                        {
                             case 1:
-                                if
+                                if(<%%>)
                                 break;
                         }
+                    break;
+                    case 2:
+                    break;
+                    case 3:
+                    break;
+                    case 4:
+                    break;
+                    case 5:
+                    break;
                 }
                 }
             </script>
