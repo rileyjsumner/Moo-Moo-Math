@@ -1,4 +1,6 @@
+<%@page import="Questions.Converter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% Converter converter = new Converter();%>
 <html>
     <head>
         <title>Home</title>
@@ -10,13 +12,13 @@
     </head>
     <body>
         <script>
-            function setCookie(cname, cvalue, exdays) {
+            function setCookie(cname, cvalue, exdays){
                 var d = new Date();
                 d.setTime(d.getTime() + (exdays*24*60*60*1000));
                 var expires = "expires="+d.toUTCString();
                 document.cookie = cname + "=" + cvalue + "; " + expires;
             }
-            function getCookie(cname) {
+            function getCookie(cname){
                 var name = cname + "=";
                 var ca = document.cookie.split(';');
                 for(var i=0; i<ca.length; i++) {
@@ -47,7 +49,7 @@
                 </div>
             </div>
             <div class = "text-center">
-                <h1>Sniper Team Dango Math</h1>
+                <h1>Oh Dang Studios! Math</h1>
             </div>
         </div>
         <div class = "content">
@@ -68,17 +70,21 @@
             </div>
         </div>
         <div>
+<<<<<<< HEAD
             <div>
                 <p id ="Kek2"></p>
+=======
+>>>>>>> 73a25977d1f88d087ca393d1ae630a4c8e177278
             <script>
                 var grade = parseInt(getCookie("Grade"));
                 var lesson = parseInt(getCookie("Lesson"));
-                if(grade === "NaN" || lesson === "NaN"){
-                    document.location.href = 'login-failed.html';
-                }
-                else{
-                    var kek = getCookie("Grade") + getCookie("Lesson")+"Stage";
-                    if(getCookie(kek) === ""){
+                if(grade === "NaN" || lesson === "NaN")
+                {document.location.href = 'login-failed.html';}
+                else
+                {
+                    var kek = getCookie("Grade") + getCookie("Lesson") + "Stage";
+                    if(getCookie(kek) === "")
+                    {
                         setCookie(kek, "Lesson",1);
                     <%@page import = "com.DbUtil.DbUtil"%>
                     <%@page import = "import java.sql.*;"%>
@@ -89,15 +95,101 @@
                         
                     %>
                     }
+<<<<<<< HEAD
                 switch(grade){
                     case 1:
                         switch(lesson){
                             
                             case 1:
                                 
+=======
+                    switch(grade)
+                    {
+                        case 1:
+                            switch(lesson)
+                            {
+                                case 1:
+>>>>>>> 73a25977d1f88d087ca393d1ae630a4c8e177278
                                 break;
-                        }
-                }
+                                case 2:
+                                break;
+                                case 3:
+                                break;
+                                case 4:
+                                break;
+                                case 5:
+                                break;
+                            }
+                        break;
+                        case 2:
+                            switch(lesson)
+                            {
+                                case 1:
+                                break;
+                                case 2:
+                                break;
+                                case 3:
+                                break;
+                                case 4:
+                                break;
+                                case 5:
+                                break;
+                            }
+                        break;
+                        case 3:
+                            switch(lesson)
+                            {
+                                case 1:
+                                break;
+                                case 2:
+                                break;
+                                case 3:
+                                break;
+                                case 4:
+                                break;
+                                case 5:
+                                break;
+                                case 6:
+                                break;
+                            }
+                        break;
+                        case 4:
+                            switch(lesson)
+                            {
+                                case 1:
+                                break;
+                                case 2:
+                                break;
+                                case 3:
+                                break;
+                                case 4:
+                                break;
+                                case 5:
+                                break;
+                                case 6:
+                                break;
+                            }
+                        break;
+                        case 5:
+                            switch(lesson)
+                            {
+                                case 1:
+                                break;
+                                case 2:
+                                break;
+                                case 3:
+                                break;
+                                case 4:
+                                break;
+                                case 5:
+                                break;
+                                case 6:
+                                break;
+                                case 7:
+                                break;
+                            }
+                        break;
+                    }
                 }
             </script>
         </div>
