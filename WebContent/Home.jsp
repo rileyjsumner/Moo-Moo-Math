@@ -41,6 +41,7 @@
                             <li><a href = "Login.jsp">Log In</a></li>
                             <li><a href = "Profile.jsp">Profile</a></li>
                             <li class = "divider"></li>
+                            <li><a href = "CreateAccount.jsp">Create Account</a></li>
                             <li><a href = "#">Log Out</a></li>
                         </ul>
                     </div>
