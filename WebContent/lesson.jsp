@@ -68,7 +68,8 @@
             </div>
         </div>
         <div>
-            
+            <div>
+                <p id ="Kek2"></p>
             <script>
                 var grade = parseInt(getCookie("Grade"));
                 var lesson = parseInt(getCookie("Lesson"));
@@ -79,12 +80,21 @@
                     var kek = getCookie("Grade") + getCookie("Lesson")+"Stage";
                     if(getCookie(kek) === ""){
                         setCookie(kek, "Lesson",1);
+                    <%@page import = "com.DbUtil.DbUtil"%>
+                    <%@page import = "import java.sql.*;"%>
+                    <%Connection con= DbUtil.getConnection();
+                    PreparedStatement preparedStatement = con
+                        .prepareStatement("SELECT * FROM progress(Userid) values (0);");
+                    ResultSet Stuff = preparedStatement.executeQuery();
+                        
+                    %>
                     }
                 switch(grade){
                     case 1:
                         switch(lesson){
+                            
                             case 1:
-                                if
+                                
                                 break;
                         }
                 }
