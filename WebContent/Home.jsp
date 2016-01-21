@@ -56,14 +56,12 @@
                 <div class = "row">
                     <div class = "col-md-12">
                         <p></p>
-                        <input type = "submit" style = "background-color:#FFDAB9; border: 4px solid #E7C6A5" onclick="location.href='UserController?action=Home'" value = "Home"/>
-                        <form name ="frm" action = "UserController" method = "GET">
                             <input type = "submit" style = "background-color:#FFDAB9; border: 4px solid #E7C6A5" name="action" value = "Home"/>
-                            <input type = "submit" style = "background-color:#FF0000; border: 4px solid #E00000" value = "1st Grade"/>
-                            <input type = "submit" style = "background-color:#FF7400; border: 4px solid #E06600" value = "2nd Grade"/>
-                            <input type = "submit" style = "background-color:#FFAA00; border: 4px solid #E09600" value = "3rd Grade"/>
-                            <input type = "submit" style = "background-color:#00DD00; border: 4px solid #00B300" value = "4th Grade"/>
-                            <input type = "submit" style = "background-color:#00BCBC; border: 4px solid #008787" value = "5th Grade"/>
+                            <input type = "button" style = "background-color:#FF0000; border: 4px solid #E00000" onclick="toGrade(1)" value = "1st Grade"/>
+                            <input type = "button" style = "background-color:#FF7400; border: 4px solid #E06600" onclick="toGrade(2)" value = "2nd Grade"/>
+                            <input type = "button" style = "background-color:#FFAA00; border: 4px solid #E09600" onclick="toGrade(3)" value = "3rd Grade"/>
+                            <input type = "button" style = "background-color:#00DD00; border: 4px solid #00B300" onclick="toGrade(4)" value = "4th Grade"/>
+                            <input type = "button" style = "background-color:#00BCBC; border: 4px solid #008787" onclick="toGrade(5)" value = "5th Grade"/>
                             <input type = "submit" style = "background-color:#FFDAB9; border: 4px solid #E7C6A5" value = "Profile"/>
                         </form>
                         <p></p>

@@ -1,4 +1,3 @@
-<%@page import="Questions.Converter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% Converter converter = new Converter();%>
 <html>
@@ -70,11 +69,8 @@
             </div>
         </div>
         <div>
-<<<<<<< HEAD
             <div>
                 <p id ="Kek2"></p>
-=======
->>>>>>> 73a25977d1f88d087ca393d1ae630a4c8e177278
             <script>
                 var grade = parseInt(getCookie("Grade"));
                 var lesson = parseInt(getCookie("Lesson"));
@@ -86,30 +82,18 @@
                     if(getCookie(kek) === "")
                     {
                         setCookie(kek, "Lesson",1);
-                    <%@page import = "com.DbUtil.DbUtil"%>
-                    <%@page import = "import java.sql.*;"%>
-                    <%Connection con= DbUtil.getConnection();
-                    PreparedStatement preparedStatement = con
-                        .prepareStatement("SELECT * FROM progress(Userid) values (0);");
-                    ResultSet Stuff = preparedStatement.executeQuery();
-                        
-                    %>
                     }
-<<<<<<< HEAD
                 switch(grade){
                     case 1:
                         switch(lesson){
                             
                             case 1:
-                                
-=======
                     switch(grade)
                     {
                         case 1:
                             switch(lesson)
                             {
                                 case 1:
->>>>>>> 73a25977d1f88d087ca393d1ae630a4c8e177278
                                 break;
                                 case 2:
                                 break;

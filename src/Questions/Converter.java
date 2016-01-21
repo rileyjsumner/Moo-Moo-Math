@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Random;
 public class Converter 
 {
-    static int    correctAnsInt;  //0
-    static double correctAnsDub;  //1
-    static String correctAnsStr;  //2
-    static boolean correctAnsBool;//3
-    static int correctAnsType;
-    static int points;
-    public static String newQuestion(int unit) 
+    int    correctAnsInt;  //0
+    double correctAnsDub;  //1
+    String correctAnsStr;  //2
+    boolean correctAnsBool;//3
+    int correctAnsType;
+    int points;
+    public String newQuestion(int unit)
     {
         int     a,  b,  c,  d,  e,  f,  g,  h,  i,  j,  k,  l,  m,  n,  o,  p,  q,  r,  s,  t,  u,  v,  w,  x,  y,  z;
         String a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1, v1, w1, x1, y1, z1;

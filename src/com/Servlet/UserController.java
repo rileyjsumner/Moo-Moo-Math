@@ -13,14 +13,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Questions.Converter;
 import com.DbUtil.DbUtil;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserController extends HttpServlet {
+    Converter converter;
     private static final long serialVersionUID = 1L;
+    
     public UserController() {
         super();
+        converter=new Converter();
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward="";
         System.out.println("DOGET");
@@ -38,6 +43,38 @@ public class UserController extends HttpServlet {
         //action = action.trim();
         if (action.equalsIgnoreCase("login")){
         	forward="/Login.jsp";
+        }
+        else if (action.equalsIgnoreCase("lesson")){
+            String lessonstring = request.getParameter("lesson");
+            String gr = lessonstring.substring(0, 1);
+            String ls = lessonstring.substring(2, 3);
+            System.out.println(gr);
+            System.out.println(ls);
+            int grade = Integer.parseUnsignedInt(gr);
+            int lesson = Integer.parseUnsignedInt(ls);
+            Connection con = DbUtil.getConnection();
+            PreparedStatement preparedStatement;
+            try {
+                preparedStatement = con.prepareStatement("SELECT * from progress WHERE UserId=0");
+                //preparedStatement.setString(1, gr+ls);
+                //preparedStatement.setString(2, gr+ls);
+                ResultSet set= preparedStatement.executeQuery();
+                set.next();
+                int id = set.getInt("11");
+                System.out.println("1.1= "+id);
+            } catch (SQLException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            // Parameters start with 1
+            
+            switch(grade){
+                case 1:
+                    switch(lesson){
+                        case 2:
+                            
+                    }
+                    break;
+            }
         }
         else if (action.equalsIgnoreCase("LoginForm")){
         	if(request.getParameter("Username")=="Nixon"){
