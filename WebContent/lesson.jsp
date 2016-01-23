@@ -73,7 +73,7 @@
             <div>
                 <p id ="Kek2"></p>
             <script>
-                document.getElementById("Kek2").innerHTML = "<c:out value="${lesson.Lesson}"/>";
+                document.getElementById("Kek2").innerHTML = "<c:out value="${lesson.GetLesson()}"/>";
                 /*var grade = parseInt(getCookie("Grade"));
                 var lesson = parseInt(getCookie("Lesson"));
                 if(grade === "NaN" || lesson === "NaN")
