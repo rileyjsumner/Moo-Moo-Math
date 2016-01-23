@@ -1,5 +1,6 @@
 package com.Servlet;
 
+import com.Beans.LessonBean;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -54,38 +55,37 @@ public class UserController extends HttpServlet {
             int lesson = Integer.parseUnsignedInt(ls);
             Connection con = DbUtil.getConnection();
             PreparedStatement preparedStatement;
+            int id =0;
             try {
-                preparedStatement = con.prepareStatement("SELECT * from progress WHERE UserId=0");
-                //preparedStatement.setString(1, gr+ls);
-                //preparedStatement.setString(2, gr+ls);
+                preparedStatement = con.prepareStatement("SELECT * FROM progress WHERE UserId = ?");
+                preparedStatement.setInt(1, 0);
                 ResultSet set= preparedStatement.executeQuery();
                 set.next();
-                int id = set.getInt("11");
-                System.out.println("1.1= "+id);
+                id = set.getInt(gr+ls);
+                System.out.println(gr+"."+ls+" = "+id);
             } catch (SQLException ex) {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                RequestDispatcher view = request.getRequestDispatcher("Login-Failed");
+                view.forward(request, response);
+                return;
             }
-            // Parameters start with 1
-            
-            switch(grade){
-                case 1:
-                    switch(lesson){
-                        case 2:
-                            
-                    }
-                    break;
+            if(id==-2){
+                LessonBean lessonbean = new LessonBean("");
+                switch(grade){
+                    case 1:
+                        switch(lesson){
+                            case 1:
+                                lessonbean.Lesson ="Add stuff";
+                                break;
+                            case 2:
+                                lessonbean.Lesson ="Do other stuff";
+                                break;
+                        }
+                }
+                request.setAttribute("lesson", lessonbean);
             }
         }
-        else if (action.equalsIgnoreCase("LoginForm")){
-        	if(request.getParameter("Username")=="Nixon"){
-        		forward="/CreateAccount.jsp";
-        	}
-        	else{
-        		forward="/Login.jsp";
-        	}
-        }
-
-        RequestDispatcher view = request.getRequestDispatcher(forward);
+        RequestDispatcher view = request.getRequestDispatcher("/lesson.jsp");
         view.forward(request, response);
     }
 

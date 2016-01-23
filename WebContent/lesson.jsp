@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% Converter converter = new Converter();%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
     <head>
         <title>Home</title>
@@ -72,7 +73,8 @@
             <div>
                 <p id ="Kek2"></p>
             <script>
-                var grade = parseInt(getCookie("Grade"));
+                document.getElementById("Kek2").innerHTML = "<c:out value="${lesson.Lesson}"/>";
+                /*var grade = parseInt(getCookie("Grade"));
                 var lesson = parseInt(getCookie("Lesson"));
                 if(grade === "NaN" || lesson === "NaN")
                 {document.location.href = 'login-failed.html';}
@@ -174,7 +176,7 @@
                             }
                         break;
                     }
-                }
+                }*/
             </script>
         </div>
     </body>

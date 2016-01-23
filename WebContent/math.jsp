@@ -158,7 +158,7 @@
                                     addButton("Geometry", "red", "red", 5.6);
                                     addButton("Divide Decimals", "red", "red", 5.7);
                                 }
-                                delCookie("Grade");
+                                //delCookie("Grade");
                             </script>
                             <p></p>
                         </div>
