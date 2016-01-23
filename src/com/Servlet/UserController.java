@@ -70,15 +70,15 @@ public class UserController extends HttpServlet {
                 return;
             }
             if(id==-2){
-                LessonBean lessonbean = new LessonBean("");
+                LessonBean lessonbean = new LessonBean();
                 switch(grade){
                     case 1:
                         switch(lesson){
                             case 1:
-                                lessonbean.Lesson ="Add stuff";
+                                lessonbean.AddLesson("Welcome to First Grade Math! Here you will learn about many types of problems, like countingKEK(SHAPES_BELOW),");
                                 break;
                             case 2:
-                                lessonbean.Lesson ="Do other stuff";
+                                lessonbean.AddLesson("Do other stuff");
                                 break;
                         }
                 }

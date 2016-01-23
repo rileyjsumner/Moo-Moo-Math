@@ -1,13 +1,19 @@
 package com.Beans;
-
+import java.util.*;
 public class LessonBean {
     public int mode;
-    public String Lesson;
-    public LessonBean(String lesson){
+    public List<String> Lessons;
+    public LessonBean(List<String> lessons){
         int mode = 0;
-        Lesson = lesson;
+        Lessons = lessons;
     }
-    public String GetLesson(){
-        return Lesson;
+    public LessonBean(){
+        int mode = 0;
+    }
+    public void AddLesson(String lesson){
+        Lessons.add(lesson);
+    }
+    public String GetLesson(int lesson){
+        return Lessons.get(lesson);
     }
 }

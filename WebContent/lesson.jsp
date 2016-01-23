@@ -70,113 +70,11 @@
             </div>
         </div>
         <div>
-            <div>
-                <p id ="Kek2"></p>
+            <div align = "center">
+                <p style="font-size: 4em" id ="Kek2"></p>
+            </div>
             <script>
-                document.getElementById("Kek2").innerHTML = "<c:out value="${lesson.GetLesson()}"/>";
-                /*var grade = parseInt(getCookie("Grade"));
-                var lesson = parseInt(getCookie("Lesson"));
-                if(grade === "NaN" || lesson === "NaN")
-                {document.location.href = 'login-failed.html';}
-                else
-                {
-                    var kek = getCookie("Grade") + getCookie("Lesson") + "Stage";
-                    if(getCookie(kek) === "")
-                    {
-                        setCookie(kek, "Lesson",1);
-                    }
-                switch(grade){
-                    case 1:
-                        switch(lesson){
-                            
-                            case 1:
-                    switch(grade)
-                    {
-                        case 1:
-                            switch(lesson)
-                            {
-                                case 1:
-                                break;
-                                case 2:
-                                break;
-                                case 3:
-                                break;
-                                case 4:
-                                break;
-                                case 5:
-                                break;
-                            }
-                        break;
-                        case 2:
-                            switch(lesson)
-                            {
-                                case 1:
-                                break;
-                                case 2:
-                                break;
-                                case 3:
-                                break;
-                                case 4:
-                                break;
-                                case 5:
-                                break;
-                            }
-                        break;
-                        case 3:
-                            switch(lesson)
-                            {
-                                case 1:
-                                break;
-                                case 2:
-                                break;
-                                case 3:
-                                break;
-                                case 4:
-                                break;
-                                case 5:
-                                break;
-                                case 6:
-                                break;
-                            }
-                        break;
-                        case 4:
-                            switch(lesson)
-                            {
-                                case 1:
-                                break;
-                                case 2:
-                                break;
-                                case 3:
-                                break;
-                                case 4:
-                                break;
-                                case 5:
-                                break;
-                                case 6:
-                                break;
-                            }
-                        break;
-                        case 5:
-                            switch(lesson)
-                            {
-                                case 1:
-                                break;
-                                case 2:
-                                break;
-                                case 3:
-                                break;
-                                case 4:
-                                break;
-                                case 5:
-                                break;
-                                case 6:
-                                break;
-                                case 7:
-                                break;
-                            }
-                        break;
-                    }
-                }*/
+                document.getElementById("Kek2").innerHTML = "<c:out value="${lesson.GetLesson(0)}"/>";
             </script>
         </div>
     </body>
