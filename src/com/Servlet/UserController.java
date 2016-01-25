@@ -61,8 +61,15 @@ public class UserController extends HttpServlet {
                 preparedStatement.setInt(1, 0);
                 ResultSet set= preparedStatement.executeQuery();
                 set.next();
-                id = set.getInt(gr+ls);
-                System.out.println(gr+"."+ls+" = "+id);
+                id = set.getInt("Intro");
+                if(id < 101){
+                    grade = 0;
+                    System.out.println("TO INTRO!");
+                }
+                else{
+                    id = set.getInt(gr+ls);
+                    System.out.println(gr+"."+ls+" = "+id);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
                 RequestDispatcher view = request.getRequestDispatcher("Login-Failed");
@@ -72,10 +79,15 @@ public class UserController extends HttpServlet {
             if(id==-2){
                 LessonBean lessonbean = new LessonBean();
                 switch(grade){
+                    case 0:
+                        lessonbean.AddLesson("Welcome to Oh Dang Studios! Math Tutorials.\nThese Guides will help you learn Maths skills form grades 1-5.");
+                        lessonbean.AddLesson("Each Section will be broken down into three Parts. The first part is the Lesson. It is inteneded to teach you key concepts from the lesson.");
+                        lessonbean.AddLesson("The second part is the free practice area. This allows you to apply what you learned in the lesson. If you make a mistake, It will take you back to a quick reminder about that question type, then let you try again.");
+                        lessonbean.AddLesson("Once you are consistent enough, You will be taken to the Test section, to test your knowledge of the material. You will be scored out of 100, but random bonus questions are available, so be alert!");
                     case 1:
                         switch(lesson){
                             case 1:
-                                lessonbean.AddLesson("Welcome to First Grade Math! Here you will learn about many types of problems, like countingKEK(SHAPES_BELOW),");
+                                lessonbean.AddLesson("");
                                 break;
                             case 2:
                                 lessonbean.AddLesson("Do other stuff");

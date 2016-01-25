@@ -70,11 +70,17 @@
             </div>
         </div>
         <div>
+            <script>
+            function NextLesson(){
+                document.getElementById("Kek23").innerHTML = "<c:out value="${lesson.GetNextLesson()}"/>";
+            }
+            </script>
             <div align = "center">
-                <p style="font-size: 4em" id ="Kek2"></p>
+                <p style="font-size: 4em" id ="Kek23"></p>
+                <button onclick = "NextLesson();" value = "Next"/>
             </div>
             <script>
-                document.getElementById("Kek2").innerHTML = "<c:out value="${lesson.GetLesson(0)}"/>";
+                NextLesson();
             </script>
         </div>
     </body>
