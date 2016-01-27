@@ -45,6 +45,26 @@ public class UserController extends HttpServlet {
         if (action.equalsIgnoreCase("login")){
         	forward="/Login.jsp";
         }
+        else if (action.equalsIgnoreCase("lessonDone")){
+            String lesson = request.getParameter("lesson");
+            Connection con = DbUtil.getConnection();
+            PreparedStatement preparedStatement;
+            int Newlesson = Integer.parseInt(lesson);
+            lesson = Integer.toString(Newlesson);
+            try{
+                
+                preparedStatement = con.prepareStatement("INSERT INTO progress (Intro) VALUES (0) WHERE UserId = 0");
+                //preparedStatement.setString(1, lesson);
+                preparedStatement.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                RequestDispatcher view = request.getRequestDispatcher("Login-Failed");
+                view.forward(request, response);
+                forward="/Home.jsp";
+                return;
+            }
+            forward="/Home.jsp";
+        }
         else if (action.equalsIgnoreCase("lesson")){
             String lessonstring = request.getParameter("lesson");
             String gr = lessonstring.substring(0, 1);
@@ -78,12 +98,14 @@ public class UserController extends HttpServlet {
             }
             if(id==-2){
                 LessonBean lessonbean = new LessonBean();
+                lessonbean.SetLesson(grade*10+lesson);
                 switch(grade){
                     case 0:
-                        lessonbean.AddLesson("Welcome to Oh Dang Studios! Math Tutorials.\nThese Guides will help you learn Maths skills form grades 1-5.");
+                        lessonbean.AddLesson("Welcome to Oh Dang Studios! Math Tutorials.These Guides will help you learn Maths skills form grades 1-5.");
                         lessonbean.AddLesson("Each Section will be broken down into three Parts. The first part is the Lesson. It is inteneded to teach you key concepts from the lesson.");
                         lessonbean.AddLesson("The second part is the free practice area. This allows you to apply what you learned in the lesson. If you make a mistake, It will take you back to a quick reminder about that question type, then let you try again.");
                         lessonbean.AddLesson("Once you are consistent enough, You will be taken to the Test section, to test your knowledge of the material. You will be scored out of 100, but random bonus questions are available, so be alert!");
+                        lessonbean.SetLesson(0);
                     case 1:
                         switch(lesson){
                             case 1:
