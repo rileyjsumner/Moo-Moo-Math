@@ -1,4 +1,4 @@
-<%@page import="Questions.Converter"%>
+<%@page import = "Questions.Converter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% Converter converter = new Converter();%>
 <html>
