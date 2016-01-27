@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 <%@page import = "Questions.Converter"%>
+=======
+>>>>>>> a081c9ce426212eec00f053cb4fb6df47412289e
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% Converter converter = new Converter();%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
     <head>
         <title>Home</title>
@@ -70,127 +74,17 @@
             </div>
         </div>
         <div>
-<<<<<<< HEAD
-            <div>
-                <p id ="Kek2"></p>
-=======
->>>>>>> 73a25977d1f88d087ca393d1ae630a4c8e177278
             <script>
-                var grade = parseInt(getCookie("Grade"));
-                var lesson = parseInt(getCookie("Lesson"));
-                if(grade === "NaN" || lesson === "NaN")
-                {document.location.href = 'login-failed.html';}
-                else
-                {
-                    var kek = getCookie("Grade") + getCookie("Lesson") + "Stage";
-                    if(getCookie(kek) === "")
-                    {
-                        setCookie(kek, "Lesson",1);
-                    <%@page import = "com.DbUtil.DbUtil"%>
-                    <%@page import = "import java.sql.*;"%>
-                    <%Connection con= DbUtil.getConnection();
-                    PreparedStatement preparedStatement = con
-                        .prepareStatement("SELECT * FROM progress(Userid) values (0);");
-                    ResultSet Stuff = preparedStatement.executeQuery();
-                        
-                    %>
-                    }
-<<<<<<< HEAD
-                switch(grade){
-                    case 1:
-                        switch(lesson){
-                            
-                            case 1:
-                                
-=======
-                    switch(grade)
-                    {
-                        case 1:
-                            switch(lesson)
-                            {
-                                case 1:
->>>>>>> 73a25977d1f88d087ca393d1ae630a4c8e177278
-                                break;
-                                case 2:
-                                break;
-                                case 3:
-                                break;
-                                case 4:
-                                break;
-                                case 5:
-                                break;
-                            }
-                        break;
-                        case 2:
-                            switch(lesson)
-                            {
-                                case 1:
-                                break;
-                                case 2:
-                                break;
-                                case 3:
-                                break;
-                                case 4:
-                                break;
-                                case 5:
-                                break;
-                            }
-                        break;
-                        case 3:
-                            switch(lesson)
-                            {
-                                case 1:
-                                break;
-                                case 2:
-                                break;
-                                case 3:
-                                break;
-                                case 4:
-                                break;
-                                case 5:
-                                break;
-                                case 6:
-                                break;
-                            }
-                        break;
-                        case 4:
-                            switch(lesson)
-                            {
-                                case 1:
-                                break;
-                                case 2:
-                                break;
-                                case 3:
-                                break;
-                                case 4:
-                                break;
-                                case 5:
-                                break;
-                                case 6:
-                                break;
-                            }
-                        break;
-                        case 5:
-                            switch(lesson)
-                            {
-                                case 1:
-                                break;
-                                case 2:
-                                break;
-                                case 3:
-                                break;
-                                case 4:
-                                break;
-                                case 5:
-                                break;
-                                case 6:
-                                break;
-                                case 7:
-                                break;
-                            }
-                        break;
-                    }
-                }
+            function NextLesson(){
+                document.getElementById("Kek23").innerHTML = "<c:out value="${lesson.GetNextLesson()}"/>";
+            }
+            </script>
+            <div align = "center">
+                <p style="font-size: 4em" id ="Kek23"></p>
+                <button onclick = "NextLesson();" value = "Next"/>
+            </div>
+            <script>
+                NextLesson();
             </script>
         </div>
     </body>

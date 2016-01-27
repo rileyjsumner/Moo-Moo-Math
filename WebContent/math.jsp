@@ -1,7 +1,33 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
-        <title>1st Grade Math</title>
+        <title id = "title">Math</title>
+        <script>
+            function getCookieb(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0; i<ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)===' ') c = c.substring(1);
+                    if (c.indexOf(name) === 0) return c.substring(name.length,c.length);
+                }
+                return "";
+            }
+            var grade=0;
+            grade = getCookieb("Grade");
+            var name="You sneaky...";
+            if(grade==="1"){
+                document.title="1st Grade Math";
+            }else if(grade==="2"){
+                document.title="2nd Grade Math";
+            }else if(grade==="3"){
+                document.title ="3rd Grade Math";
+            }else if(grade==="4"){
+                document.title ="4th Grade Math";
+            }else if(grade==="5"){
+                document.title ="5th Grade Math";
+            }
+        </script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" href = "main.css">
@@ -15,6 +41,9 @@
                 d.setTime(d.getTime() + (exdays*24*60*60*1000));
                 var expires = "expires="+d.toUTCString();
                 document.cookie = cname + "=" + cvalue + "; " + expires;
+            }
+            function delCookie(cname) {
+                document.cookie = cname + "=0; expires=0";
             }
             function getCookie(cname) {
                 var name = cname + "=";
@@ -31,13 +60,15 @@
                 document.location.href = 'Home.jsp';
                 document.location.href = 'math.jsp';
             }
+            function toLesson(grade, lesson){
+                
+            }
             function addButton (name, bgCol, bdCol, lesson) {
                 var element = document.createElement("input");
                 element.setAttribute("type", "button");
                 element.setAttribute("value", name);
                 element.onclick = function (){
-                    setCookie("lesson", lesson, 1);
-                    document.location.href = "lesson.jsp";
+                    document.location.href = "UserController?action=lesson&lesson="+lesson.toString();
                 };
                 element.style.backgroundColor = bgCol;
                 element.style.borderColor = bdCol;
@@ -63,7 +94,7 @@
                 </div>
             </div>
             <div class = "text-center">
-                <h1>Sniper Team Dango Math</h1>
+                <h1>Oh Dang Studios! Math</h1>
                 <p id ="p2">Grade Math</p>
                 <script>
                     var grade=0;
@@ -119,11 +150,11 @@
                                 }
                                 else if (grade === "2")
                                 {
-                                    addButton("3 Digit Addition", "#FF8C36", "FF730B", 1.1);
-                                    addButton("2 Digit Subtraction", "FF9136", "FF7A0B", 1.2);
-                                    addButton("Number Patterns", "FF9736", "FF800B", 1.3);
-                                    addButton("Patterns", "FF9C36", "FF860B", 1.4);
-                                    addButton("Probability", "FFA036", "FF8C0B", 1.5);
+                                    addButton("3 Digit Addition", "#FF8C36", "FF730B", 2.1);
+                                    addButton("2 Digit Subtraction", "FF9136", "FF7A0B", 2.2);
+                                    addButton("Number Patterns", "FF9736", "FF800B", 2.3);
+                                    addButton("Patterns", "FF9C36", "FF860B", 2.4);
+                                    addButton("Probability", "FFA036", "FF8C0B", 2.5);
                                 }
                                 else if (grade === "3")
                                 {
@@ -153,6 +184,7 @@
                                     addButton("Geometry", "red", "red", 5.6);
                                     addButton("Divide Decimals", "red", "red", 5.7);
                                 }
+                                //delCookie("Grade");
                             </script>
                             <p></p>
                         </div>

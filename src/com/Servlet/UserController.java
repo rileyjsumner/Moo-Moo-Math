@@ -1,5 +1,6 @@
 package com.Servlet;
 
+import com.Beans.LessonBean;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,14 +14,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Questions.Converter;
 import com.DbUtil.DbUtil;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserController extends HttpServlet {
+    Converter converter;
     private static final long serialVersionUID = 1L;
+    
     public UserController() {
         super();
+        converter=new Converter();
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward="";
         System.out.println("DOGET");
@@ -39,16 +45,59 @@ public class UserController extends HttpServlet {
         if (action.equalsIgnoreCase("login")){
         	forward="/Login.jsp";
         }
-        else if (action.equalsIgnoreCase("LoginForm")){
-        	if(request.getParameter("Username")=="Nixon"){
-        		forward="/CreateAccount.jsp";
-        	}
-        	else{
-        		forward="/Login.jsp";
-        	}
+        else if (action.equalsIgnoreCase("lesson")){
+            String lessonstring = request.getParameter("lesson");
+            String gr = lessonstring.substring(0, 1);
+            String ls = lessonstring.substring(2, 3);
+            System.out.println(gr);
+            System.out.println(ls);
+            int grade = Integer.parseUnsignedInt(gr);
+            int lesson = Integer.parseUnsignedInt(ls);
+            Connection con = DbUtil.getConnection();
+            PreparedStatement preparedStatement;
+            int id =0;
+            try {
+                preparedStatement = con.prepareStatement("SELECT * FROM progress WHERE UserId = ?");
+                preparedStatement.setInt(1, 0);
+                ResultSet set= preparedStatement.executeQuery();
+                set.next();
+                id = set.getInt("Intro");
+                if(id < 101){
+                    grade = 0;
+                    System.out.println("TO INTRO!");
+                }
+                else{
+                    id = set.getInt(gr+ls);
+                    System.out.println(gr+"."+ls+" = "+id);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                RequestDispatcher view = request.getRequestDispatcher("Login-Failed");
+                view.forward(request, response);
+                return;
+            }
+            if(id==-2){
+                LessonBean lessonbean = new LessonBean();
+                switch(grade){
+                    case 0:
+                        lessonbean.AddLesson("Welcome to Oh Dang Studios! Math Tutorials.\nThese Guides will help you learn Maths skills form grades 1-5.");
+                        lessonbean.AddLesson("Each Section will be broken down into three Parts. The first part is the Lesson. It is inteneded to teach you key concepts from the lesson.");
+                        lessonbean.AddLesson("The second part is the free practice area. This allows you to apply what you learned in the lesson. If you make a mistake, It will take you back to a quick reminder about that question type, then let you try again.");
+                        lessonbean.AddLesson("Once you are consistent enough, You will be taken to the Test section, to test your knowledge of the material. You will be scored out of 100, but random bonus questions are available, so be alert!");
+                    case 1:
+                        switch(lesson){
+                            case 1:
+                                lessonbean.AddLesson("");
+                                break;
+                            case 2:
+                                lessonbean.AddLesson("Do other stuff");
+                                break;
+                        }
+                }
+                request.setAttribute("lesson", lessonbean);
+            }
         }
-
-        RequestDispatcher view = request.getRequestDispatcher(forward);
+        RequestDispatcher view = request.getRequestDispatcher("/lesson.jsp");
         view.forward(request, response);
     }
 
