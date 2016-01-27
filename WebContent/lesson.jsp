@@ -77,7 +77,7 @@
             </script>
             <div align = "center">
                 <p style="font-size: 4em" id ="Kek23"></p>
-                <button onclick = "NextLesson();" value = "Next"/>
+                <button onclick = "NextLesson()" value = "Next" name = "Next"/>
             </div>
             <script>
                 NextLesson();
