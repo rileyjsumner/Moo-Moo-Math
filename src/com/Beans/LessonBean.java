@@ -1,37 +1,27 @@
 package com.Beans;
-import java.util.*;
 public class LessonBean {
     public int mode;
-    public List<String> Lessons;
-    public int stage;
-    public int Lesson;
-    public LessonBean(List<String> lessons){
+    public String Lesson;
+    public LessonBean(String lesson){
         mode = 0;
-        stage =0;
-        Lesson = 0;
-        Lessons = lessons;
-    }
-    public void SetLesson(int lesson){
         Lesson = lesson;
     }
     public LessonBean(){
         mode = 0;
-        Lessons = new ArrayList<>();
-        System.out.println("HERE!! MADE");
+        Lesson = "";
     }
-    public void AddLesson(String lesson){
-        Lessons.add(lesson);
+    public String GetLesson(){
+        return Lesson;
     }
-    public String GetNextLesson(){
-        if(stage < Lessons.size()){
-            stage+=1;
-            System.out.println("Stage = "+(stage-1));
-            System.out.println(Lessons.get(stage-1));
-            return Lessons.get(stage-1);
+    public void AddLine(String Line){
+        Lesson+="<p>"+Line+"</p>";
+    }
+    public void Apply(boolean CustomNextBtn){
+        if(!CustomNextBtn){
+            
         }
-        System.out.println("DONE");
-        return "DONE";
     }
+    /*
     public String GetLessons(){
         String returnStr
                 = "<input type=\"hidden\" name=\"myHiddenField\" id=\"LessonOn\" value=\"-1\" />\n"
@@ -57,5 +47,5 @@ public class LessonBean {
                 + "<p id = 'kek1'></p>\n"
                 + "<input type = \"button\" style = \"background-color:#FF0000; border: 4px solid #E00000\" onclick = \"NextLesson()\" value = \"1st Grade\"/>";
         return returnStr;
-    }
+    }*/
 }

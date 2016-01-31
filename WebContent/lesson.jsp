@@ -71,7 +71,7 @@
             </div>
         </div>
         <div align = "center">
-            ${lesson.GetLessons()}
+            ${lesson.GetLesson()}
         </div>
         
     </body>
