@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Enumeration;
 
+import javax.servlet.http.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +30,14 @@ public class UserController extends HttpServlet {
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward="";
+        HttpSession session = request.getSession();
+        session.setAttribute("UserName", "Steve");
+        Enumeration<String> h = session.getAttributeNames();
+        System.out.println("ELEMENTS:");
+        while(h.hasMoreElements()){
+            System.out.println(h.nextElement());
+        }
+        System.out.println();
         String action = request.getParameter("action");
         if (action==null){
         	RequestDispatcher view = request.getRequestDispatcher("/Login.jsp");
@@ -39,24 +49,7 @@ public class UserController extends HttpServlet {
         	forward="/Login.jsp";
         }
         else if (action.equalsIgnoreCase("lessonDone")){
-            String lesson = request.getParameter("lesson");
-            Connection con = DbUtil.getConnection();
-            PreparedStatement preparedStatement;
-            int Newlesson = Integer.parseInt(lesson);
-            lesson = Integer.toString(Newlesson);
-            try{
-                
-                preparedStatement = con.prepareStatement("INSERT INTO progress (Intro) VALUES (0) WHERE UserId = 0");
-                //preparedStatement.setString(1, lesson);
-                preparedStatement.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-                RequestDispatcher view = request.getRequestDispatcher("Login-Failed");
-                view.forward(request, response);
-                forward="/Home.jsp";
-                return;
-            }
-            forward="/Home.jsp";
+            System.out.println("DONE");
         }
         else if (action.equalsIgnoreCase("lesson")){
             String lessonstring = request.getParameter("lesson");
@@ -118,6 +111,7 @@ public class UserController extends HttpServlet {
                                 break;
                         }
                 }
+                lessonbean.Apply(false);
                 request.setAttribute("lesson", lessonbean);
             }
         }

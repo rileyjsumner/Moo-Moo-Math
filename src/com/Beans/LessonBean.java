@@ -14,11 +14,11 @@ public class LessonBean {
         return Lesson;
     }
     public void AddLine(String Line){
-        Lesson+="<p>"+Line+"</p>";
+        Lesson+="\n<p>"+Line+"</p>";
     }
     public void Apply(boolean CustomNextBtn){
         if(!CustomNextBtn){
-            
+            Lesson+="\n<input type=\"button\" style=\"background-color:#FFDAB9; border: 4px solid #E7C6A5\" onclick=\"document.location.href='UserController?action=lessonDone'\" value=\"Next\"/>";
         }
     }
     /*
