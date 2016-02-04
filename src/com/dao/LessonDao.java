@@ -36,7 +36,7 @@ public class LessonDao {
                     if(buffer==0){standard=false;}else{standard=true;}
                     LessonBean lessonbean = new LessonBean();
                     lessonbean.AddLine(Lessontxt);
-                    lessonbean.Apply(customBtn, standard);
+                    lessonbean.Apply(standard, customBtn);
                     return lessonbean;
                 }
             }
