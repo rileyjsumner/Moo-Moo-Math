@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class ProgressDao {
-    static int getProgress(int userid, int grade,int lesson){
+    public static int getProgress(int userid, int grade,int lesson){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
@@ -23,7 +23,7 @@ public class ProgressDao {
             return -100;
         }
     }
-    static boolean SetProgress(int userid, int grade,int lesson,int value){
+    public static boolean SetProgress(int userid, int grade,int lesson,int value){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
@@ -39,7 +39,7 @@ public class ProgressDao {
             return false;
         }
     }
-    static boolean AddUser(int UserId){
+    public static boolean AddUser(int UserId){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {

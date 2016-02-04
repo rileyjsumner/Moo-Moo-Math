@@ -70,7 +70,7 @@
                 </div> 
             </div>
         </div>
-        ${lesson.GetLesson()}
+        ${data.GetData()}
         
     </body>
 </html>
