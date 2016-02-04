@@ -42,7 +42,7 @@ public class LessonDao {
         } catch (SQLException ex) {
             Logger.getLogger(ProgressDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return new LessonBean("<p>ERROR 404: Page Not Found</p>");
+        return new LessonBean("<p>ERROR 404: Page Not Found</p>",true);
     }
     static int getLessons(int grade,int lesson){
         Connection con =DbUtil.getConnection();
