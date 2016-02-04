@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Enumeration;
 
+import javax.servlet.http.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,25 +26,29 @@ public class UserController extends HttpServlet {
     
     public UserController() {
         super();
-        converter=new Converter();
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward="";
-        System.out.println("DOGET");
+        HttpSession session = request.getSession();
+        session.setAttribute("UserName", "Steve");
+        Enumeration<String> h = session.getAttributeNames();
+        System.out.println("ELEMENTS:");
+        while(h.hasMoreElements()){
+            System.out.println(h.nextElement());
+        }
+        System.out.println();
         String action = request.getParameter("action");
         if (action==null){
         	RequestDispatcher view = request.getRequestDispatcher("/Login.jsp");
             view.forward(request, response);
         }
         
-        System.out.println("ACTION IS: " + action);
-        Enumeration<String> names = request.getParameterNames();
-        while(names.hasMoreElements()){
-        	System.out.println(names.nextElement());
-        }
-        //action = action.trim();
+        System.out.println("Get action is: " + action);
         if (action.equalsIgnoreCase("login")){
         	forward="/Login.jsp";
+        }
+        else if (action.equalsIgnoreCase("lessonDone")){
+            System.out.println("DONE");
         }
         else if (action.equalsIgnoreCase("lesson")){
             String lessonstring = request.getParameter("lesson");
@@ -61,7 +66,7 @@ public class UserController extends HttpServlet {
                 preparedStatement.setInt(1, 0);
                 ResultSet set= preparedStatement.executeQuery();
                 set.next();
-                id = set.getInt("Intro");
+                id = set.getInt("11");
                 if(id < 101){
                     grade = 0;
                     System.out.println("TO INTRO!");
@@ -76,24 +81,38 @@ public class UserController extends HttpServlet {
                 view.forward(request, response);
                 return;
             }
-            if(id==-2){
+            if(id<0){
                 LessonBean lessonbean = new LessonBean();
+                boolean standard=true;
+                boolean customBtn=false;
                 switch(grade){
                     case 0:
-                        lessonbean.AddLesson("Welcome to Oh Dang Studios! Math Tutorials.\nThese Guides will help you learn Maths skills form grades 1-5.");
-                        lessonbean.AddLesson("Each Section will be broken down into three Parts. The first part is the Lesson. It is inteneded to teach you key concepts from the lesson.");
-                        lessonbean.AddLesson("The second part is the free practice area. This allows you to apply what you learned in the lesson. If you make a mistake, It will take you back to a quick reminder about that question type, then let you try again.");
-                        lessonbean.AddLesson("Once you are consistent enough, You will be taken to the Test section, to test your knowledge of the material. You will be scored out of 100, but random bonus questions are available, so be alert!");
+                        switch(id){
+                            case -4:
+                                lessonbean.Lesson = "Welcome to Oh Dang Studios! Math Tutorials.These Guides will help you learn Maths skills form grades 1-5.";
+                                break;
+                            case -3:
+                                lessonbean.Lesson = "Each Section will be broken down into three Parts. The first part is the Lesson. It is inteneded to teach you key concepts from the lesson.";
+                                break;
+                            case -2:
+                                lessonbean.Lesson = "The second part is the free practice area. This allows you to apply what you learned in the lesson. If you make a mistake, It will take you back to a quick reminder about that question type, then let you try again.";
+                                break;
+                            case -1:
+                                lessonbean.Lesson = "Once you are consistent enough, You will be taken to the Test section, to test your knowledge of the material. You will be scored out of 100, but random bonus questions are available, so be alert!";
+                                break;
+                        }
+                        break;
                     case 1:
                         switch(lesson){
                             case 1:
-                                lessonbean.AddLesson("");
+                                lessonbean.Lesson ="";
                                 break;
                             case 2:
-                                lessonbean.AddLesson("Do other stuff");
+                                lessonbean.Lesson = "Do other stuff";
                                 break;
                         }
                 }
+                lessonbean.Apply(customBtn,standard);
                 request.setAttribute("lesson", lessonbean);
             }
         }
@@ -103,59 +122,52 @@ public class UserController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String forward="/Fail.jsp";
-    	System.out.println("DOPOST");
     	String action = request.getParameter("action");
-    	System.out.println("---------\naction = "+action);
-    	Enumeration<String> names = request.getParameterNames();
-    	while(names.hasMoreElements()){
-        	System.out.println(names.nextElement());
-        }
+    	System.out.println("Post action is: " + action);
     	if(action.equals("LoginForm")){
-    		forward="/Login.jsp";
-    		String Username=request.getParameter("User name");
-    		String Password = request.getParameter("password");
-    		Connection con= DbUtil.getConnection();
-    		try {
-                PreparedStatement preparedStatement = con
-                        .prepareStatement("SELECT Userid from users WHERE Username=? AND Password=?");
+            forward="/Login.jsp";
+            String Username=request.getParameter("User name");
+            String Password = request.getParameter("password");
+            Connection con= DbUtil.getConnection();
+            try {
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("SELECT Userid from users WHERE Username=? AND Password=?");
+            // Parameters start with 1
+            preparedStatement.setString(1, Username);
+            preparedStatement.setString(2, Password);
+            ResultSet set= preparedStatement.executeQuery();
+            try{
+                set.next();
+                int id = set.getInt(1);
+                preparedStatement = con
+                    .prepareStatement("SELECT Password from users WHERE Userid=?");
                 // Parameters start with 1
-                preparedStatement.setString(1, Username);
-                preparedStatement.setString(2, Password);
-                ResultSet set= preparedStatement.executeQuery();
-                try{
-                	set.next();
-                	int id = set.getInt(1);
-                	preparedStatement = con
-                            .prepareStatement("SELECT Password from users WHERE Userid=?");
-                    // Parameters start with 1
-                    preparedStatement.setInt(1, id);
-                    set = preparedStatement.executeQuery();
-                    set.next();
-                    String Real_Password = set.getString(1);
-                    if(Password.equals(Real_Password)){
-                    	
-                    	forward="/Home.jsp";
-                    }
-                	
-    			} catch (SQLException e) {
-    				System.out.println(e.getMessage());
-    				forward="/Login.jsp";
-    			}
-                
-                
+                preparedStatement.setInt(1, id);
+                set = preparedStatement.executeQuery();
+                set.next();
+                String Real_Password = set.getString(1);
+                if(Password.equals(Real_Password)){
+
+                    forward="/Home.jsp";
+                }
+
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                    forward="/Login.jsp";
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
     		
     	}
     	else if(action.equals("CreateAccount")){
-    		String Username=request.getParameter("User Name");
-    		String Password = request.getParameter("Password");
-    		String FName = request.getParameter("First Name");
-    		String LName = request.getParameter("Last Name");
-    		System.out.println("Got here");
-    		Connection con= DbUtil.getConnection();
-    		try {
+            String Username=request.getParameter("User Name");
+            String Password = request.getParameter("Password");
+            String FName = request.getParameter("First Name");
+            String LName = request.getParameter("Last Name");
+            System.out.println("Got here");
+            Connection con= DbUtil.getConnection();
+            try {
                 PreparedStatement preparedStatement = con
                         .prepareStatement("INSERT INTO users (Userid, Username, Password, Points) values (?, ?, ?, ?);");
                 // Parameters start with 1
@@ -171,7 +183,7 @@ public class UserController extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             };
-    		forward="/Correct.jsp";
+            forward="/Correct.jsp";
     	}
     	RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
