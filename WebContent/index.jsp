@@ -7,7 +7,7 @@
 <title>Index</title>
 </head>
 <body>
-<h1>HELLO</h1>
+<h1></h1>
 <script>
     document.location.href="Home.jsp";
 </script>
