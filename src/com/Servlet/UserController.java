@@ -26,7 +26,6 @@ public class UserController extends HttpServlet {
     
     public UserController() {
         super();
-        converter=new Converter();
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward="";
@@ -84,6 +83,8 @@ public class UserController extends HttpServlet {
             }
             if(id<0){
                 LessonBean lessonbean = new LessonBean();
+                boolean standard=true;
+                boolean customBtn=false;
                 switch(grade){
                     case 0:
                         switch(id){
@@ -111,7 +112,7 @@ public class UserController extends HttpServlet {
                                 break;
                         }
                 }
-                lessonbean.Apply(false);
+                lessonbean.Apply(customBtn,standard);
                 request.setAttribute("lesson", lessonbean);
             }
         }

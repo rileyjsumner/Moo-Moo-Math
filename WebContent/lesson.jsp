@@ -70,10 +70,7 @@
                 </div> 
             </div>
         </div>
-        <div align = "center">
-            ${lesson.GetLesson()}
-            
-        </div>
+        ${lesson.GetLesson()}
         
     </body>
 </html>
