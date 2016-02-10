@@ -9,7 +9,7 @@
 <body>
 <h1></h1>
 <script>
-    document.location.href="Home.jsp";
+    document.location.href="UserController?action=home";
 </script>
 </body>
 </html>

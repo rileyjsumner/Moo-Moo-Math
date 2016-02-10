@@ -26,9 +26,7 @@ public class UserController extends HttpServlet {
     public UserController() {
         super();
     }
-
     /**
-     *
      * @param request
      * @param response
      * @throws ServletException
@@ -43,6 +41,7 @@ public class UserController extends HttpServlet {
         System.out.println("ELEMENTS:");
         while(h.hasMoreElements()){
             System.out.println(h.nextElement());
+            
         }
         System.out.println();
         String action = request.getParameter("action");
@@ -53,7 +52,12 @@ public class UserController extends HttpServlet {
         
         System.out.println("Get action is: " + action);
         if (action.equalsIgnoreCase("login")) {
-        } else if (action.equalsIgnoreCase("lessonDone")){
+            
+        }
+        else if (action.equalsIgnoreCase("home")){
+            
+        }
+        else if (action.equalsIgnoreCase("lessonDone")){
             System.out.println("DONE");
         }
         else if (action.equalsIgnoreCase("lesson")){
@@ -78,7 +82,6 @@ public class UserController extends HttpServlet {
         view.forward(request, response);
     }
     /**
-     *
      * @param request
      * @param response
      * @throws ServletException

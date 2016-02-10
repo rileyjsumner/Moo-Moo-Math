@@ -1,79 +1,105 @@
 package com.dao;
 
+import com.Beans.ButtonBean;
 import com.Beans.LessonBean;
 import com.DbUtil.DbUtil;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LessonDao {
-    public static LessonBean getLesson(int grade,int lesson,int page){
+    public static LessonBean getLessonPage(int grade,int lesson,int page){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = con.prepareStatement("SELECT * FROM lessons");
+            preparedStatement = con.prepareStatement("SELECT LessonTxt, Standard, CustomBtn FROM pages WHERE Lesson = ? AND Grade = ? AND Page = ?");
+            preparedStatement.setInt(1, lesson);
+            preparedStatement.setInt(2, grade);
+            preparedStatement.setInt(2, page);
             ResultSet set = preparedStatement.executeQuery();
-            set.next();
-            String query = Integer.toString(grade) + Integer.toString(lesson);
-            int result;
-            int curGrade;
-            int curLesson;
-            int curPage=0;
-            int lessons=0;
-            while(set.next()){
-                result = set.getInt(1);
-                curPage=result%10;
-                result= (result-result%10)/10;
-                curLesson=result%10;
-                result= (result-result%10)/10;
-                curGrade=result%10;
-                if(curLesson==lesson&&curGrade==grade&&curPage==page){
-                    String Lessontxt = set.getString(2);
-                    int buffer = set.getInt(3);
-                    boolean customBtn,standard;
-                    if(buffer==0){customBtn=false;}else{customBtn=true;}
-                    buffer = set.getInt(4);
-                    if(buffer==0){standard=false;}else{standard=true;}
-                    LessonBean lessonbean = new LessonBean();
-                    lessonbean.AddLine(Lessontxt);
-                    lessonbean.Apply(standard, customBtn);
-                    return lessonbean;
-                }
+            if(set.first()){
+                LessonBean bean = new LessonBean();
+                bean.AddLine(set.getString(1));
+                bean.Apply(set.getInt(2)==1, set.getInt(3)==1);
+                return bean;
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProgressDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new LessonBean("<p>ERROR 404: Page Not Found</p>",true);
     }
-    public static int getLessons(int grade,int lesson){
+    public static ButtonBean getButtonBean(int GradeSelected){
+        List<String> lessons = new ArrayList<>();
+        ButtonBean bean = new ButtonBean();
+        
+    }
+    public static int getGrades(){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = con.prepareStatement("SELECT * FROM lessons");
+            preparedStatement = con.prepareStatement("SELECT Grade FROM grades");
             ResultSet set = preparedStatement.executeQuery();
-            set.next();
-            String query = Integer.toString(grade) + Integer.toString(lesson);
-            int result;
-            int curGrade;
-            int curLesson;
-            int curPage=0;
+            int grades=0;
+            while(set.next()){
+                grades++;
+            }
+            return grades;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProgressDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public static int getLessons(int grade){
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = con.prepareStatement("SELECT Lesson FROM lessons WHERE Grade = ?");
+            preparedStatement.setInt(1, grade);
+            ResultSet set = preparedStatement.executeQuery();
             int lessons=0;
             while(set.next()){
-                result = set.getInt(1);
-                curPage=result%10;
-                result= (result-result%10)/10;
-                curLesson=result%10;
-                result= (result-result%10)/10;
-                curGrade=result%10;
-                if(curLesson==lesson&&curGrade==grade){
-                    lessons++;
-                }
+                lessons++;
             }
             return lessons;
         } catch (SQLException ex) {
             Logger.getLogger(ProgressDao.class.getName()).log(Level.SEVERE, null, ex);
-            return -100;
         }
+        return 0;
     }
-    
+    public static String getLessonText(int grade,int lesson){
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = con.prepareStatement("SELECT LessonName FROM lessons WHERE Lesson = ? AND Grade = ?");
+            preparedStatement.setInt(1, lesson);
+            preparedStatement.setInt(2, grade);
+            ResultSet set = preparedStatement.executeQuery();
+            if(set.first()){
+                return set.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProgressDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "{NULL}";
+    }
+    public static int getLessonPages(int grade,int lesson){
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = con.prepareStatement("SELECT Id FROM pages WHERE Lesson = ? AND Grade = ?");
+            preparedStatement.setInt(1, lesson);
+            preparedStatement.setInt(2, grade);
+            ResultSet set = preparedStatement.executeQuery();
+            int pages=0;
+            while(set.next()){
+                pages++;
+            }
+            return pages;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProgressDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
 }
