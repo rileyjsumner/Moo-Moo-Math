@@ -69,9 +69,9 @@ public class UserController extends HttpServlet {
             int grade = Integer.parseUnsignedInt(gr);
             int lesson = Integer.parseUnsignedInt(ls);
             int progress = ProgressDao.getProgress(0, grade, lesson);
-            int lessons = LessonDao.getLessons(grade, lesson);
+            int lessons = LessonDao.getLessonPages(grade, lesson);
             if (progress <= lessons-1){
-                LessonBean lessonBean = LessonDao.getLesson(grade, lesson, progress+1);
+                LessonBean lessonBean = LessonDao.getLessonPage(grade, lesson, progress+1);
                 request.setAttribute("data", lessonBean);
             }
         }

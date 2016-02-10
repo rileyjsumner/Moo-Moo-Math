@@ -3,6 +3,9 @@ package com.dao;
 import com.Beans.ButtonBean;
 import com.Beans.LessonBean;
 import com.DbUtil.DbUtil;
+
+import java.awt.color.*;
+import java.awt.Color;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +36,16 @@ public class LessonDao {
     public static ButtonBean getButtonBean(int GradeSelected){
         List<String> lessons = new ArrayList<>();
         ButtonBean bean = new ButtonBean();
-        
+        int grades = getGrades();
+        bean.HTML = "<div class = \"content\">\n"+
+                  "\t<div class = \"text-center\">\n"
+                + "\t\t<div class = \"col-md-12\">\n"
+                + "\t\t\t<p></p>";
+        for(int i=1;i<=grades;i++){
+            
+        }
+                "\t\t\t";
+        return bean;
     }
     public static int getGrades(){
         Connection con =DbUtil.getConnection();
