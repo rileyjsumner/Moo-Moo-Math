@@ -16,4 +16,7 @@ public class ButtonBean {
     public ButtonBean(String html){
         HTML = html;
     }
+    public String GetData(){
+        return HTML;
+    }
 }
