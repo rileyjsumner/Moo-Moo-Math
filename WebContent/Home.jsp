@@ -12,7 +12,7 @@
     <body>
         <script>
             function toLesson(grade,lesson){
-                document.location.href = 'UserController?action=lesson&lesson='+grade+'.'+lesson;
+                document.location.href = 'UserController?action=next&lesson='+grade+'.'+lesson;
             }
             function toGrade(grade){
                 document.location.href = 'UserController?action=viewLessons&grade='+grade;

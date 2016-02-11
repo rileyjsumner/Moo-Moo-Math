@@ -53,6 +53,7 @@ public class Converter
                         correctAnsInt = a + b * 5;
                         correctAnsType = 0;
                         break;
+                        
                     case 3:
                         // Odd or Even?
                         a = num.nextInt(100) + 1;

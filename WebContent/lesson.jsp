@@ -13,6 +13,9 @@
     </head>
     <body>
         <script>
+            function toLesson(lesson){
+                document.location.href = 'UserController?action=next&lesson='+lesson;
+            }
             function toGrade(grade){
                 document.location.href = 'UserController?action=viewLessons&grade='+grade;
             }
