@@ -1,37 +1,33 @@
 package com.Beans;
 public class LessonBean {
-    public int mode;
-    public String Lesson;
-    public LessonBean(String lesson,boolean onlylesson,String WhichLesson){
-        mode = 0;
-        Lesson = lesson;
-        this.Apply(true,true,WhichLesson);
+    public String HTML;
+    public LessonBean(String html,int grade,int lesson){
+        HTML = html;
+        this.Apply(true,true,grade,lesson);
     }
-    public LessonBean(String lesson){
-        mode = 0;
-        Lesson = lesson;
+    public LessonBean(String html){
+        HTML = html;
     }
     public LessonBean(){
-        mode = 0;
-        Lesson = "";
+        HTML = "";
     }
     public String GetData(){
-        return Lesson;
+        return HTML;
     }
     public String GetLesson(){
-        return Lesson;
+        return HTML;
     }
     public void AddLine(String Line){
-        Lesson+="\n<p>"+Line+"</p>";
+        HTML+="\n<p>"+Line+"</p>";
     }
-    public void Apply(boolean customBtn, boolean standard,String lesson){
+    public void Apply(boolean standard, boolean customBtn ,int grade, int lesson){
         if(standard){
-            Lesson = "\n<div align = \"center\">\n"+Lesson+"\n</div>";
+            HTML = "\n<div align = \"center\">\n"+HTML+"\n</div>";
         }
         if(!customBtn){
-            Lesson+="\n<div align = \"center\">";
-            Lesson+="\n<input type=\"button\" style=\"background-color:#FFDAB9; border: 4px solid #E7C6A5\" onclick=\"document.location.href='UserController?action=lessonDone&lesson="+lesson+"'\" value=\"Next\"/>";
-            Lesson+="\n</div>";
+            HTML+="\n<div align = \"center\">";
+            HTML+="\n<input type=\"button\" style=\"background-color:#FFDAB9; border: 4px solid #E7C6A5\" onclick=\"document.location.href='UserController?action=lessonDone&lesson="+grade+"."+lesson+"'\" value=\"Next\"/>";
+            HTML+="\n</div>";
         }
     }
 }

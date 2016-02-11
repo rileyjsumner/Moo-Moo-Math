@@ -24,16 +24,15 @@ public class LessonDao {
             if(set.first()){
                 LessonBean bean = new LessonBean();
                 bean.AddLine(set.getString(1));
-                bean.Apply(set.getInt(2)==1, set.getInt(3)==1,Integer.toString(grade)+Integer.toString(lesson));
+                bean.Apply(set.getInt(2)==1, set.getInt(3)==1,grade,lesson);
                 return bean;
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProgressDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return new LessonBean("<p>ERROR 404: Page Not Found</p>",true,"00");
+        return new LessonBean("<p>ERROR 404: Page Not Found</p>",0,0);
     }
     public static ButtonBean getButtonBean(int GradeSelected){
-        List<String> lessons = new ArrayList<>();
         ButtonBean bean = new ButtonBean();
         int grades = getGrades();
         
@@ -53,6 +52,19 @@ public class LessonDao {
                 + "\t\t</div>\n"
                 + "\t</div>\n"
                 + "</div>\n";
+        if(GradeSelected!=0 && GradeSelected <=grades){
+            bean.HTML += "<div class = \"content\">\n"+
+                  "\t<div class = \"text-center\">\n"
+                + "\t\t<div class = \"col-md-12\">\n"
+                + "\t\t\t<p></p>\n";
+            int lessons = getLessons(GradeSelected);
+            hue = 25 * (GradeSelected-1) - lessons * (float)2.5;
+            for (int i=1;i<=lessons;i++){
+                bean.HTML+="\t\t\t<input type = \"button\" style = \"background-color:"+Util.hsvToRgb((float)hue, (float)90, (float)90);
+                bean.HTML+="; border: 4px solid "+Util.hsvToRgb((float)hue, (float)90, (float)80)+"\" onclick = \"toLesson("+GradeSelected+","+i+")\" value = \""+getLessonText(GradeSelected,i)+"\"/>\n";
+                hue+=5;
+            }
+        }
         return bean;
     }
     public static int getMaxPages(int grade,int lesson){

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
@@ -10,25 +11,11 @@
     </head>
     <body>
         <script>
-            function setCookie(cname, cvalue, exdays) {
-                var d = new Date();
-                d.setTime(d.getTime() + (exdays*24*60*60*1000));
-                var expires = "expires="+d.toUTCString();
-                document.cookie = cname + "=" + cvalue + "; " + expires;
-            }
-            function getCookie(cname) {
-                var name = cname + "=";
-                var ca = document.cookie.split(';');
-                for(var i=0; i<ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0)===' ') c = c.substring(1);
-                    if (c.indexOf(name) === 0) return c.substring(name.length,c.length);
-                }
-                return "";
+            function toLesson(grade,lesson){
+                document.location.href = 'UserController?action=lesson&lesson='+grade+'.'+lesson;
             }
             function toGrade(grade){
-                setCookie("Grade",grade,1);
-                document.location.href = 'math.jsp';
+                document.location.href = 'UserController?action=viewLessons&grade='+grade;
             }
         </script>
         <div class = "jumbotron">
@@ -51,6 +38,13 @@
                 <h1>Oh Dang Studios! Math</h1>
             </div>
         </div>
-        ${buttons.GetData()}
+        <c:choose>
+            <c:when test="${not empty buttons}">
+                ${buttons.GetData()}
+            </c:when>
+            <c:otherwise>
+                <c:redirect url="UserController?action=Home"/>
+            </c:otherwise>
+        </c:choose>
     </body>
 </html>

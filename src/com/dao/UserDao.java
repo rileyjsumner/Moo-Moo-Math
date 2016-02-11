@@ -1,17 +1,12 @@
 package com.dao;
+
 import com.DbUtil.DbUtil;
+
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-/**
- *
- * @author owner
- */
+
 public class UserDao {
-    /**
-     * 
-     * @return UserID
-     */
     public static int AddUser(String Username,String Password){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
@@ -19,8 +14,8 @@ public class UserDao {
             preparedStatement = con.prepareStatement("INSERT INTO users (Username,Password) values(?,?)");
             preparedStatement.setString(1, Username);
             preparedStatement.setString(1, Password);
-            
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
