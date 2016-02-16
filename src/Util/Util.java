@@ -14,6 +14,13 @@ import java.util.List;
  */
 public class Util
 {
+    public static <T> ArrayList<T> createArrayList(T ... elements) { 
+        ArrayList<T> list = new ArrayList<T>();  
+        for (T element : elements) { 
+            list.add(element); 
+        } 
+        return list;
+    } 
     public static String hsvToRgb(float H, float S, float V) {
 
         float R, G, B;
