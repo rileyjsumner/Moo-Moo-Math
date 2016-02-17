@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.DbUtil.DbUtil;
+import java.util.List;
 
 public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -80,19 +81,43 @@ public class UserController extends HttpServlet {
             request.setAttribute("buttons", LessonDao.getButtonBean());
             int prog = ProgressDao.getProgress(1, grade, lesson);
             int max = LessonDao.getLessons(grade);
-            int MaxPractice = LessonDao.getMaxPractice(grade,lesson);
+            int MaxPractice = LessonDao.getMaxPractice(grade,lesson); System.out.println(MaxPractice + max);
             if(prog<max){
                 prog++;
+                System.out.println("Nixon is really Stupid");
                 ProgressDao.SetProgress(1, grade, lesson, prog);
             }
             else if(prog < MaxPractice + max){
+                System.out.println("Nixon is Stupid");
                 String answer = request.getParameter("answer");
                 if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
                     prog++;
                     ProgressDao.SetProgress(1, grade, lesson, prog);
                 }
+                else
+                {
+                    System.out.print("Lol you suck");
+                    int pgType = AnswersDao.getPageType(1, grade, lesson);
+                    List<Integer> pages = LessonDao.getPagesOfType(grade, lesson, pgType);
+                    System.out.println("pages" + pages.size());
+                    for (int x = 0; x < pages.size(); x++)
+                    {
+                        System.out.println(" something random garbage I dont really care");
+                        request.setAttribute("data", LessonDao.getLessonPage(grade, lesson, pages.get(x)));
+                        RequestDispatcher view = request.getRequestDispatcher("/lesson.jsp");
+                        try{
+                        view.forward(request, response);
+                        }
+                        catch (Exception e)
+                        {
+                            return;
+                        }
+                    }
+                    return;
+                    
+                }
             }
-            else{
+            else{System.out.println("Nixon is Keking Stupid");
                 String answer = request.getParameter("answer");
                 if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
                     prog++;
