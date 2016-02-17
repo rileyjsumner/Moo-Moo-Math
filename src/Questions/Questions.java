@@ -18,7 +18,8 @@ public class Questions {
                         // What number comes after x?
                         bean.HTML="<p>What number comes after "+a+"?</p>\n";
                         bean.Apply(true, "TEXT", grade, lesson);
-                        AnswersDao.safeCreateAnswer(1, grade, lesson, Integer.toString(a+1));
+                        a++;
+                        AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(a));
                         break;
                 }
             case 2:

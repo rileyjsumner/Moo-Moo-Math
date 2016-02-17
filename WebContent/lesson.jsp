@@ -38,8 +38,8 @@ ${buttons.GetData()}
                     element.setAttribute("type", "button");
                     element.setAttribute("value", lessons[i]);
                     element.setAttribute('onclick', "document.location.href = 'UserController?action=next&lesson="+grade+"."+(i+1)+"'");
-                    element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .7, .5);
-                    element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .7, .3);
+                    element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .8, .6);
+                    element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .8, .4);
                     element.style.borderWidth = "4px";
                     element.style.borderStyle = "solid";
                     document.getElementById("LessonButtonContainer").appendChild(element);
@@ -128,8 +128,8 @@ ${buttons.GetData()}
                             element.setAttribute("type", "button");
                             element.setAttribute("value", "Grade "+i);
                             element.setAttribute('onclick', "viewGrade("+i+")");
-                            element.style.backgroundColor = hslToRgb((i-1)*.1,.7,.5);
-                            element.style.borderColor = hslToRgb((i-1)*.1,.7,.3);
+                            element.style.backgroundColor = hslToRgb((i-1)*.1,.8,.6);
+                            element.style.borderColor = hslToRgb((i-1)*.1,.8,.4);
                             element.style.borderWidth = "4px";
                             element.style.borderStyle = "solid";
                             document.getElementById("GradeButtonContainer").appendChild(element);
@@ -147,7 +147,7 @@ ${buttons.GetData()}
         </div>
         <div id="lessonStrip">
             <p style="text-align:center;font-size:300%;">${data.GetTitle()}</p>
-            <p style="text-align:center;font-size:150%;">Lesson ${data.GetGrade()}.${data.GetGrade()}</p>
+            <p style="text-align:center;font-size:150%;">${data.GetMode()} ${data.GetGrade()}.${data.GetGrade()}</p>
             <script>
                 var element = document.getElementById("lessonStrip");
                 element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .7, .5);

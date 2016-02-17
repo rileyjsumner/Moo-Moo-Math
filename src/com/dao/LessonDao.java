@@ -46,6 +46,22 @@ public class LessonDao {
         }
         return bean;
     }
+    public static int getMaxPractice(int grade,int lesson){
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = con.prepareStatement("SELECT MaxPractice FROM lessons WHERE Lesson = ? AND Grade = ?");
+            preparedStatement.setInt(1, lesson);
+            preparedStatement.setInt(2, grade);
+            ResultSet set = preparedStatement.executeQuery();
+            if(set.first()){
+                return set.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProgressDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
     public static int getMaxPages(int grade,int lesson){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
