@@ -9,7 +9,6 @@ public class ButtonBean {
     public int grades=0;
     public List<List<String>> lessons;
     public ButtonBean(){
-        lessons = Util.createArrayList(Util.createArrayList("COUNTING","OTHER"),Util.createArrayList("HHHHHMMMMMM"));
         
     }
     public ButtonBean(int _grades){

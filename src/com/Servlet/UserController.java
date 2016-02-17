@@ -54,7 +54,7 @@ public class UserController extends HttpServlet {
             String lessonS = request.getParameter("lesson");
             int progress = ProgressDao.getProgress(1,grade, lesson);
             int max = LessonDao.getMaxPages(grade, lesson);
-            request.setAttribute("buttons", LessonDao.getButtonBean(0));
+            request.setAttribute("buttons", LessonDao.getButtonBean());
             forward = "/lesson.jsp";
             if(progress < max){
                 System.out.println("LESSON");
@@ -77,8 +77,7 @@ public class UserController extends HttpServlet {
             String ls = lessonS.substring(2, 3);
             int grade = Integer.parseUnsignedInt(gr);
             int lesson = Integer.parseUnsignedInt(ls);
-            //String answer = request.getParameter("answer");
-            request.setAttribute("buttons", LessonDao.getButtonBean(0));
+            request.setAttribute("buttons", LessonDao.getButtonBean());
             int prog = ProgressDao.getProgress(1, grade, lesson);
             int max = LessonDao.getLessons(grade);
             if(prog<max){
@@ -86,7 +85,10 @@ public class UserController extends HttpServlet {
                 ProgressDao.SetProgress(1, grade, lesson, prog);
             }
             else if(prog < max+100){
-                //Practice here
+                String answer = request.getParameter("answer");
+                if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
+                    ProgressDao.SetProgress(1, grade, lesson, prog+1);
+                }
             }
             else{
                 //test heres
@@ -100,13 +102,8 @@ public class UserController extends HttpServlet {
             }
             forward="/lesson.jsp";
         }
-        else if (action.equalsIgnoreCase("viewLessons")){
-            String view = request.getParameter("grade");
-            request.setAttribute("buttons", LessonDao.getButtonBean(Integer.parseInt(view)));
-            forward="/Home.jsp";
-        }
         else if (action.equalsIgnoreCase("home")){
-            request.setAttribute("buttons", LessonDao.getButtonBean(0));
+            request.setAttribute("buttons", LessonDao.getButtonBean());
             RequestDispatcher view = request.getRequestDispatcher("/Home.jsp");
             view.forward(request, response);
             forward="/Home.jsp";
@@ -119,7 +116,7 @@ public class UserController extends HttpServlet {
             int lesson = Integer.parseUnsignedInt(ls);
             int progress = ProgressDao.getProgress(1,grade, lesson);
             int max = LessonDao.getMaxPages(grade, lesson);
-            request.setAttribute("buttons", LessonDao.getButtonBean(0));
+            request.setAttribute("buttons", LessonDao.getButtonBean());
             forward = "/lesson.jsp";
             if(progress < max){
                 System.out.println("LESSON");

@@ -5,6 +5,7 @@ import com.Beans.LessonBean;
 import com.DbUtil.DbUtil;
 
 import Util.Util;
+import java.util.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,9 @@ public class LessonDao {
             ResultSet set = preparedStatement.executeQuery();
             if(set.first()){
                 LessonBean bean = new LessonBean();
+                bean.Grade = grade;
+                bean.Lesson=lesson;
+                bean.Title = getLessonText(grade,lesson);
                 bean.AddLine(set.getString(1));
                 bean.Apply(set.getInt(2)==1, set.getInt(3)==1,grade,lesson);
                 return bean;
@@ -30,12 +34,16 @@ public class LessonDao {
         }
         return new LessonBean("<p>ERROR 404: Page Not Found</p>",0,0);
     }
-    public static ButtonBean getButtonBean(int GradeSelected){
+    public static ButtonBean getButtonBean(){
         ButtonBean bean = new ButtonBean(); 
         bean.grades = getGrades();
-        
-
-        
+        bean.lessons=new ArrayList<>();
+        for(int i =1;i<=bean.grades;i++){
+            bean.lessons.add(new ArrayList<>());
+            for(int j=1;j<=getLessons(i);j++){
+                bean.lessons.get(i-1).add(getLessonText(i,j));
+            }
+        }
         return bean;
     }
     public static int getMaxPages(int grade,int lesson){

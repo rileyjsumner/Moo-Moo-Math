@@ -13,6 +13,7 @@ public class Questions {
             case 1:
                 switch(lesson){
                     case 1:
+                        bean.Title="Next Number";
                         int a = random.nextInt(100);
                         // What number comes after x?
                         bean.HTML="<p>What number comes after "+a+"?</p>\n";
@@ -43,6 +44,8 @@ public class Questions {
             default:
                 
         }
+    bean.Grade=grade;
+    bean.Lesson =lesson;
     return bean;
     }
 }

@@ -1,8 +1,13 @@
 package com.Beans;
 public class LessonBean {
     public String HTML;
+    public int Grade;
+    public int Lesson;
+    public String Title;
     public LessonBean(String html,int grade,int lesson){
         HTML = html;
+        Grade = grade;
+        Lesson= lesson;
         this.Apply(true,true,grade,lesson);
     }
     public LessonBean(String html){
@@ -11,11 +16,17 @@ public class LessonBean {
     public LessonBean(){
         HTML = "";
     }
+    public String GetTitle(){
+        return Title;
+    }
     public String GetData(){
         return HTML;
     }
-    public String GetLesson(){
-        return HTML;
+    public int GetGrade(){
+        return Grade;
+    }
+    public int GetLesson(){
+        return Lesson;
     }
     public void AddLine(String Line){
         HTML+="\n<p>"+Line+"</p>";
@@ -26,7 +37,7 @@ public class LessonBean {
         }
         if(!customBtn){
             HTML+="\n<div align = \"center\">";
-            HTML+="\n<input type=\"button\" style=\"background-color:#FFDAB9; border: 4px solid #E7C6A5\" onclick=\"document.location.href='UserController?action=lessonDone&lesson="+grade+"."+lesson+"'\" value=\"Next\"/>";
+            HTML+="\n<input type=\"button\" style=\"background-color:#FFDAB9; border: 4px solid #E7C6A5\" onclick=\"document.location.href='UserController?action=done&lesson="+grade+"."+lesson+"'\" value=\"Next\"/>";
             HTML+="\n</div>";
         }
     }

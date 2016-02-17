@@ -1,6 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <c:if test="${empty buttons} || ${empty data}">
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+ <c:if test="${empty data} || ${empty buttons}">
     <c:redirect url="UserController?action=Home"/>
 </c:if>
 <html>
@@ -12,7 +13,8 @@
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
-    <body>
+    <body id ="body">
+    
         <script>
             Object.size = function(obj) {
                 var size = 0, key;
@@ -105,7 +107,6 @@ ${buttons.GetData()}
                             <li><a href = "Login.jsp">Log In</a></li>
                             <li><a href = "Profile.jsp">Profile</a></li>
                             <li class = "divider"></li>
-                            <li><a href = "CreateAccount.jsp">Create Account</a></li>
                             <li><a href = "#">Log Out</a></li>
                         </ul>
                     </div>
@@ -145,22 +146,22 @@ ${buttons.GetData()}
                 </div>
             </div>
         </div>
-        <div id="lessonStrip">
-            <p style="text-align:center;font-size:300%;">${data.GetTitle()}</p>
-            <p style="text-align:center;font-size:150%;">Lesson ${data.GetGrade()}.${data.GetGrade()}</p>
+        <div class="content">
+            <div id="lessonStrip">
+                <p style="text-align:center;font-size:300%;">Lesson ${data.GetGrade()}.${data.GetGrade()}</p>
+                <p style="text-align:center;font-size:210%;">${data.GetTitle()}</p>
+                <script>
+                    var element = document.getElementById("lessonStrip");
+                    element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .7, .5);
+                    element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .2, .2);
+                </script>
+            </div>
+                
+        </div>
             <script>
-                var element = document.getElementById("lessonStrip");
-                element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .7, .5);
-                element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .2, .2);
+                var element = document.getElementById("body");
+                element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .2, .9);
+                element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .1, .2);
             </script>
-        </div>
-        <script>
-            var element = document.getElementById("body");
-            element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .2, .9);
-            element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .1, .2);
-        </script>
-        <div>
-            ${data.GetData()}
-        </div>
     </body>
 </html>
