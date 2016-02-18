@@ -15,7 +15,7 @@
         <div class = "nav">
             <div class = "jumbotron">
                 <div class = "text-center">
-                    <h1>Sniper Team Dango Math</h1>
+                    <h1>Oink Oink Math</h1>
                     <p>First Grade Math</p>
                 </div>
             </div>

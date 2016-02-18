@@ -145,12 +145,14 @@ ${buttons.GetData()}
                 </div>
             </div>
             <div class = "jumbotron">
-                <h2>Welcome to Moo Moo Math!</h2>
-                <p>Select your grade, and the lesson you would like to work on!</p>
-                <p>We will run you through a short lesson on how to do the math, and quiz you on your abilities</p>
-                <img src="pics/pig.png" alt="Oink!"/>
-                <p>Moo Moo Math was created by Team A: Sam Scheidecker and Riley Sumner</p>
-                <p>Anoka's BPA Chapter Number 30-0005</p>
+                <div class ="text-center">
+                    <h2>Welcome to Oink Oink Math!</h2>
+                    <p>Select your grade, and the lesson you would like to work on!</p>
+                    <p>We will run you through a short lesson on how to do the math, and quiz you on your abilities</p>
+                    <img src="pics/pig.png" alt="Oink!"/>
+                    <p>Oink Oink Math was created by Team A: Sam Scheidecker and Riley Sumner</p>
+                    <p>Anoka's BPA Chapter Number 30-0005</p>
+                </div>
             </div>
         </div>
         
