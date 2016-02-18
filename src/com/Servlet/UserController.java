@@ -84,11 +84,9 @@ public class UserController extends HttpServlet {
             int MaxPractice = LessonDao.getMaxPractice(grade,lesson); System.out.println(MaxPractice + max);
             if(prog<max){
                 prog++;
-                System.out.println("Nixon is really Stupid");
                 ProgressDao.SetProgress(1, grade, lesson, prog);
             }
             else if(prog < MaxPractice + max){
-                System.out.println("Nixon is Stupid");
                 String answer = request.getParameter("answer");
                 if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
                     prog++;
@@ -96,13 +94,11 @@ public class UserController extends HttpServlet {
                 }
                 else
                 {
-                    System.out.print("Lol you suck");
                     int pgType = AnswersDao.getPageType(1, grade, lesson);
                     List<Integer> pages = LessonDao.getPagesOfType(grade, lesson, pgType);
                     System.out.println("pages" + pages.size());
                     for (int x = 0; x < pages.size(); x++)
                     {
-                        System.out.println(" something random garbage I dont really care");
                         request.setAttribute("data", LessonDao.getLessonPage(grade, lesson, pages.get(x)));
                         RequestDispatcher view = request.getRequestDispatcher("/lesson.jsp");
                         try{
@@ -117,7 +113,7 @@ public class UserController extends HttpServlet {
                     
                 }
             }
-            else{System.out.println("Nixon is Keking Stupid");
+            else{
                 String answer = request.getParameter("answer");
                 if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
                     prog++;
