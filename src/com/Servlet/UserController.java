@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.DbUtil.DbUtil;
+import java.util.List;
 
 public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -80,22 +81,53 @@ public class UserController extends HttpServlet {
             request.setAttribute("buttons", LessonDao.getButtonBean());
             int prog = ProgressDao.getProgress(1, grade, lesson);
             int max = LessonDao.getLessons(grade);
+            int MaxPractice = LessonDao.getMaxPractice(grade,lesson); System.out.println(MaxPractice + max);
             if(prog<max){
                 prog++;
                 ProgressDao.SetProgress(1, grade, lesson, prog);
             }
-            else if(prog < max+100){
+            else if(prog < MaxPractice + max){
                 String answer = request.getParameter("answer");
                 if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
-                    ProgressDao.SetProgress(1, grade, lesson, prog+1);
+                    prog++;
+                    ProgressDao.SetProgress(1, grade, lesson, prog);
+                }
+                else
+                {
+                    int pgType = AnswersDao.getPageType(1, grade, lesson);
+                    List<Integer> pages = LessonDao.getPagesOfType(grade, lesson, pgType);
+                    System.out.println("pages" + pages.size());
+                    for (int x = 0; x < pages.size(); x++)
+                    {
+                        request.setAttribute("data", LessonDao.getLessonPage(grade, lesson, pages.get(x)));
+                        RequestDispatcher view = request.getRequestDispatcher("/lesson.jsp");
+                        try{
+                        view.forward(request, response);
+                        }
+                        catch (Exception e)
+                        {
+                            return;
+                        }
+                    }
+                    return;
+                    
                 }
             }
             else{
-                //test heres
+                String answer = request.getParameter("answer");
+                if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
+                    prog++;
+                    ProgressDao.SetProgress(1, grade, lesson, prog);
+                }
+                
             }
             if(prog<max){
                 LessonBean bean = LessonDao.getLessonPage(grade, lesson, prog+1);
                 request.setAttribute("data", bean);
+            }
+            else if (prog<MaxPractice + max)
+            {
+                request.setAttribute("data", Questions.getNewQuestion(grade, lesson));
             }
             else{
                 request.setAttribute("data", Questions.getNewQuestion(grade, lesson));
@@ -108,34 +140,9 @@ public class UserController extends HttpServlet {
             view.forward(request, response);
             forward="/Home.jsp";
         }
-        else if (action.equalsIgnoreCase("lessonDone")){
-            String lessonstring = request.getParameter("lesson");
-            String gr = lessonstring.substring(0, 1);
-            String ls = lessonstring.substring(2, 3);
-            int grade = Integer.parseUnsignedInt(gr);
-            int lesson = Integer.parseUnsignedInt(ls);
-            int progress = ProgressDao.getProgress(1,grade, lesson);
-            int max = LessonDao.getMaxPages(grade, lesson);
-            request.setAttribute("buttons", LessonDao.getButtonBean());
-            forward = "/lesson.jsp";
-            if(progress < max){
-                System.out.println("LESSON");
-                ProgressDao.SetProgress(1, grade, lesson, progress+1);
-                request = goToNextLesson(grade,lesson,request);
-            }
-            else{
-                System.out.println("TRIED");
-                ProgressDao.SetProgress(1, grade, lesson, progress+1);
-                QuestionBean bean = Questions.getNewQuestion(grade, lesson);
-                request.setAttribute("data", bean);
-            }
-        }
+        
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
-    }
-    public HttpServletRequest goToNextLesson(int grade,int lesson,HttpServletRequest request){
-        
-        return request;
     }
     /**
      * @param request

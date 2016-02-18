@@ -5,7 +5,8 @@ import com.Beans.LessonBean;
 import com.DbUtil.DbUtil;
 
 import Util.Util;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,6 +47,22 @@ public class LessonDao {
         }
         return bean;
     }
+    public static int getMaxPractice(int grade,int lesson){
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = con.prepareStatement("SELECT MaxPractice FROM lessons WHERE Lesson = ? AND Grade = ?");
+            preparedStatement.setInt(1, lesson);
+            preparedStatement.setInt(2, grade);
+            ResultSet set = preparedStatement.executeQuery();
+            if(set.first()){
+                return set.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProgressDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
     public static int getMaxPages(int grade,int lesson){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
@@ -77,6 +94,24 @@ public class LessonDao {
             Logger.getLogger(ProgressDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
+    }
+    public static List<Integer> getPagesOfType(int grade, int lesson, int pgType)
+    {
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = con.prepareStatement("SELECT Page FROM pages WHERE pageType = ?");
+            preparedStatement.setInt(1, pgType);
+            ResultSet set = preparedStatement.executeQuery();
+            List<Integer> pages = new ArrayList<Integer>();
+            while(set.next()){
+                pages.add(set.getInt(1));
+            }
+            return pages;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProgressDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new ArrayList<Integer>();
     }
     public static int getLessons(int grade){
         Connection con =DbUtil.getConnection();

@@ -38,8 +38,8 @@ ${buttons.GetData()}
                     element.setAttribute("type", "button");
                     element.setAttribute("value", lessons[i]);
                     element.setAttribute('onclick', "document.location.href = 'UserController?action=next&lesson="+grade+"."+(i+1)+"'");
-                    element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .7, .5);
-                    element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .7, .3);
+                    element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .8, .6);
+                    element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .8, .4);
                     element.style.borderWidth = "4px";
                     element.style.borderStyle = "solid";
                     document.getElementById("LessonButtonContainer").appendChild(element);
@@ -112,7 +112,7 @@ ${buttons.GetData()}
                 </div>
             </div>
             <div class = "text-center">
-                <h1>Oh Dang Studios! Math</h1>
+                <h1>Moo-Moo Math</h1>
             </div>
         </div>
         <div class = "content">
@@ -128,8 +128,8 @@ ${buttons.GetData()}
                             element.setAttribute("type", "button");
                             element.setAttribute("value", "Grade "+i);
                             element.setAttribute('onclick', "viewGrade("+i+")");
-                            element.style.backgroundColor = hslToRgb((i-1)*.1,.7,.5);
-                            element.style.borderColor = hslToRgb((i-1)*.1,.7,.3);
+                            element.style.backgroundColor = hslToRgb((i-1)*.1,.8,.6);
+                            element.style.borderColor = hslToRgb((i-1)*.1,.8,.4);
                             element.style.borderWidth = "4px";
                             element.style.borderStyle = "solid";
                             document.getElementById("GradeButtonContainer").appendChild(element);
@@ -140,7 +140,7 @@ ${buttons.GetData()}
                 </div>
             </div>
             <div class = "text-center">
-                <div id = "LessonButtonContainer" class = "col-md-12">
+                <div id = "LessonButtonContainer">
                     
                 </div>
             </div>

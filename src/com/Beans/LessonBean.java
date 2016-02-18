@@ -22,6 +22,9 @@ public class LessonBean {
     public String GetData(){
         return HTML;
     }
+    public String GetMode(){
+        return "Lesson";
+    }
     public int GetGrade(){
         return Grade;
     }
