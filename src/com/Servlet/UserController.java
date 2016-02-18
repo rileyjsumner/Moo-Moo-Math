@@ -38,8 +38,7 @@ public class UserController extends HttpServlet {
         System.out.println();
         String action = request.getParameter("action");
         if (action==null){
-        	RequestDispatcher view = request.getRequestDispatcher("/Login.jsp");
-            view.forward(request, response);
+            forward = "/login-failed.html";
         }
         
         System.out.println("Get action is: " + action);
@@ -54,16 +53,15 @@ public class UserController extends HttpServlet {
             int lesson = Integer.parseUnsignedInt(ls);
             String lessonS = request.getParameter("lesson");
             int progress = ProgressDao.getProgress(1,grade, lesson);
-            int max = LessonDao.getMaxPages(grade, lesson);
+            int max = LessonDao.getLessons(grade);
+            int MaxPractice = LessonDao.getMaxPractice(grade,lesson);
             request.setAttribute("buttons", LessonDao.getButtonBean());
             forward = "/lesson.jsp";
             if(progress < max){
-                System.out.println("LESSON");
                 LessonBean lessonBean = LessonDao.getLessonPage(grade, lesson, progress+1);
                 request.setAttribute("data", lessonBean);
             }
-            else if (progress < max+100){
-                System.out.println("QUESTION");
+            else if (progress < max+MaxPractice){
                 ProgressDao.SetProgress(1, grade, lesson, progress+1);
                 QuestionBean bean = Questions.getNewQuestion(grade, lesson);
                 request.setAttribute("data", bean);
@@ -83,6 +81,7 @@ public class UserController extends HttpServlet {
             int max = LessonDao.getLessons(grade);
             int MaxPractice = LessonDao.getMaxPractice(grade,lesson); System.out.println(MaxPractice + max);
             int helpNeeded=0;
+            forward="/lesson.jsp";
             if(prog<max){
                 prog++;
                 ProgressDao.SetProgress(1, grade, lesson, prog);
@@ -123,12 +122,10 @@ public class UserController extends HttpServlet {
             else{
                 request.setAttribute("data", Questions.getNewQuestion(grade, lesson));
             }
-            forward="/lesson.jsp";
+            
         }
         else if (action.equalsIgnoreCase("home")){
             request.setAttribute("buttons", LessonDao.getButtonBean());
-            RequestDispatcher view = request.getRequestDispatcher("/Home.jsp");
-            view.forward(request, response);
             forward="/Home.jsp";
         }
         

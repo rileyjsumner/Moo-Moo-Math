@@ -19,7 +19,7 @@ public class Questions {
                         bean.HTML="<p>What number comes after "+a+"?</p>\n";
                         bean.Apply(true, "TEXT", grade, lesson);
                         a++;
-                        AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(a),2);
+                        AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(a),bean.HTML,2);
                         break;
                 }
             case 2:
