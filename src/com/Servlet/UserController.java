@@ -82,6 +82,7 @@ public class UserController extends HttpServlet {
             int prog = ProgressDao.getProgress(1, grade, lesson);
             int max = LessonDao.getLessons(grade);
             int MaxPractice = LessonDao.getMaxPractice(grade,lesson); System.out.println(MaxPractice + max);
+            int helpNeeded=0;
             if(prog<max){
                 prog++;
                 ProgressDao.SetProgress(1, grade, lesson, prog);
@@ -94,23 +95,7 @@ public class UserController extends HttpServlet {
                 }
                 else
                 {
-                    int pgType = AnswersDao.getPageType(1, grade, lesson);
-                    List<Integer> pages = LessonDao.getPagesOfType(grade, lesson, pgType);
-                    System.out.println("pages" + pages.size());
-                    for (int x = 0; x < pages.size(); x++)
-                    {
-                        request.setAttribute("data", LessonDao.getLessonPage(grade, lesson, pages.get(x)));
-                        RequestDispatcher view = request.getRequestDispatcher("/lesson.jsp");
-                        try{
-                        view.forward(request, response);
-                        }
-                        catch (Exception e)
-                        {
-                            return;
-                        }
-                    }
-                    return;
-                    
+                    helpNeeded = AnswersDao.getPageType(1, grade, lesson);
                 }
             }
             else{
@@ -127,7 +112,13 @@ public class UserController extends HttpServlet {
             }
             else if (prog<MaxPractice + max)
             {
-                request.setAttribute("data", Questions.getNewQuestion(grade, lesson));
+                if (helpNeeded!=0){
+                    request.setAttribute("data", HelpDao.getHelpPage(helpNeeded));
+                    forward = "/help.jsp";
+                }
+                else{
+                    request.setAttribute("data", Questions.getNewQuestion(grade, lesson));
+                }
             }
             else{
                 request.setAttribute("data", Questions.getNewQuestion(grade, lesson));

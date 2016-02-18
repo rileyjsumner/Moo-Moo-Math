@@ -7,24 +7,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AnswersDao {
-    public static void safeCreateAnswer(int userid, int grade,int lesson, String answer, int pageType){
+    public static void safeCreateAnswer(int userid, int grade,int lesson, String answer, String question, int pageType){
         if(!hasAnswer(userid,grade,lesson)){
-            newAnswer(userid,grade,lesson,answer, pageType);
+            newAnswer(userid,grade,lesson,answer,question, pageType);
         }
         else{
-            updateAnswer(userid,grade,lesson,answer, pageType);
+            updateAnswer(userid,grade,lesson,answer,question, pageType);
         }
     }
-    public static void updateAnswer(int userid, int grade,int lesson, String correct, int pageType){
+    public static void updateAnswer(int userid, int grade,int lesson, String correct,String question, int pageType){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = con.prepareStatement("UPDATE answers SET CorrectAnswer = ?, ansType = ? WHERE UserId = ? AND Grade = ? AND Lesson = ?");
+            preparedStatement = con.prepareStatement("UPDATE answers SET CorrectAnswer = ?,QuestionTxt = ?, ansType = ? WHERE UserId = ? AND Grade = ? AND Lesson = ?");
             preparedStatement.setString(1, correct);
-            preparedStatement.setInt(2, pageType);
-            preparedStatement.setInt(3, userid);
-            preparedStatement.setInt(4, grade);
-            preparedStatement.setInt(5, lesson);
+            preparedStatement.setString(2, question);
+            preparedStatement.setInt(3, pageType);
+            preparedStatement.setInt(4, userid);
+            preparedStatement.setInt(5, grade);
+            preparedStatement.setInt(6, lesson);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AnswersDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,6 +78,23 @@ public class AnswersDao {
         }
         return 0;
     }
+    public static String getQuestion(int userid, int grade,int lesson){
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = con.prepareStatement("SELECT QuestionTxt FROM answers WHERE UserId = ? AND Grade = ? AND Lesson = ?");
+            preparedStatement.setInt(1, userid);
+            preparedStatement.setInt(2, grade);
+            preparedStatement.setInt(3, lesson);
+            ResultSet set = preparedStatement.executeQuery();
+            if(set.first()){
+                return set.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AnswersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
     public static String getAnswer(int userid, int grade,int lesson){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
@@ -94,16 +112,17 @@ public class AnswersDao {
         }
         return "";
     }
-    public static void newAnswer(int userid, int grade,int lesson,String answer, int pageType){
+    public static void newAnswer(int userid, int grade,int lesson,String answer, String question, int pageType){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = con.prepareStatement("INSERT INTO answers (UserId,Grade,Lesson,CorrectAnswer,ansType) values(?,?,?,?,?)");
+            preparedStatement = con.prepareStatement("INSERT INTO answers (UserId,Grade,Lesson,CorrectAnswer,QuestionTxt,ansType) values(?,?,?,?,?,?)");
             preparedStatement.setInt(1, userid);
             preparedStatement.setInt(2, grade);
             preparedStatement.setInt(3, lesson);
             preparedStatement.setString(4, answer);
-            preparedStatement.setInt(5, pageType);
+            preparedStatement.setString(5, question);
+            preparedStatement.setInt(6, pageType);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AnswersDao.class.getName()).log(Level.SEVERE, null, ex);
