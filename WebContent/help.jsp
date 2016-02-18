@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <c:if test="${empty buttons}">
+ <c:if test="${empty buttons} || ${empty data}">
     <c:redirect url="UserController?action=Home"/>
 </c:if>
 <html>
@@ -11,6 +11,7 @@
         <link rel = "stylesheet" href = "main.css">
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css-fireworks.css">
     </head>
     <body>
         <script>
@@ -23,7 +24,7 @@
             };
             function getLessons(grade){
                 switch(grade){
-${buttons.GetData()}
+                ${buttons.GetData()}
                 }
             }
             function viewGrade(grade){
@@ -144,15 +145,26 @@ ${buttons.GetData()}
                     
                 </div>
             </div>
-            <div class = "jumbotron">
-                <h2>Welcome to Moo Moo Math!</h2>
-                <p>Select your grade, and the lesson you would like to work on!</p>
-                <p>We will run you through a short lesson on how to do the math, and quiz you on your abilities</p>
-                <img src="pics/pig.png" alt="Oink!"/>
-                <p>Moo Moo Math was created by Team A: Sam Scheidecker and Riley Sumner</p>
-                <p>Anoka's BPA Chapter Number 30-0005</p>
-            </div>
         </div>
-        
+        <div id="lessonStrip">
+            <p style="text-align:center;font-size:300%;">${data.GetTitle()}</p>
+            <p style="text-align:center;font-size:150%;">Help ${data.GetGrade()}.${data.GetGrade()}</p>
+            <script>
+                var element = document.getElementById("lessonStrip");
+                element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .7, .5);
+                element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .2, .2);
+            </script>
+        </div>
+        <script>
+            var element = document.getElementById("body");
+            element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .2, .9);
+            element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .1, .2);
+        </script>
+        <div>
+            ${data.GetQuestion()}
+            <p>Here is your question. You answered ${data.GetUserAnswer()}</p>
+            <p>The correct answer was ${data.GetAnswer()}</p>
+            ${data.Help()}
+        </div>
     </body>
 </html>
