@@ -7,6 +7,6 @@
         <link rel = "stylesheet" href = "main.css">
     </head>
     <body>
-        <h1>Oh Dang Studios! Math</h1>
+        <h1>Oink Oink Math</h1>
     </body>
 </html>

@@ -32,13 +32,13 @@
         </script>
         <div class = "jumbotron">
             <div class = "text-center">
-                <h1>Sniper Team Dango Math</h1>
+                <h1>Oink Oink Math</h1>
                 <p>My Profile</p>
             </div>
         <div class = "content">
             <div class = "text-center">
                 <div class = "row">
-                    <div class = "col-md-11">
+                    <div class = "col-md-12">
                         <p></p>
                         <input type = "button" style = "background-color:#5EA4FF; border: 4px solid #3B90FF" onclick = "document.location.href = 'Home.jsp'" value = "Home"/>
                         <input type = "button" style = "background-color:#FF0000; border: 4px solid #E00000" onclick = "toGrade(1)" value = "1st Grade"/>

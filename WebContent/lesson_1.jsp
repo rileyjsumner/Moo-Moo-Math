@@ -113,7 +113,7 @@ ${buttons.GetData()}
                 </div>
             </div>
             <div class = "text-center">
-                <h1>Oh Dang Studios! Math</h1>
+                <h1>Oink Oink Math</h1>
             </div>
         </div>
         <div class = "content">

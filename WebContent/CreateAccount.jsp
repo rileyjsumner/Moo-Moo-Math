@@ -15,27 +15,27 @@
 <script>
 function validateForm(){
 	var x = document.forms["SignIn"];
-    if (x["First Name"].value == null || x["First Name"].value == "") {
+    if (x["First Name"].value === null || x["First Name"].value === "") {
         alert("First name must be filled out");
         return false;
     }
-    if (x["Last Name"].value == null || x["Last Name"].value == "") {
+    if (x["Last Name"].value === null || x["Last Name"].value === "") {
     	alert("Last name must be filled out");
         return false;
     }
-    if (x["User Name"].value == null || x["User Name"].value == "") {
+    if (x["User Name"].value === null || x["User Name"].value === "") {
     	alert("User name must be filled out");
         return false;
     }
-    if (x["Password"].value == null || x["Password"].value == "") {
+    if (x["Password"].value === null || x["Password"].value === "") {
     	alert("Password must be filled out");
         return false;
     }
-    if (x["Verify Password"].value == null || x["Verify Password"].value == "") {
+    if (x["Verify Password"].value === null || x["Verify Password"].value === "") {
     	alert("Password verification must be filled out");
         return false;
     }
-    if (x["Verify Password"].value != x["Password"].value) {
+    if (x["Verify Password"].value !== x["Password"].value) {
     	alert("Passwords do not match");
         return false;
     }

@@ -13,14 +13,39 @@ public class Questions {
             case 1:
                 switch(lesson){
                     case 1:
-                        bean.Title="Next Number";
-                        int a = random.nextInt(100);
-                        // What number comes after x?
-                        bean.HTML="<p>What number comes after "+a+"?</p>\n";
-                        bean.Apply(true, "TEXT", grade, lesson);
-                        a++;
-                        AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(a),bean.HTML,2);
-                        break;
+                        int kek = random.nextInt(2);
+                        switch(kek)
+                        {
+                            case 0:
+                                bean.Title="Next Number";
+                                int a = random.nextInt(100);
+                                // What number comes after x?
+                                bean.HTML="<p>What number comes after "+a+"?</p>\n";
+                                bean.Apply(true, "TEXT", grade, lesson);
+                                a++;
+                                AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(a),bean.HTML,2);
+                                break;
+                            case 1:
+                                bean.Title="Counting Intervals";
+                                int b = random.nextInt(100);
+                                int c = random.nextInt(9) + 1;
+                                bean.HTML = "<p>When counting by " + c + "'s, what number comes after "+b+"? </p>\n";
+                                bean.Apply(true, "TEXT", grade, lesson);
+                                b+=c;
+                                AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(b), bean.HTML, 3);
+                                break;
+                            case 2:
+                                bean.Title="Counting Patterns";
+                                int d = random.nextInt(100);
+                                int e = random.nextInt(9) + 1;
+                                bean.HTML = "<p>What number comes next in the sequence? \n" + d + ", " + (d + e) + ", " + (d + e * 2) + ", " + (d + e * 3) + ", " + (d + e * 4) + "</p>\n";
+                                bean.Apply(true, "TEXT", grade, lesson);
+                                d = (d + e * 5);
+                                AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(d), bean.HTML, grade);
+                        }
+                    case 2:
+                        
+                    
                 }
             case 2:
                 switch(lesson){
