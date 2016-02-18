@@ -103,7 +103,7 @@ ${buttons.GetData()}
                         <span class = "caret"></span></button>
                         <ul class = "dropdown-menu pull-right">
                             <li><a href = "Login.jsp">Log In</a></li>
-                            <li><a href = "crud.jsp">CRUD</a></li>
+                            <li><a href = "Profile.jsp">Profile</a></li>
                             <li class = "divider"></li>
                             <li><a href = "CreateAccount.jsp">Create Account</a></li>
                             <li><a href = "#">Log Out</a></li>

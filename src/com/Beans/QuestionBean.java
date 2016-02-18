@@ -10,13 +10,17 @@ public class QuestionBean {
         HTML = html;
         Grade = grade;
         Lesson= lesson;
-        this.Apply(true,"TEXT",grade,lesson);
+        this.Apply(true,"TEXT");
     }
     public QuestionBean(String html){
         HTML = html;
+        Grade=0;
+        Lesson=0;
     }
     public QuestionBean(){
         HTML = "";
+        Grade=0;
+        Lesson=0;
     }
     public String GetTitle(){
         return Title;
@@ -42,12 +46,12 @@ public class QuestionBean {
     public void AddLine(String Line){
         HTML+="\n<p>"+Line+"</p>";
     }
-    public void Apply(boolean standard,String returning ,int grade, int lesson){
+    public void Apply(boolean standard,String returning){
         if(returning.equals("TEXT")){
             HTML+="<form action = \"UserController\">\n"
                     + "<input type=\"text\" name=\"answer\"/>\n"
                     + "<input type =\"hidden\" name=\"action\" value = \"done\"/>\n"
-                    + "<input type =\"hidden\" name=\"lesson\" value = \""+grade+"."+lesson+"\"/>\n"
+                    + "<input type =\"hidden\" name=\"lesson\" value = \""+Grade+"."+Lesson+"\"/>\n"
                     + "<input type=\"submit\" name=\"Done\"/>"
                     + "</form>";
         }

@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Index</title>
+<title>Home</title>
 </head>
 <body>
-<h1></h1>
 <script>
     document.location.href="Home.jsp";
 </script>

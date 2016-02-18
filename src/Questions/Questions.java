@@ -9,6 +9,8 @@ public class Questions {
     static Random random = new Random();
     public static QuestionBean getNewQuestion(int grade,int lesson){
         QuestionBean bean= new QuestionBean();
+        bean.Grade= grade;
+        bean.Lesson = lesson;
         switch(grade){
             case 1:
                 switch(lesson){
@@ -21,7 +23,7 @@ public class Questions {
                                 int a = random.nextInt(100);
                                 // What number comes after x?
                                 bean.HTML="<p>What number comes after "+a+"?</p>\n";
-                                bean.Apply(true, "TEXT", grade, lesson);
+                                bean.Apply(true, "TEXT");
                                 a++;
                                 AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(a),bean.HTML,2);
                                 break;
@@ -30,7 +32,7 @@ public class Questions {
                                 int b = random.nextInt(100);
                                 int c = random.nextInt(9) + 1;
                                 bean.HTML = "<p>When counting by " + c + "'s, what number comes after "+b+"? </p>\n";
-                                bean.Apply(true, "TEXT", grade, lesson);
+                                bean.Apply(true, "TEXT");
                                 b+=c;
                                 AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(b), bean.HTML, 3);
                                 break;
@@ -39,9 +41,10 @@ public class Questions {
                                 int d = random.nextInt(100);
                                 int e = random.nextInt(9) + 1;
                                 bean.HTML = "<p>What number comes next in the sequence? \n" + d + ", " + (d + e) + ", " + (d + e * 2) + ", " + (d + e * 3) + ", " + (d + e * 4) + "</p>\n";
-                                bean.Apply(true, "TEXT", grade, lesson);
+                                bean.Apply(true, "TEXT");
                                 d = (d + e * 5);
-                                AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(d), bean.HTML, grade);
+                                AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(d), bean.HTML, 4);
+                                break;
                         }
                     case 2:
                         
@@ -70,8 +73,6 @@ public class Questions {
             default:
                 
         }
-    bean.Grade=grade;
-    bean.Lesson =lesson;
     return bean;
     }
 }
