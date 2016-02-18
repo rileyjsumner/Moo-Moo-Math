@@ -112,7 +112,10 @@ public class UserController extends HttpServlet {
             else if (prog<MaxPractice + max)
             {
                 if (helpNeeded!=0){
-                    request.setAttribute("data", HelpDao.getHelpPage(helpNeeded));
+                    HelpBean bean = HelpDao.getHelpPage(helpNeeded);
+                    bean.UserAnswer = request.getParameter("answer");
+                    request.setAttribute("data", bean);
+                    System.out.println("HELP:"+helpNeeded);
                     forward = "/help.jsp";
                 }
                 else{

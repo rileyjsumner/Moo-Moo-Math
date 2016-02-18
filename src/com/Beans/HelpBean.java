@@ -5,12 +5,16 @@ public class HelpBean {
     public int Lesson;
     public String Title;
     public String CorrectAns;
-    public HelpBean(String question,int grade,int lesson, String title, String correct){
+    public String UserAnswer;
+    public String Help;
+    public HelpBean(String question,int grade,int lesson, String title, String correct, String help){
         Question= question;
         Grade= grade;
         Lesson = lesson;
         Title=title;
         CorrectAns = correct;
+        UserAnswer = "";
+        Help = help;
     }
     public HelpBean(){
         Question= "";
@@ -18,6 +22,18 @@ public class HelpBean {
         Lesson = 0;
         Title="";
         CorrectAns = "";
+    }
+    public String GetHelp(){
+        return Help;
+    }
+    public String GetAnswer(){
+        return CorrectAns;
+    }
+    public String GetUserAnswer(){
+        return UserAnswer;
+    }
+    public String GetQuestion(){
+        return Question;
     }
     public String GetTitle(){
         return Title;

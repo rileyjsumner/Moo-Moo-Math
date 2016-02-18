@@ -160,11 +160,10 @@
             element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .2, .9);
             element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .1, .2);
         </script>
-        <div>
-            ${data.GetQuestion()}
-            <p>Here is your question. You answered ${data.GetUserAnswer()}</p>
-            <p>The correct answer was ${data.GetAnswer()}</p>
-            ${data.Help()}
+        <div class = "text-center" style ="font-size:150%;">
+            <p>You answered ${data.GetUserAnswer()}.</p>
+            <p>The correct answer was ${data.GetAnswer()}.</p>
+            ${data.GetHelp()}
         </div>
     </body>
 </html>

@@ -119,13 +119,13 @@ public class HelpDao {
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = con.prepareStatement("SELECT * FROM helppages WHERE HelpType = ?");
+            preparedStatement = con.prepareStatement("SELECT HelpPage FROM help WHERE HelpType = ?");
             preparedStatement.setInt(1, helpType);
             ResultSet set = preparedStatement.executeQuery();
             int grade = getUserHelpGrade(helpType);
             int lesson = getUserHelpLesson(helpType);
             if(set.first()){
-                return new HelpBean(AnswersDao.getQuestion(1, grade, lesson),grade,lesson,LessonDao.getLessonText(grade, lesson),AnswersDao.getAnswer(1, grade, lesson));
+                return new HelpBean(AnswersDao.getQuestion(1, grade, lesson),grade,lesson,LessonDao.getLessonText(grade, lesson),AnswersDao.getAnswer(1, grade, lesson),set.getString(1));
                 
             }
         } catch (SQLException ex) {

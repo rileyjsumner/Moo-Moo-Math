@@ -19,7 +19,7 @@ public class AnswersDao {
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = con.prepareStatement("UPDATE answers SET CorrectAnswer = ?,QuestionTxt = ?, ansType = ? WHERE UserId = ? AND Grade = ? AND Lesson = ?");
+            preparedStatement = con.prepareStatement("UPDATE answers SET CorrectAnswer = ?,QuestionTxt = ?, AnswerType = ? WHERE UserId = ? AND Grade = ? AND Lesson = ?");
             preparedStatement.setString(1, correct);
             preparedStatement.setString(2, question);
             preparedStatement.setInt(3, pageType);
@@ -65,7 +65,7 @@ public class AnswersDao {
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = con.prepareStatement("SELECT ansType FROM answers WHERE UserId = ? AND Grade = ? AND Lesson = ?");
+            preparedStatement = con.prepareStatement("SELECT AnswerType FROM answers WHERE UserId = ? AND Grade = ? AND Lesson = ?");
             preparedStatement.setInt(1, userid);
             preparedStatement.setInt(2, grade);
             preparedStatement.setInt(3, lesson);
@@ -116,12 +116,13 @@ public class AnswersDao {
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = con.prepareStatement("INSERT INTO answers (UserId,Grade,Lesson,CorrectAnswer,QuestionTxt,ansType) values(?,?,?,?,?,?)");
+            preparedStatement = con.prepareStatement("INSERT INTO answers (UserId,Grade,Lesson,CorrectAnswer,QuestionTxt,AnswerType) values(?,?,?,?,?,?)");
             preparedStatement.setInt(1, userid);
             preparedStatement.setInt(2, grade);
             preparedStatement.setInt(3, lesson);
             preparedStatement.setString(4, answer);
             preparedStatement.setString(5, question);
+            System.out.println(pageType);
             preparedStatement.setInt(6, pageType);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
