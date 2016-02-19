@@ -45,32 +45,7 @@ public class UserController extends HttpServlet {
         if (action.equalsIgnoreCase("login")) {
             
         }
-        else if (action.equals("next")){
-            String lessonstring = request.getParameter("lesson");
-            String gr = lessonstring.substring(0, 1);
-            String ls = lessonstring.substring(2, 3);
-            int grade = Integer.parseUnsignedInt(gr);
-            int lesson = Integer.parseUnsignedInt(ls);
-            String lessonS = request.getParameter("lesson");
-            int progress = ProgressDao.getProgress(1,grade, lesson);
-            int max = LessonDao.getLessons(grade);
-            int MaxPractice = LessonDao.getMaxPractice(grade,lesson);
-            request.setAttribute("buttons", LessonDao.getButtonBean());
-            forward = "/lesson.jsp";
-            if(progress < max){
-                LessonBean lessonBean = LessonDao.getLessonPage(grade, lesson, progress+1);
-                request.setAttribute("data", lessonBean);
-            }
-            else if (progress < max+MaxPractice){
-                ProgressDao.SetProgress(1, grade, lesson, progress+1);
-                QuestionBean bean = Questions.getNewQuestion(grade, lesson);
-                request.setAttribute("data", bean);
-            }
-            else{
-                System.out.println("TEST");
-            }
-        }
-        else if (action.equalsIgnoreCase("done")){
+        else if (action.equals("done") || action.equals("next")){
             String lessonS = request.getParameter("lesson");
             String gr = lessonS.substring(0, 1);
             String ls = lessonS.substring(2, 3);
@@ -78,32 +53,35 @@ public class UserController extends HttpServlet {
             int lesson = Integer.parseUnsignedInt(ls);
             request.setAttribute("buttons", LessonDao.getButtonBean());
             int prog = ProgressDao.getProgress(1, grade, lesson);
-            int max = LessonDao.getLessons(grade);
+            int max = LessonDao.getLessonPages(grade,lesson);
+            System.out.println("MAX:"+max);
             int MaxPractice = LessonDao.getMaxPractice(grade,lesson); System.out.println(MaxPractice + max);
             int helpNeeded=0;
             forward="/lesson.jsp";
-            if(prog<max){
-                prog++;
-                ProgressDao.SetProgress(1, grade, lesson, prog);
-            }
-            else if(prog < MaxPractice + max){
-                String answer = request.getParameter("answer");
-                if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
+            if(action.equals("done")){
+                if(prog<max){
                     prog++;
                     ProgressDao.SetProgress(1, grade, lesson, prog);
                 }
-                else
-                {
-                    helpNeeded = AnswersDao.getPageType(1, grade, lesson);
+                else if(prog < MaxPractice + max){
+                    String answer = request.getParameter("answer");
+                    if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
+                        prog++;
+                        ProgressDao.SetProgress(1, grade, lesson, prog);
+                    }
+                    else
+                    {
+                        helpNeeded = AnswersDao.getPageType(1, grade, lesson);
+                    }
                 }
-            }
-            else{
-                String answer = request.getParameter("answer");
-                if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
-                    prog++;
-                    ProgressDao.SetProgress(1, grade, lesson, prog);
+                else{
+                    String answer = request.getParameter("answer");
+                    if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
+                        prog++;
+                        ProgressDao.SetProgress(1, grade, lesson, prog);
+                    }
+
                 }
-                
             }
             if(prog<max){
                 LessonBean bean = LessonDao.getLessonPage(grade, lesson, prog+1);
@@ -112,10 +90,20 @@ public class UserController extends HttpServlet {
             else if (prog<MaxPractice + max)
             {
                 if (helpNeeded!=0){
-                    HelpBean bean = HelpDao.getHelpPage(helpNeeded);
+                    HelpBean bean;
+                    if(HelpDao.hasHelpPage(helpNeeded)){
+                        bean = HelpDao.getHelpPage(helpNeeded);
+                    }
+                    else{
+                        bean = new HelpBean();
+                        bean.Grade = grade;
+                        bean.Lesson = lesson;
+                        bean.CorrectAns = AnswersDao.getAnswer(1, grade, lesson);
+                        bean.Help = "<p>Sorry, but we couldn't find any help content for that question.</p><p>You might have to try this one on your own.</p>";
+                        bean.Title = LessonDao.getLessonText(grade, lesson);
+                    }
                     bean.UserAnswer = request.getParameter("answer");
                     request.setAttribute("data", bean);
-                    System.out.println("HELP:"+helpNeeded);
                     forward = "/help.jsp";
                 }
                 else{

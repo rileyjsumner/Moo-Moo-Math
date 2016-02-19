@@ -8,7 +8,7 @@
         <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel = "stylesheet" href = "main.css">
+        <link rel = "stylesheet" href = "newcss.css">
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
@@ -43,6 +43,11 @@ ${buttons.GetData()}
                     element.style.borderWidth = "4px";
                     element.style.borderStyle = "solid";
                     document.getElementById("LessonButtonContainer").appendChild(element);
+                    if(i != grades-1){
+                        element = document.createElement("div");
+                        element.setAttribute("class","divider");
+                        document.getElementById("LessonButtonContainer").appendChild(element);
+                    }
                 }
             }
             function toLesson(grade,lesson){
@@ -133,6 +138,11 @@ ${buttons.GetData()}
                             element.style.borderWidth = "4px";
                             element.style.borderStyle = "solid";
                             document.getElementById("GradeButtonContainer").appendChild(element);
+                            if(i != grades-1){
+                                element = document.createElement("div");
+                                element.setAttribute("class","divider");
+                                document.getElementById("GradeButtonContainer").appendChild(element);
+                            }
                         }
                     </script>
                     <input type = "button" style = "background-color:#FFDAB9; border: 4px solid #E7C6A5" onclick = "document.location.href = 'Profile.jsp'" value = "Profile"/>

@@ -115,6 +115,24 @@ public class HelpDao {
         }
         return 0;
     }
+    public static boolean hasHelpPage(int helpType){
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = con.prepareStatement("SELECT HelpPage FROM help WHERE HelpType = ?");
+            preparedStatement.setInt(1, helpType);
+            ResultSet set = preparedStatement.executeQuery();
+            int grade = getUserHelpGrade(helpType);
+            int lesson = getUserHelpLesson(helpType);
+            if(set.first()){
+                return true;
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HelpDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     public static HelpBean getHelpPage(int helpType){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
