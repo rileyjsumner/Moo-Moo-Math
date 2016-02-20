@@ -24,6 +24,20 @@
                     element.className = "";
                 }
             }
+            function isValid(){
+                var x = document.forms["SignIn"];
+                if (x["UserName"].value == null || x["UserName"].value == "") {
+                    alert("Username must be filled out");
+                    return false;
+                }
+                else if (x["Password"].value == null || x["Password"].value == "") {
+                    alert("Password must be filled out");
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
             function rgbToHex(r, g, b) {
                 if(r < 0 || r > 255) alert("r is out of bounds; "+r);
                 if(g < 0 || g > 255) alert("g is out of bounds; "+g);
@@ -97,7 +111,7 @@
                 <div class ="text-center">
                     <h2 style="font-size: 280%">You're not logged in yet!</h2>
                     <p style="font-size: 150%">Please Sign in below</p>
-                    <form method="POST" action="UserController?action=Login" name = "SignIn">
+                    <form method="POST" onsubmit="return isValid();" action="UserController?action=Login" name = "SignIn">
                         <p class="form-basic" style="font-size: 100%">Username</p>
                         <input class="" id="UserName" onblur="validate('UserName')" type="text" name="UserName" value="Username" />
                         <p />
