@@ -53,9 +53,7 @@ public class AnswersDao {
             preparedStatement.setInt(2, grade);
             preparedStatement.setInt(3, lesson);
             ResultSet set = preparedStatement.executeQuery();
-            if(set.first()){
-                return true;
-            }
+            return set.first();
         } catch (SQLException ex) {
             Logger.getLogger(AnswersDao.class.getName()).log(Level.SEVERE, null, ex);
         }

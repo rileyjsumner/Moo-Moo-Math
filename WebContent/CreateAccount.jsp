@@ -15,10 +15,10 @@
 <script>
 function validateForm(){
 	var x = document.forms["SignIn"];
-    if (x["First Name"].value === null || x["First Name"].value === "") {
-        alert("First name must be filled out");
-        return false;
-    }
+        if (x["First Name"].value === null || x["First Name"].value === "") {
+            alert("First name must be filled out");
+            return false;
+        }
     if (x["Last Name"].value === null || x["Last Name"].value === "") {
     	alert("Last name must be filled out");
         return false;

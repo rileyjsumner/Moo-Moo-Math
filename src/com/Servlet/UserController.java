@@ -10,12 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Enumeration;
 
-import javax.servlet.http.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 import com.DbUtil.DbUtil;
 import java.util.List;
@@ -34,15 +31,42 @@ public class UserController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         String forward="/login-failed.html";
-        System.out.println();
         String action = request.getParameter("action");
-        if (action==null){
+        Cookie[] cookies = request.getCookies();
+        String sessionName = null;
+        String sessionPass = null;
+        if (action!=null){
+            System.out.println("Get action is: " + action);
+        }
+        for (Cookie cookie : cookies) {
+            if(cookie.getName().equals("JSESSION_USERNAME")){
+                sessionName=cookie.getValue();
+            }
+            else if(cookie.getName().equals("JSESSION_PASSWORD")){
+                sessionPass=cookie.getValue();
+            }
+        }
+        int Role =-1;
+        if(sessionPass!=null && sessionName != null){
+            Role = UserDao.CheckUser(sessionName, sessionPass);
+            forward = "/login.jsp";
+            System.out.println("Get FAIL");
+        }
+        else{
+            forward = "/login.jsp";
+            System.out.println("Get FAsssIL");
+        }
+        if(Role == -1){
+            request.setAttribute("buttons", LessonDao.getButtonBean());
+            forward = "/login.jsp";
+            System.out.println("Get asdasdFAIL");
+        }
+        else if (action==null){
             forward = "/login-failed.html";
         }
-        
-        System.out.println("Get action is: " + action);
-        if (action.equalsIgnoreCase("login")) {
+        else if (action.equalsIgnoreCase("login")) {
             
         }
         else if (action.equals("done") || action.equals("next")){
@@ -116,6 +140,7 @@ public class UserController extends HttpServlet {
             
         }
         else if (action.equalsIgnoreCase("home")){
+            System.out.println("Get FAIL");
             request.setAttribute("buttons", LessonDao.getButtonBean());
             forward="/Home.jsp";
         }
@@ -131,10 +156,16 @@ public class UserController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String forward="/Fail.jsp";
+    	String forward="/login-failed.html";
+        Enumeration<String> test = request.getParameterNames();
+        String h="";
+        while (test.hasMoreElements()){
+            h= test.nextElement();
+            System.out.println("PARAMETER: "+h+" : "+request.getParameter(h));
+        }
     	String action = request.getParameter("action");
     	System.out.println("Post action is: " + action);
-    	if(action.equals("LoginForm")){
+    	if(action.equals("Login")){
             forward="/Login.jsp";
             String Username=request.getParameter("User name");
             String Password = request.getParameter("password");

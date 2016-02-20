@@ -1,3 +1,15 @@
+form input[type=text]{
+    background: #fff;
+    display: inline-block;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    border-radius: 1px;
+    box-sizing: border-box;
+}
+input.form-error{
+    border: 2px solid #ff0000;
+    border-top: 2px solid #ff0000;
+}
 .question{
     font-weight: bold;
     font-size: 300%;

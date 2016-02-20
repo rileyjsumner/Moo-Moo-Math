@@ -126,7 +126,7 @@
             <div class = "text-center">
                 <div id = "GradeButtonContainer" class = "col-md-12">
                     <p></p>
-                    <input type = "button" style = "background-color:#FFDAB9; border: 4px solid #E7C6A5" onclick = "document.location.href = 'Home.jsp'" value = "Home"/>
+                    <input type = "button" style = "background-color:#81C6C9; border: 4px solid #489194" onclick = "document.location.href = 'Home.jsp'" value = "Home"/>
                     <script>
                         var grades = ${buttons.GetGrades()};
                         var element;
@@ -148,7 +148,7 @@
                             }
                         }
                     </script>
-                    <input type = "button" style = "background-color:#FFDAB9; border: 4px solid #E7C6A5" onclick = "document.location.href = 'Profile.jsp'" value = "Profile"/>
+                    <input type = "button" style = "background-color:#81C6C9; border: 4px solid #489194" onclick = "document.location.href = 'Profile.jsp'" value = "Profile"/>
                     <p></p>
                 </div>
             </div>
