@@ -7,6 +7,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ProgressDao {
+    public static void safeMakeProgress(int userid, int grade,int lesson){
+        if(!HasProgress(userid,grade,lesson)){
+            NewProgress(userid,grade,lesson);
+        }
+    }
     public static int getProgress(int userid, int grade,int lesson){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;

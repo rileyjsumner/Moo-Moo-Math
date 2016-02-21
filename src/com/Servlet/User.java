@@ -17,10 +17,10 @@ import javax.servlet.http.*;
 import com.DbUtil.DbUtil;
 import java.util.List;
 
-public class UserController extends HttpServlet {
+public class User extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
-    public UserController() {
+    public User() {
         super();
     }
     /**
@@ -48,25 +48,65 @@ public class UserController extends HttpServlet {
                 sessionPass=cookie.getValue();
             }
         }
+        System.out.println("USERNAME: "+sessionName);
+        System.out.println("PASSWORD: "+sessionPass);
         int Role =-1;
+        int UserId =-1;
         if(sessionPass!=null && sessionName != null){
-            Role = UserDao.CheckUser(sessionName, sessionPass);
+            Role = UserDao.GetRole(sessionName, sessionPass);
+            UserId = UserDao.GetUserId(sessionName);
             forward = "/login.jsp";
-            System.out.println("Get FAIL");
         }
         else{
-            forward = "/login.jsp";
-            System.out.println("Get FAsssIL");
+            forward = "/Home.jsp";
         }
-        if(Role == -1){
+        System.out.println("ROLE: "+Role);
+        if("login".equals(action)){
+            request.setAttribute("buttons", LessonDao.getButtonBean());
+            forward = "/Home.jsp";
+        }
+        else if("createAccount".equals(action)){
+            request.setAttribute("buttons", LessonDao.getButtonBean());
+            forward = "/createAccount.jsp";
+        }
+        else if(Role == -1 || UserId == -1){
             request.setAttribute("buttons", LessonDao.getButtonBean());
             forward = "/login.jsp";
-            System.out.println("Get asdasdFAIL");
         }
         else if (action==null){
             forward = "/login-failed.html";
         }
-        else if (action.equalsIgnoreCase("login")) {
+        else if (action.equals("crud")){
+            request.setAttribute("buttons", LessonDao.getButtonBean());
+            request.setAttribute("general", new GeneralBean(sessionName,Role));
+            if(Role>1){
+                String CRUDaction = request.getParameter("crudaction");
+                if(CRUDaction == null || CRUDaction.equals("home")){
+                    forward = "/crud/crud.jsp";
+                }
+                else if(CRUDaction.equals("lessons")){
+                    forward = "/crud/lessons.jsp";
+                    
+                }
+                else if(CRUDaction.equals("progress")){
+                    forward = "/crud/progress.jsp";
+                    
+                }
+                else if(CRUDaction.equals("questions")){
+                    forward = "/crud/questions.jsp";
+                    
+                }
+                else if(CRUDaction.equals("users")){
+                    forward = "/crud/users.jsp";
+                    request.setAttribute("users", UserDao.GetAllUsers());
+                }
+                else{
+                    forward = "/crud/crud.jsp";
+                }
+            }
+            else{
+                forward = "/permission-denied.jsp";
+            }
             
         }
         else if (action.equals("done") || action.equals("next")){
@@ -76,7 +116,9 @@ public class UserController extends HttpServlet {
             int grade = Integer.parseUnsignedInt(gr);
             int lesson = Integer.parseUnsignedInt(ls);
             request.setAttribute("buttons", LessonDao.getButtonBean());
-            int prog = ProgressDao.getProgress(1, grade, lesson);
+            request.setAttribute("general", new GeneralBean(sessionName,Role));
+            ProgressDao.safeMakeProgress(UserId, grade, lesson);
+            int prog = ProgressDao.getProgress(UserId, grade, lesson);
             int max = LessonDao.getLessonPages(grade,lesson);
             System.out.println("MAX:"+max);
             int MaxPractice = LessonDao.getMaxPractice(grade,lesson); System.out.println(MaxPractice + max);
@@ -85,24 +127,24 @@ public class UserController extends HttpServlet {
             if(action.equals("done")){
                 if(prog<max){
                     prog++;
-                    ProgressDao.SetProgress(1, grade, lesson, prog);
+                    ProgressDao.SetProgress(UserId, grade, lesson, prog);
                 }
                 else if(prog < MaxPractice + max){
                     String answer = request.getParameter("answer");
-                    if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
+                    if(answer.equals(AnswersDao.getAnswer(UserId, grade, lesson))){
                         prog++;
-                        ProgressDao.SetProgress(1, grade, lesson, prog);
+                        ProgressDao.SetProgress(UserId, grade, lesson, prog);
                     }
                     else
                     {
-                        helpNeeded = AnswersDao.getPageType(1, grade, lesson);
+                        helpNeeded = AnswersDao.getPageType(UserId, grade, lesson);
                     }
                 }
                 else{
                     String answer = request.getParameter("answer");
-                    if(answer.equals(AnswersDao.getAnswer(1, grade, lesson))){
+                    if(answer.equals(AnswersDao.getAnswer(UserId, grade, lesson))){
                         prog++;
-                        ProgressDao.SetProgress(1, grade, lesson, prog);
+                        ProgressDao.SetProgress(UserId, grade, lesson, prog);
                     }
 
                 }
@@ -116,13 +158,13 @@ public class UserController extends HttpServlet {
                 if (helpNeeded!=0){
                     HelpBean bean;
                     if(HelpDao.hasHelpPage(helpNeeded)){
-                        bean = HelpDao.getHelpPage(helpNeeded);
+                        bean = HelpDao.getHelpPage(helpNeeded,UserId);
                     }
                     else{
                         bean = new HelpBean();
                         bean.Grade = grade;
                         bean.Lesson = lesson;
-                        bean.CorrectAns = AnswersDao.getAnswer(1, grade, lesson);
+                        bean.CorrectAns = AnswersDao.getAnswer(UserId, grade, lesson);
                         bean.Help = "<p>Sorry, but we couldn't find any help content for that question.</p><p>You might have to try this one on your own.</p>";
                         bean.Title = LessonDao.getLessonText(grade, lesson);
                     }
@@ -131,18 +173,23 @@ public class UserController extends HttpServlet {
                     forward = "/help.jsp";
                 }
                 else{
-                    request.setAttribute("data", Questions.getNewQuestion(grade, lesson));
+                    request.setAttribute("data", Questions.getNewQuestion(UserId, grade, lesson));
                 }
             }
             else{
-                request.setAttribute("data", Questions.getNewQuestion(grade, lesson));
+                request.setAttribute("data", Questions.getNewQuestion(UserId, grade, lesson));
             }
             
         }
         else if (action.equalsIgnoreCase("home")){
-            System.out.println("Get FAIL");
             request.setAttribute("buttons", LessonDao.getButtonBean());
+            request.setAttribute("general", new GeneralBean(sessionName,Role));
             forward="/Home.jsp";
+        }
+        else if (action.equals("logout")){
+            response.addCookie(new Cookie("JSESSION_USERNAME",""));
+            response.addCookie(new Cookie("JSESSION_PASSWORD",""));
+            forward = "/login.jsp";
         }
         
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -166,35 +213,21 @@ public class UserController extends HttpServlet {
     	String action = request.getParameter("action");
     	System.out.println("Post action is: " + action);
     	if(action.equals("Login")){
-            forward="/Login.jsp";
-            String Username=request.getParameter("User name");
-            String Password = request.getParameter("password");
+            forward="/login.jsp";
+            String Username=request.getParameter("UserName");
+            String Password = request.getParameter("Password");
             Connection con= DbUtil.getConnection();
             try {
-            PreparedStatement preparedStatement = con
-                    .prepareStatement("SELECT Userid from users WHERE Username=? AND Password=?");
-            // Parameters start with 1
-            preparedStatement.setString(1, Username);
-            preparedStatement.setString(2, Password);
-            ResultSet set= preparedStatement.executeQuery();
-            try{
-                set.next();
-                int id = set.getInt(1);
-                preparedStatement = con
-                    .prepareStatement("SELECT Password from users WHERE Userid=?");
+                PreparedStatement preparedStatement = con
+                        .prepareStatement("SELECT Userid from users WHERE Username=? AND Password=?");
                 // Parameters start with 1
-                preparedStatement.setInt(1, id);
-                set = preparedStatement.executeQuery();
-                set.next();
-                String Real_Password = set.getString(1);
-                if(Password.equals(Real_Password)){
-
-                    forward="/Home.jsp";
-                }
-
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                    forward="/Login.jsp";
+                preparedStatement.setString(1, Username);
+                preparedStatement.setString(2, Password);
+                ResultSet set= preparedStatement.executeQuery();
+                if(set.first()){
+                    int id = set.getInt(1);
+                    response.addCookie(new Cookie("JSESSION_USERNAME",Username));
+                    response.addCookie(new Cookie("JSESSION_PASSWORD",Password));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -202,29 +235,14 @@ public class UserController extends HttpServlet {
     		
     	}
     	else if(action.equals("CreateAccount")){
-            String Username=request.getParameter("User Name");
-            String Password = request.getParameter("Password");
-            String FName = request.getParameter("First Name");
-            String LName = request.getParameter("Last Name");
-            System.out.println("Got here");
+            String Username=request.getParameter("UserName");
+            String FirstName=request.getParameter("FirstName");
+            String LastName=request.getParameter("LastName");
+            String Email=request.getParameter("Email");
+            String Password=request.getParameter("Password");
             Connection con= DbUtil.getConnection();
-            try {
-                PreparedStatement preparedStatement = con
-                        .prepareStatement("INSERT INTO users (Userid, Username, Password, Points) values (?, ?, ?, ?);");
-                // Parameters start with 1
-                System.out.println("Got here");
-                preparedStatement.setInt(1, 0);
-                preparedStatement.setString(2, Username);
-                preparedStatement.setString(3, Password);
-                preparedStatement.setInt(4, 0);
-                System.out.println("Got here");
-                preparedStatement.executeUpdate();
-                System.out.println("Got here");
-                
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            forward="/Correct.jsp";
+            UserDao.SafeAddUser(Username, FirstName, LastName, Email, Password);
+            forward="/Home.jsp";
     	}
     	RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);

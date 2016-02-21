@@ -6,8 +6,20 @@ form input[type=text]{
     border-radius: 2px;
     box-sizing: border-box;
 }
+form input[type=password]{
+    background: #fff;
+    display: inline-block;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+p.form-error{
+    color: #F00!important;
+    font-size: 86%;
+    font-weight: bold;
+}
 p.form-basic{
-    font-family:arial, helvetica, sans-serif;
     font-weight: bold;
     font-size: 86%;
 }

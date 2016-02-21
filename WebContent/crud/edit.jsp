@@ -1,20 +1,24 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
- <c:if test="${empty data} || ${empty buttons}">
-    <c:redirect url="UserController?action=Home"/>
+ <c:if test="${empty buttons}">
+    <c:redirect url="User?action=crud"/>
+</c:if>
+<c:if test="${empty general}">
+    <c:redirect url="User?action=crud"/>
+</c:if>
+ <c:if test="${empty edit}">
+    <c:redirect url="User?action=crud"/>
 </c:if>
 <html>
     <head>
-        <title>Home</title>
+        <title>Edit</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" href = "main.css">
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
-    <body id ="body">
-    
+    <body>
         <script>
             Object.size = function(obj) {
                 var size = 0, key;
@@ -39,19 +43,19 @@ ${buttons.GetData()}
                     element = document.createElement("input");
                     element.setAttribute("type", "button");
                     element.setAttribute("value", lessons[i]);
-                    element.setAttribute('onclick', "document.location.href = 'UserController?action=next&lesson="+grade+"."+(i+1)+"'");
-                    element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .7, .5);
-                    element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .7, .3);
+                    element.setAttribute('onclick', "document.location.href = 'User?action=next&lesson="+grade+"."+(i+1)+"'");
+                    element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .8, .6);
+                    element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .8, .4);
                     element.style.borderWidth = "4px";
                     element.style.borderStyle = "solid";
                     document.getElementById("LessonButtonContainer").appendChild(element);
                 }
             }
             function toLesson(grade,lesson){
-                document.location.href = 'UserController?action=next&lesson='+grade+'.'+lesson;
+                document.location.href = 'User?action=next&lesson='+grade+'.'+lesson;
             }
             function toGrade(grade){
-                document.location.href = 'UserController?action=viewLessons&grade='+grade;
+                document.location.href = 'User?action=viewLessons&grade='+grade;
             }
             function rgbToHex(r, g, b) {
                 if(r < 0 || r > 255) alert("r is out of bounds; "+r);
@@ -101,67 +105,55 @@ ${buttons.GetData()}
             <div class = "text-right">
                 <div class = "col-xs-pull-1">
                     <div class = "dropdown">
-                        <button class = "btn btn-default dropdown-toggle" type = "button" data-toggle = "dropdown" style = "background-color:#FFDAB9; border: 4px solid #E7C6A5"> Options
+                        <button class = "btn btn-default dropdown-toggle" type = "button" data-toggle = "dropdown" style = "background-color:#81C6C9; border: 4px solid #489194"> Options
                         <span class = "caret"></span></button>
                         <ul class = "dropdown-menu pull-right">
-                            <li><a href = "Login.jsp">Log In</a></li>
                             <li><a href = "Profile.jsp">Profile</a></li>
-                            <li class = "divider"></li>
-                            <li><a href = "#">Log Out</a></li>
+                            <li><a href = "User?action=logout">Log Out</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class = "text-center">
-                <h1>Oink Oink Math</h1>
+                <h1>Moo-Moo Math</h1>
             </div>
         </div>
         <div class = "content">
             <div class = "text-center">
                 <div id = "GradeButtonContainer" class = "col-md-12">
                     <p></p>
-                    <input type = "button" style = "background-color:#FFDAB9; border: 4px solid #E7C6A5" onclick = "document.location.href = 'Home.jsp'" value = "Home"/>
+                    <input type = "button" style = "background-color:#81C6C9; border: 4px solid #489194" onclick = "document.location.href = 'Home.jsp'" value = "Home"/>
                     <script>
-                        var grades = ${buttons.GetGrades()};
+                        var grades = ["lessons","progress","questions","users"];
+                        var gradeNames = ["Lessons","Progress","Questions","Users"];
                         var element;
-                        for(i=1;i<grades;i++){
+                        for(i=0;i<4;i++){
                             element = document.createElement("input");
                             element.setAttribute("type", "button");
-                            element.setAttribute("value", "Grade "+i);
-                            element.setAttribute('onclick', "viewGrade("+i+")");
-                            element.style.backgroundColor = hslToRgb((i-1)*.1,.7,.5);
-                            element.style.borderColor = hslToRgb((i-1)*.1,.7,.3);
+                            element.setAttribute("value", "View "+gradeNames[i]);
+                            element.setAttribute('onclick', "document.location.href='User?action=crud&crudaction="+grades[i]+"'");
+                            element.style.backgroundColor = hslToRgb(i*.1,.8,.6);
+                            element.style.borderColor = hslToRgb(i*.1,.8,.4);
                             element.style.borderWidth = "4px";
                             element.style.borderStyle = "solid";
                             document.getElementById("GradeButtonContainer").appendChild(element);
+                            if(i !== 3){
+                                element = document.createElement("div");
+                                element.setAttribute("class","divider");
+                                document.getElementById("GradeButtonContainer").appendChild(element);
+                            }
                         }
                     </script>
-                    <input type = "button" style = "background-color:#FFDAB9; border: 4px solid #E7C6A5" onclick = "document.location.href = 'Profile.jsp'" value = "Profile"/>
+                    <input type = "button" style = "background-color:#81C6C9; border: 4px solid #489194" onclick = "document.location.href = 'Profile.jsp'" value = "Profile"/>
                     <p></p>
                 </div>
             </div>
-            <div class = "text-center">
-                <div id = "LessonButtonContainer" class = "col-md-12">
+            <div class = "content">
+                <div class ="text-center">
                     
                 </div>
             </div>
         </div>
-        <div class="content">
-            <div id="lessonStrip">
-                <p style="text-align:center;font-size:300%;">Lesson ${data.GetGrade()}.${data.GetGrade()}</p>
-                <p style="text-align:center;font-size:210%;">${data.GetTitle()}</p>
-                <script>
-                    var element = document.getElementById("lessonStrip");
-                    element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .7, .5);
-                    element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .2, .2);
-                </script>
-            </div>
-                
-        </div>
-            <script>
-                var element = document.getElementById("body");
-                element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .2, .9);
-                element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .1, .2);
-            </script>
+        
     </body>
 </html>

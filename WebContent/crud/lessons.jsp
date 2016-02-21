@@ -1,7 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <c:if test="${empty buttons}">
-    <c:redirect url="UserController?action=Home"/>
+    <c:redirect url="User?action=CRUD"/>
+</c:if>
+<c:if test="${empty general}">
+    <c:redirect url="User?action=CRUD"/>
 </c:if>
 <html>
     <head>
@@ -37,7 +40,7 @@ ${buttons.GetData()}
                     element = document.createElement("input");
                     element.setAttribute("type", "button");
                     element.setAttribute("value", lessons[i]);
-                    element.setAttribute('onclick', "document.location.href = 'UserController?action=next&lesson="+grade+"."+(i+1)+"'");
+                    element.setAttribute('onclick', "document.location.href = 'User?action=next&lesson="+grade+"."+(i+1)+"'");
                     element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .8, .6);
                     element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .8, .4);
                     element.style.borderWidth = "4px";
@@ -46,10 +49,10 @@ ${buttons.GetData()}
                 }
             }
             function toLesson(grade,lesson){
-                document.location.href = 'UserController?action=next&lesson='+grade+'.'+lesson;
+                document.location.href = 'User?action=next&lesson='+grade+'.'+lesson;
             }
             function toGrade(grade){
-                document.location.href = 'UserController?action=viewLessons&grade='+grade;
+                document.location.href = 'User?action=viewLessons&grade='+grade;
             }
             function rgbToHex(r, g, b) {
                 if(r < 0 || r > 255) alert("r is out of bounds; "+r);
@@ -102,11 +105,8 @@ ${buttons.GetData()}
                         <button class = "btn btn-default dropdown-toggle" type = "button" data-toggle = "dropdown" style = "background-color:#81C6C9; border: 4px solid #489194"> Options
                         <span class = "caret"></span></button>
                         <ul class = "dropdown-menu pull-right">
-                            <li><a href = "Login.jsp">Log In</a></li>
                             <li><a href = "Profile.jsp">Profile</a></li>
-                            <li class = "divider"></li>
-                            <li><a href = "CreateAccount.jsp">Create Account</a></li>
-                            <li><a href = "#">Log Out</a></li>
+                            <li><a href = "User?action=logout">Log Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -121,37 +121,33 @@ ${buttons.GetData()}
                     <p></p>
                     <input type = "button" style = "background-color:#81C6C9; border: 4px solid #489194" onclick = "document.location.href = 'Home.jsp'" value = "Home"/>
                     <script>
-                        var grades = ${buttons.GetGrades()};
+                        var grades = ["lessons","progress","questions","users"];
+                        var gradeNames = ["Lessons","Progress","Questions","Users"];
                         var element;
-                        for(i=1;i<grades;i++){
+                        for(i=0;i<4;i++){
                             element = document.createElement("input");
                             element.setAttribute("type", "button");
-                            element.setAttribute("value", "Grade "+i);
-                            element.setAttribute('onclick', "viewGrade("+i+")");
-                            element.style.backgroundColor = hslToRgb((i-1)*.1,.8,.6);
-                            element.style.borderColor = hslToRgb((i-1)*.1,.8,.4);
+                            element.setAttribute("value", "View "+gradeNames[i]);
+                            element.setAttribute('onclick', "document.location.href='User?action=crud&crudaction="+grades[i]+"'");
+                            element.style.backgroundColor = hslToRgb(i*.1,.8,.6);
+                            element.style.borderColor = hslToRgb(i*.1,.8,.4);
                             element.style.borderWidth = "4px";
                             element.style.borderStyle = "solid";
                             document.getElementById("GradeButtonContainer").appendChild(element);
+                            if(i !== 3){
+                                element = document.createElement("div");
+                                element.setAttribute("class","divider");
+                                document.getElementById("GradeButtonContainer").appendChild(element);
+                            }
                         }
                     </script>
                     <input type = "button" style = "background-color:#81C6C9; border: 4px solid #489194" onclick = "document.location.href = 'Profile.jsp'" value = "Profile"/>
                     <p></p>
                 </div>
             </div>
-            <div class = "text-center">
-                <div id = "LessonButtonContainer">
-                    
-                </div>
-            </div>
-            <div class = "jumbotron">
+            <div class = "content">
                 <div class ="text-center">
-                    <h2>Welcome to Oink Oink Math!</h2>
-                    <p>Select your grade, and the lesson you would like to work on!</p>
-                    <p>We will run you through a short lesson on how to do the math, and quiz you on your abilities</p>
-                    <img src="pics/pig.png" alt="Oink!"/>
-                    <p>Oink Oink Math was created by Team A: Sam Scheidecker and Riley Sumner</p>
-                    <p>Anoka's BPA Chapter Number 30-0005</p>
+                    
                 </div>
             </div>
         </div>

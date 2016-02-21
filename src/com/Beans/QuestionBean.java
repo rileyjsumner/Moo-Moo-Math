@@ -48,7 +48,7 @@ public class QuestionBean {
     }
     public void Apply(boolean standard,String returning){
         if(returning.equals("TEXT")){
-            HTML+="<form action = \"UserController\">\n"
+            HTML+="<form action = \"User\">\n"
                     + "<input type=\"text\" name=\"answer\"/>\n"
                     + "<input type =\"hidden\" name=\"action\" value = \"done\"/>\n"
                     + "<input type =\"hidden\" name=\"lesson\" value = \""+Grade+"."+Lesson+"\"/>\n"

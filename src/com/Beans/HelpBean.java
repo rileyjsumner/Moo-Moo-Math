@@ -1,14 +1,12 @@
 package com.Beans;
 public class HelpBean {
-    public String Question;
     public int Grade;
     public int Lesson;
     public String Title;
     public String CorrectAns;
     public String UserAnswer;
     public String Help;
-    public HelpBean(String question,int grade,int lesson, String title, String correct, String help){
-        Question= question;
+    public HelpBean(int grade,int lesson, String title, String correct, String help){
         Grade= grade;
         Lesson = lesson;
         Title=title;
@@ -17,7 +15,6 @@ public class HelpBean {
         Help = help;
     }
     public HelpBean(){
-        Question= "";
         Grade= 0;
         Lesson = 0;
         Title="";
@@ -31,9 +28,6 @@ public class HelpBean {
     }
     public String GetUserAnswer(){
         return UserAnswer;
-    }
-    public String GetQuestion(){
-        return Question;
     }
     public String GetTitle(){
         return Title;

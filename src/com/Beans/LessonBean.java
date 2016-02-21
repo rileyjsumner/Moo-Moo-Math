@@ -40,7 +40,7 @@ public class LessonBean {
         }
         if(!customBtn){
             HTML+="\n<div align = \"center\">";
-            HTML+="\n<input type=\"button\" style=\"background-color:#FFDAB9; border: 4px solid #E7C6A5\" onclick=\"document.location.href='UserController?action=done&lesson="+grade+"."+lesson+"'\" value=\"Next\"/>";
+            HTML+="\n<input type=\"button\" style=\"background-color:#FFDAB9; border: 4px solid #E7C6A5\" onclick=\"document.location.href='User?action=done&lesson="+grade+"."+lesson+"'\" value=\"Next\"/>";
             HTML+="\n</div>";
         }
     }

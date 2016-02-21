@@ -1,20 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <c:if test="${empty buttons} || ${empty data}">
-    <c:redirect url="User?action=next"/>
+<c:if test="${empty buttons}">
+    <c:redirect url="User?action=Home"/>
 </c:if>
 <c:if test="${empty general}">
-    <c:redirect url="User?action=next"/>
+    <c:redirect url="User?action=Home"/>
 </c:if>
 <html>
     <head>
-        <title>Help</title>
+        <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" href = "main.css">
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/css-fireworks.css">
     </head>
     <body>
         <script>
@@ -27,7 +26,7 @@
             };
             function getLessons(grade){
                 switch(grade){
-                ${buttons.GetData()}
+${buttons.GetData()}
                 }
             }
             function viewGrade(grade){
@@ -42,10 +41,9 @@
                     element.setAttribute("type", "button");
                     element.setAttribute("value", lessons[i]);
                     element.setAttribute('onclick', "document.location.href = 'User?action=next&lesson="+grade+"."+(i+1)+"'");
-                    element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .7, .5);
-                    element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .7, .3);
+                    element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .8, .6);
+                    element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .8, .4);
                     element.style.borderWidth = "4px";
-                    element.style.padding = "5px";
                     element.style.borderStyle = "solid";
                     document.getElementById("LessonButtonContainer").appendChild(element);
                     if(i != grades-1){
@@ -83,7 +81,7 @@
             function hslToRgb(h, s, l){
                 var r, g, b;
 
-                if(s == 0){
+                if(s === 0){
                     r = g = b = l; // achromatic
                 }else{
                     var hue2rgb = function hue2rgb(p, q, t){
@@ -109,7 +107,7 @@
             <div class = "text-right">
                 <div class = "col-xs-pull-1">
                     <div class = "dropdown">
-                        <button class = "btn btn-default dropdown-toggle" type = "button" data-toggle = "dropdown" style = "background-color:#FFDAB9; border: 4px solid #E7C6A5"> Options
+                        <button class = "btn btn-default dropdown-toggle" type = "button" data-toggle = "dropdown" style = "background-color:#81C6C9; border: 4px solid #489194"> Options
                         <span class = "caret"></span></button>
                         <ul class = "dropdown-menu pull-right">
                             <li><a href = "Profile.jsp">Profile</a></li>
@@ -136,11 +134,10 @@
                             element.setAttribute("type", "button");
                             element.setAttribute("value", "Grade "+i);
                             element.setAttribute('onclick', "viewGrade("+i+")");
-                            element.style.backgroundColor = hslToRgb((i-1)*.1,.7,.5);
-                            element.style.borderColor = hslToRgb((i-1)*.1,.7,.3);
+                            element.style.backgroundColor = hslToRgb((i-1)*.1,.8,.6);
+                            element.style.borderColor = hslToRgb((i-1)*.1,.8,.4);
                             element.style.borderWidth = "4px";
                             element.style.borderStyle = "solid";
-                            element.style.padding = "5px";
                             document.getElementById("GradeButtonContainer").appendChild(element);
                             if(i != grades-1){
                                 element = document.createElement("div");
@@ -154,48 +151,17 @@
                 </div>
             </div>
             <div class = "text-center">
-                <div id = "LessonButtonContainer" class = "col-md-12">
+                <div id = "LessonButtonContainer">
                     
                 </div>
             </div>
-        </div>
-        <div id="lessonStrip">
-            <p style="text-align:center;font-size:300%;">${data.GetTitle()}</p>
-            <p style="text-align:center;font-size:150%;">Help ${data.GetGrade()}.${data.GetGrade()}</p>
-            <script>
-                var element = document.getElementById("lessonStrip");
-                element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .7, .5);
-                element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .2, .2);
-            </script>
-        </div>
-        <script>
-            var element = document.getElementById("body");
-            element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .3, .98);
-            element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .1, .2);
-        </script>
-        <div class = "text-center" style ="font-size:150%;">
-            <p>You answered <strong>${data.GetUserAnswer()}</strong>.</p>
-            <p>The correct answer was <strong>${data.GetAnswer()}</strong>.</p>
-            <div class="helpcontent">
-                <div id="contentspace">
-                    ${data.GetHelp()}
+            <div class = "content">
+                <div class ="text-center">
+                    <p>We're sorry, but you don't have permission to go there.</p>
+                    <input type = "button" style = "border-color: #31B531;background-color: #028F02;" onclick = "document.location.href = 'Home.jsp'" value = "Back to home"/>
                 </div>
             </div>
-            <script>
-                var element = document.getElementById("contentspace");
-                element.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .7, .9);
-                element.style.color = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02, .2, .2);
-                var button;
-                button = document.createElement("input");
-                button.setAttribute("type", "button");
-                button.setAttribute("value", "Continue");
-                button.setAttribute('onclick', "document.location.href='User?action=next&lesson=${data.GetGrade()}.${data.GetLesson()}'");
-                button.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02,.7,.5);
-                button.style.borderColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02,.7,.3);
-                button.style.borderWidth = "4px";
-                button.style.borderStyle = "solid";
-                document.getElementById("contentspace").appendChild(button);
-            </script>
         </div>
+        
     </body>
 </html>

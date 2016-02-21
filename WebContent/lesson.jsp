@@ -1,14 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <c:if test="${empty buttons} || ${empty data}">
-    <c:redirect url="UserController?action=Home"/>
+    <c:redirect url="User?action=next"/>
+</c:if>
+ <c:if test="${empty general}">
+    <c:redirect url="User?action=next"/>
 </c:if>
 <html>
     <head>
         <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel = "stylesheet" href = "newcss.css">
+        <link rel = "stylesheet" href = "main.css">
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/css-fireworks.css">
@@ -38,7 +41,7 @@
                     element = document.createElement("input");
                     element.setAttribute("type", "button");
                     element.setAttribute("value", lessons[i]);
-                    element.setAttribute('onclick', "document.location.href = 'UserController?action=next&lesson="+grade+"."+(i+1)+"'");
+                    element.setAttribute('onclick', "document.location.href = 'User?action=next&lesson="+grade+"."+(i+1)+"'");
                     element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .8, .6);
                     element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .8, .4);
                     element.style.borderWidth = "4px";
@@ -47,10 +50,10 @@
                 }
             }
             function toLesson(grade,lesson){
-                document.location.href = 'UserController?action=next&lesson='+grade+'.'+lesson;
+                document.location.href = 'User?action=next&lesson='+grade+'.'+lesson;
             }
             function toGrade(grade){
-                document.location.href = 'UserController?action=viewLessons&grade='+grade;
+                document.location.href = 'User?action=viewLessons&grade='+grade;
             }
             function rgbToHex(r, g, b) {
                 if(r < 0 || r > 255) alert("r is out of bounds; "+r);
@@ -103,17 +106,15 @@
                         <button class = "btn btn-default dropdown-toggle" type = "button" data-toggle = "dropdown" style = "background-color:#81C6C9; border: 4px solid #489194"> Options
                         <span class = "caret"></span></button>
                         <ul class = "dropdown-menu pull-right">
-                            <li><a href = "Login.jsp">Log In</a></li>
                             <li><a href = "Profile.jsp">Profile</a></li>
-                            <li class = "divider"></li>
-                            <li><a href = "CreateAccount.jsp">Create Account</a></li>
-                            <li><a href = "#">Log Out</a></li>
+                            ${general.GetCRUD()}
+                            <li><a href = "User?action=logout">Log Out</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class = "text-center">
-                <h1>Oink Oink Math</h1>
+                <h1>Moo-Moo Math</h1>
             </div>
         </div>
         <div class = "content">

@@ -133,7 +133,7 @@ public class HelpDao {
         }
         return false;
     }
-    public static HelpBean getHelpPage(int helpType){
+    public static HelpBean getHelpPage(int helpType,int UserId){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
@@ -143,7 +143,7 @@ public class HelpDao {
             int grade = getUserHelpGrade(helpType);
             int lesson = getUserHelpLesson(helpType);
             if(set.first()){
-                return new HelpBean(AnswersDao.getQuestion(1, grade, lesson),grade,lesson,LessonDao.getLessonText(grade, lesson),AnswersDao.getAnswer(1, grade, lesson),set.getString(1));
+                return new HelpBean(grade,lesson,LessonDao.getLessonText(grade, lesson),AnswersDao.getAnswer(UserId, grade, lesson),set.getString(1));
                 
             }
         } catch (SQLException ex) {

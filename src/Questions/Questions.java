@@ -7,7 +7,7 @@ import com.dao.AnswersDao;
 import java.util.Random;
 public class Questions {
     static Random random = new Random();
-    public static QuestionBean getNewQuestion(int grade,int lesson){
+    public static QuestionBean getNewQuestion(int UserId, int grade,int lesson){
         QuestionBean bean= new QuestionBean();
         bean.Grade= grade;
         bean.Lesson = lesson;
@@ -25,7 +25,7 @@ public class Questions {
                                 bean.HTML="<p>What number comes after "+a+"?</p>\n";
                                 bean.Apply(true, "TEXT");
                                 a++;
-                                AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(a),bean.HTML,2);
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(a),2);
                                 break;
                             case 1:
                                 bean.Title="Counting Intervals";
@@ -34,7 +34,7 @@ public class Questions {
                                 bean.HTML = "<p>When counting by " + c + "'s, what number comes after "+b+"? </p>\n";
                                 bean.Apply(true, "TEXT");
                                 b+=c;
-                                AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(b), bean.HTML, 3);
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(b), 3);
                                 break;
                             case 2:
                                 bean.Title="Counting Patterns";
@@ -43,7 +43,7 @@ public class Questions {
                                 bean.HTML = "<p>What number comes next in the sequence? \n" + d + ", " + (d + e) + ", " + (d + e * 2) + ", " + (d + e * 3) + ", " + (d + e * 4) + "</p>\n";
                                 bean.Apply(true, "TEXT");
                                 d = (d + e * 5);
-                                AnswersDao.safeCreateAnswer(1, grade, lesson, String.valueOf(d), bean.HTML, 4);
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(d), 4);
                                 break;
                         }
                     case 2:

@@ -1,11 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <c:if test="${empty buttons}">
-    <c:redirect url="User?action=login"/>
+    <c:redirect url="User?action=createAccount"/>
 </c:if>
 <html>
     <head>
-        <title>Home</title>
+        <title>Create Account</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" href = "main.css">
@@ -19,24 +19,50 @@
                 var x = document.forms["SignIn"];
                 if (x[page].value === null || x[page].value === "") {
                     element.className="form-error";
+                    document.getElementById(page+"Error").innerHTML="Cannot leave this field empty";
                 }
                 else{
                     element.className = "";
+                    document.getElementById(page+"Error").innerHTML="";
+                }
+                if(page === "VerifyPassword" || page === "Password"){
+                    if(x["Password"].value !== x["VerifyPassword"].value){
+                        document.getElementById("VerifyPassword").className="form-error";
+                        document.getElementById("VerifyPasswordError").innerHTML="Passwords do not match";
+                    }
+                    else{
+                        document.getElementById("VerifyPassword").className="";
+                        document.getElementById("VerifyPasswordError").innerHTML="";
+                    }
                 }
             }
-            function isValid(){
+            function validateForm(){
                 var x = document.forms["SignIn"];
-                if (x["UserName"].value == null || x["UserName"].value == "") {
-                    alert("Username must be filled out");
+                if (x["FirstName"].value === null || x["FirstName"].value === "") {
+                    alert("First name must be filled out");
                     return false;
                 }
-                else if (x["Password"].value == null || x["Password"].value == "") {
+                if (x["LastName"].value === null || x["LastName"].value === "") {
+                    alert("Last name must be filled out");
+                    return false;
+                }
+                if (x["UserName"].value === null || x["UserName"].value === "") {
+                    alert("User name must be filled out");
+                    return false;
+                }
+                if (x["Password"].value === null || x["Password"].value === "") {
                     alert("Password must be filled out");
                     return false;
                 }
-                else{
-                    return true;
+                if (x["VerifyPassword"].value === null || x["VerifyPassword"].value === "") {
+                    alert("Password verification must be filled out");
+                    return false;
                 }
+                if (x["VerifyPassword"].value !== x["Password"].value) {
+                    alert("Passwords do not match");
+                    return false;
+                }
+                return true;
             }
             function rgbToHex(r, g, b) {
                 if(r < 0 || r > 255) alert("r is out of bounds; "+r);
@@ -104,18 +130,27 @@
             </div>
             <div class = "content">
                 <div class ="text-center">
-                    <h2 style="font-size: 280%">You're not logged in yet!</h2>
-                    <p style="font-size: 150%">Please Sign in below</p>
-                    <form method="POST" onsubmit="return isValid();" action="User?action=Login" name = "SignIn">
+                    <h2 style="font-size: 280%">Create Account</h2>
+                    <form method="POST" onsubmit="return validateForm()" action="User?action=CreateAccount" name = "SignIn">
+                        <p class="form-basic" style="font-size: 100%">First Name</p>
+                        <input class="" id="FirstName" onblur="validate('FirstName')" type="text" name="FirstName" value="First name" />
+                        <p class ="form-error" id="FirstNameError"> </p>
+                        <p class="form-basic" style="font-size: 100%">Last Name</p>
+                        <input class="" id="LastName" onblur="validate('LastName')" type="text" name="LastName" value="Last name" />
+                        <p class ="form-error" id="LastNameError"></p>
                         <p class="form-basic" style="font-size: 100%">Username</p>
                         <input class="" id="UserName" onblur="validate('UserName')" type="text" name="UserName" value="Username" />
-                        <p />
+                        <p class ="form-error" id="UserNameError"> </p>
+                        <p class="form-basic" style="font-size: 100%">Email</p>
+                        <input class="" id="Email" onblur="validate('Email')" type="text" name="Email" value="Email" />
+                        <p class ="form-error" id="EmailError"> </p>
                         <p class="form-basic" style="font-size: 100%">Password</p>
-                        <input class="" id="Password" onblur="validate('Password')" type="password" name="Password" value="" />
-                        <p></p>
-                        <input style ="border-color: #31B531;background-color: #028F02;" type="submit" value="Log In"/>
-                        <p></p>
-                        <p><a href="User?action=createAccount">Create Account</a></p>
+                        <input class="" id="Password" onchange="validate('Password')" onblur="validate('Password')" type="password" name="Password" value="" />
+                        <p class ="form-error" id="PasswordError"></p>
+                        <p class="form-basic" style="font-size: 100%">Verify Password</p>
+                        <input class="" id="VerifyPassword" onchange="validate('VerifyPassword')" onblur="validate('VerifyPassword')" type="password" name="VerifyPassword" value="" />
+                        <p class ="form-error" id="VerifyPasswordError"></p>
+                        <input style ="border-color: #31B531;background-color: #028F02;" type="submit" value="Create Account"/>
                     </form>
                 </div>
             </div>

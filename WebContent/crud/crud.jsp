@@ -1,14 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <c:if test="${empty buttons}">
-    <c:redirect url="User?action=Home"/>
-</c:if>
- <c:if test="${empty general}">
-    <c:redirect url="User?action=Home"/>
+<c:if test="${empty general}">
+    <c:redirect url="/User?action=crud"/>
 </c:if>
 <html>
     <head>
-        <title>Home</title>
+        <title>CRUD</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" href = "main.css">
@@ -17,48 +14,6 @@
     </head>
     <body>
         <script>
-            Object.size = function(obj) {
-                var size = 0, key;
-                for (key in obj) {
-                    if (obj.hasOwnProperty(key)) size++;
-                }
-                return size;
-            };
-            function getLessons(grade){
-                switch(grade){
-${buttons.GetData()}
-                }
-            }
-            function viewGrade(grade){
-                var myNode = document.getElementById("LessonButtonContainer");
-                while (myNode.firstChild) {
-                    myNode.removeChild(myNode.firstChild);
-                }
-                var lessons = getLessons(grade);
-                var element;
-                for(i =0;i<Object.size(lessons);i++){
-                    element = document.createElement("input");
-                    element.setAttribute("type", "button");
-                    element.setAttribute("value", lessons[i]);
-                    element.setAttribute('onclick', "document.location.href = 'User?action=next&lesson="+grade+"."+(i+1)+"'");
-                    element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .8, .6);
-                    element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .8, .4);
-                    element.style.borderWidth = "4px";
-                    element.style.borderStyle = "solid";
-                    document.getElementById("LessonButtonContainer").appendChild(element);
-                    if(i != grades-1){
-                        element = document.createElement("div");
-                        element.setAttribute("class","divider");
-                        document.getElementById("LessonButtonContainer").appendChild(element);
-                    }
-                }
-            }
-            function toLesson(grade,lesson){
-                document.location.href = 'User?action=next&lesson='+grade+'.'+lesson;
-            }
-            function toGrade(grade){
-                document.location.href = 'User?action=viewLessons&grade='+grade;
-            }
             function rgbToHex(r, g, b) {
                 if(r < 0 || r > 255) alert("r is out of bounds; "+r);
                 if(g < 0 || g > 255) alert("g is out of bounds; "+g);
@@ -107,11 +62,10 @@ ${buttons.GetData()}
             <div class = "text-right">
                 <div class = "col-xs-pull-1">
                     <div class = "dropdown">
-                        <button class = "btn btn-default dropdown-toggle" type = "button" data-toggle = "dropdown" style = "background-color:#81C6C9; border: 4px solid #489194"><strong>Options</strong>
-                        <img src="pics/gear.png" alt=""/><span class = "caret"></span></button>
+                        <button class = "btn btn-default dropdown-toggle" type = "button" data-toggle = "dropdown" style = "background-color:#81C6C9; border: 4px solid #489194"> Options
+                        <span class = "caret"></span></button>
                         <ul class = "dropdown-menu pull-right">
                             <li><a href = "Profile.jsp">Profile</a></li>
-                            ${general.GetCRUD()}
                             <li><a href = "User?action=logout">Log Out</a></li>
                         </ul>
                     </div>
@@ -127,19 +81,20 @@ ${buttons.GetData()}
                     <p></p>
                     <input type = "button" style = "background-color:#81C6C9; border: 4px solid #489194" onclick = "document.location.href = 'Home.jsp'" value = "Home"/>
                     <script>
-                        var grades = ${buttons.GetGrades()};
+                        var grades = ["lessons","progress","questions","users"];
+                        var gradeNames = ["Lessons","Progress","Questions","Users"];
                         var element;
-                        for(i=1;i<grades;i++){
+                        for(i=0;i<4;i++){
                             element = document.createElement("input");
                             element.setAttribute("type", "button");
-                            element.setAttribute("value", "Grade "+i);
-                            element.setAttribute('onclick', "viewGrade("+i+")");
-                            element.style.backgroundColor = hslToRgb((i-1)*.1,.8,.6);
-                            element.style.borderColor = hslToRgb((i-1)*.1,.8,.4);
+                            element.setAttribute("value", "View "+gradeNames[i]);
+                            element.setAttribute('onclick', "document.location.href='User?action=crud&crudaction="+grades[i]+"'");
+                            element.style.backgroundColor = hslToRgb(i*.1,.8,.6);
+                            element.style.borderColor = hslToRgb(i*.1,.8,.4);
                             element.style.borderWidth = "4px";
                             element.style.borderStyle = "solid";
                             document.getElementById("GradeButtonContainer").appendChild(element);
-                            if(i != grades-1){
+                            if(i !== 3){
                                 element = document.createElement("div");
                                 element.setAttribute("class","divider");
                                 document.getElementById("GradeButtonContainer").appendChild(element);
@@ -150,19 +105,10 @@ ${buttons.GetData()}
                     <p></p>
                 </div>
             </div>
-            <div class = "text-center">
-                <div id = "LessonButtonContainer">
-                    
-                </div>
-            </div>
-            <div class = "content">
+            <div class = "jumbotron">
                 <div class ="text-center">
-                    <h2 style="font-size: 210%">Welcome to Moo Moo Math!</h2>
-                    <p style="font-size: 150%">Select your grade, and the lesson you would like to work on!</p>
-                    <p style="font-size: 150%">We will run you through a short lesson on how to do the math, and quiz you on your abilities</p>
-                    <img src="pics/pig.png" alt="Oink!"/>
-                    <p style="font-size: 110%">Moo Moo Math was created by Team A: Sam Scheidecker and Riley Sumner</p>
-                    <p style="font-size: 110%">Anoka's BPA Chapter Number 30-0005</p>
+                    <p>Welcome to the C.R.U.D.</p>
+                    <p>Select an option from above to edit data</p>
                 </div>
             </div>
         </div>
