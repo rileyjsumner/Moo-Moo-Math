@@ -110,7 +110,6 @@
                         <button class = "btn btn-default dropdown-toggle" type = "button" data-toggle = "dropdown" style = "background-color:#81C6C9; border: 4px solid #489194"> Options
                         <span class = "caret"></span></button>
                         <ul class = "dropdown-menu pull-right">
-                            <li><a href = "Profile.jsp">Profile</a></li>
                             ${general.GetCRUD()}
                             <li><a href = "User?action=logout">Log Out</a></li>
                         </ul>
@@ -146,7 +145,6 @@
                             }
                         }
                     </script>
-                    <input type = "button" style = "background-color:#81C6C9; border: 4px solid #489194" onclick = "document.location.href = 'Profile.jsp'" value = "Profile"/>
                     <p></p>
                 </div>
             </div>
