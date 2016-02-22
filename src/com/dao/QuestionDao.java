@@ -1,34 +1,54 @@
 package com.dao;
 
+import com.Bits.EditBit;
 import com.Bits.QuestionBit;
 import com.DbUtil.DbUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class QuestionDao {
-    public static QuestionBit getQuestion(int id){
+    public static List<EditBit> GetQuestion(int UserId){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
-        QuestionBit bit=new QuestionBit();
+        List<EditBit> users = new ArrayList<>();
         try {
             preparedStatement = con.prepareStatement("SELECT * FROM questions WHERE Id = ?");
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, UserId);
             ResultSet set = preparedStatement.executeQuery();
             if(set.first()){
-                bit.Id=id;
-                bit.Grade=set.getInt(2);
-                bit.Lesson=set.getInt(3);
-                bit.Points=set.getInt(4);
-                bit.Text=set.getString(5);
-                bit.Answer=set.getString(6);
-                bit.HelpType=set.getInt(7);
+                users.add(new EditBit("ID",Integer.toString(set.getInt(1)),false));
+                users.add(new EditBit("Grade",Integer.toString(set.getInt(2)),true));
+                users.add(new EditBit("Lesson",set.getString(3),true));
+                users.add(new EditBit("Points",set.getString(4),true));
+                users.add(new EditBit("Password",set.getString(5),true));
+                users.add(new EditBit("Email",set.getString(6),true));
+                users.add(new EditBit("Role",Integer.toString(set.getInt(7)),true));
+                
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return users;
+    }
+    public static List<QuestionBit> getAllQuestions(){
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        List<QuestionBit> bits=new ArrayList<>();
+        try {
+            preparedStatement = con.prepareStatement("SELECT * FROM questions");
+            ResultSet set = preparedStatement.executeQuery();
+            while(set.next()){
+                bits.add(new QuestionBit(set.getInt(1),set.getInt(2),set.getInt(3),set.getInt(4),set.getString(5),set.getString(6),set.getInt(7)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuestionDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return bit;
+        return bits;
     }
     public static void newQuestion(int grade,int lesson,int points,String text,String answer,int helpType){
         Connection con =DbUtil.getConnection();

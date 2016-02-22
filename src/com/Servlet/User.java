@@ -98,7 +98,17 @@ public class User extends HttpServlet {
                 }
                 else if(CRUDaction.equals("questions")){
                     forward = "/crud/questions.jsp";
-                    
+                    request.setAttribute("questions", QuestionDao.getAllQuestions());
+                }
+                else if(CRUDaction.equals("editquestionform")){
+                    forward = "/crud/edit.jsp";
+                    request.setAttribute("editList",QuestionDao.GetQuestion(Integer.parseInt(request.getParameter("Id"))));
+                    request.setAttribute("editType", "Question");
+                }
+                else if(CRUDaction.equals("deletequestion")){
+                    forward = "/crud/questions.jsp";
+                    QuestionDao.deleteQuestion(Integer.parseInt(request.getParameter("Id")));
+                    request.setAttribute("questions", QuestionDao.getAllQuestions());
                 }
                 else if(CRUDaction.equals("users")){
                     forward = "/crud/users.jsp";
@@ -147,7 +157,7 @@ public class User extends HttpServlet {
                     prog++;
                     ProgressDao.SetProgress(UserId, grade, lesson, prog);
                 }
-                else if(prog < MaxPractice + max){
+                else{
                     String answer = request.getParameter("answer");
                     if(answer.equals(AnswersDao.getAnswer(UserId, grade, lesson))){
                         prog++;
@@ -158,20 +168,12 @@ public class User extends HttpServlet {
                         helpNeeded = AnswersDao.getPageType(UserId, grade, lesson);
                     }
                 }
-                else{
-                    String answer = request.getParameter("answer");
-                    if(answer.equals(AnswersDao.getAnswer(UserId, grade, lesson))){
-                        prog++;
-                        ProgressDao.SetProgress(UserId, grade, lesson, prog);
-                    }
-
-                }
             }
             if(prog<max){
                 LessonBean bean = LessonDao.getLessonPage(grade, lesson, prog+1);
                 request.setAttribute("data", bean);
             }
-            else if (prog<MaxPractice + max)
+            else
             {
                 if (helpNeeded!=0){
                     HelpBean bean;
@@ -193,9 +195,6 @@ public class User extends HttpServlet {
                 else{
                     request.setAttribute("data", Questions.getNewQuestion(UserId, grade, lesson));
                 }
-            }
-            else{
-                request.setAttribute("data", Questions.getNewQuestion(UserId, grade, lesson));
             }
             
         }
@@ -306,6 +305,23 @@ public class User extends HttpServlet {
                     forward = "/crud/crud.jsp";
                 }
                 else if(CRUDaction.equals("editUser")){
+                    int editUserID = Integer.parseInt(request.getParameter("editUserID"));
+                    String editUserName = request.getParameter("editUsername");
+                    String editFirstName = request.getParameter("editFirst Name");
+                    String editLastName = request.getParameter("editLast Name");
+                    String editPassword = request.getParameter("editPassword");
+                    String editEmail = request.getParameter("editEmail");
+                    int editRole=0;
+                    try{
+                        editRole = Integer.parseInt(request.getParameter("editRole"));
+                    }
+                    catch (NumberFormatException ex){
+                        
+                    }
+                    UserDao.UpdateUser(editUserID,editUserName, editFirstName, editLastName, editEmail, editPassword, editRole);
+                    forward="/crud/users.jsp";
+                }
+                else if(CRUDaction.equals("editQuestion")){
                     int editUserID = Integer.parseInt(request.getParameter("editUserID"));
                     String editUserName = request.getParameter("editUsername");
                     String editFirstName = request.getParameter("editFirst Name");
