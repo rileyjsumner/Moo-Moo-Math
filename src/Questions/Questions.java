@@ -30,8 +30,9 @@ public class Questions {
                                 break;
                             case 1:
                                 bean.Title="Counting Intervals";
-                                int b = random.nextInt(100);
+                                int b = random.nextInt(10);
                                 int c = random.nextInt(9) + 1;
+                                b*=c;
                                 bean.HTML = "<p>When counting by " + c + "'s, what number comes after "+b+"? </p>\n";
                                 bean.Apply(true, "TEXT");
                                 b+=c;
