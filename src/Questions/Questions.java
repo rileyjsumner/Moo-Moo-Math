@@ -15,8 +15,8 @@ public class Questions {
         switch(grade){
             case 1:
                 switch(lesson){
-                    case 1:
-                        int kek = random.nextInt(3);
+                    case 2:
+                        int kek = random.nextInt(4);
                         switch(kek)
                         {
                             case 0:
@@ -58,9 +58,18 @@ public class Questions {
                                 {a2 = true;}
 				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(a2), 5);
 				break;
+                             case 4:
+                                bean.Title="Previous Number";
+                                int ds = random.nextInt(100);
+                                // What number comes after x?
+                                bean.HTML="<p>What number comes before "+ds+"?</p>\n";
+                                bean.Apply(true, "TEXT");
+                                ds--;
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(ds), 2);
+                                break;
                         }
 			 break;
-                    case 2:
+                    case 1:
 			bean.Title="Addition";
 			int g = random.nextInt(10) + 10;
 			int h = random.nextInt(10);
