@@ -1,17 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <c:if test="${empty buttons}">
+<c:if test="${empty buttons}">
     <c:redirect url="User?action=crud"/>
 </c:if>
 <c:if test="${empty general}">
     <c:redirect url="User?action=crud"/>
 </c:if>
- <c:if test="${empty edit}">
+<c:if test="${empty editList}">
+    <c:redirect url="User?action=crud"/>
+</c:if>
+<c:if test="${empty editType}">
     <c:redirect url="User?action=crud"/>
 </c:if>
 <html>
     <head>
-        <title>Edit</title>
+        <title>Edit ${editType}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" href = "main.css">
@@ -150,7 +153,34 @@ ${buttons.GetData()}
             </div>
             <div class = "content">
                 <div class ="text-center">
-                    
+                    <form method="POST" action="User?action=crud&crudaction=edit${editType}" name = "Edit">
+                        <table border=1 style="margin: 0px auto;">
+                            <thead>
+                                <tr>
+                                    <c:forEach items="${editList}" var="name">
+                                        <th><c:out value="${name.GetName()}" /></th>
+                                    </c:forEach>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <c:forEach items="${editList}" var="value">
+                                        <c:if test="${value.CanEdit()}">
+                                            <td><input class ='tableform' name='edit<c:out value="${value.GetName()}" />' type='text' value="<c:out value="${value.GetValue()}" />" /></td>
+                                        </c:if>
+                                        <c:if test="${!value.CanEdit()}">
+                                            <td>
+                                                <input disabled class ='tableform' name='edit<c:out value="${value.GetName()}" />' type='text' value="<c:out value="${value.GetValue()}" />" />
+                                                <input name='edit<c:out value="${value.GetName()}" />' type='hidden' value="<c:out value="${value.GetValue()}" />" />
+                                            </td>
+                                        </c:if>
+                                    </c:forEach>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p></p>
+                        <input style ="border-color: #31B531;background-color: #028F02;" type="submit" value="Update ${editType}"/>
+                    </form>
                 </div>
             </div>
         </div>

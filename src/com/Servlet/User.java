@@ -15,6 +15,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import com.DbUtil.DbUtil;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class User extends HttpServlet {
@@ -31,15 +33,17 @@ public class User extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
         String forward="/login-failed.html";
         String action = request.getParameter("action");
+        
         Cookie[] cookies = request.getCookies();
         String sessionName = null;
         String sessionPass = null;
+        
         if (action!=null){
             System.out.println("Get action is: " + action);
         }
+        
         for (Cookie cookie : cookies) {
             if(cookie.getName().equals("JSESSION_USERNAME")){
                 sessionName=cookie.getValue();
@@ -48,19 +52,19 @@ public class User extends HttpServlet {
                 sessionPass=cookie.getValue();
             }
         }
-        System.out.println("USERNAME: "+sessionName);
-        System.out.println("PASSWORD: "+sessionPass);
         int Role =-1;
         int UserId =-1;
         if(sessionPass!=null && sessionName != null){
             Role = UserDao.GetRole(sessionName, sessionPass);
             UserId = UserDao.GetUserId(sessionName);
             forward = "/login.jsp";
+            //Refresh cookies
+            response.addCookie(new Cookie("JSESSION_USERNAME",sessionName));
+            response.addCookie(new Cookie("JSESSION_PASSWORD",sessionPass));
         }
         else{
             forward = "/Home.jsp";
         }
-        System.out.println("ROLE: "+Role);
         if("login".equals(action)){
             request.setAttribute("buttons", LessonDao.getButtonBean());
             forward = "/Home.jsp";
@@ -99,6 +103,19 @@ public class User extends HttpServlet {
                 else if(CRUDaction.equals("users")){
                     forward = "/crud/users.jsp";
                     request.setAttribute("users", UserDao.GetAllUsers());
+                }
+                else if(CRUDaction.equals("edituserform")){
+                    forward = "/crud/edit.jsp";
+                    request.setAttribute("editList",UserDao.GetUserProperties(Integer.parseInt(request.getParameter("userId"))));
+                    request.setAttribute("editType", "User");
+                }
+                else if(CRUDaction.equals("edituser")){
+                    Enumeration<String> test = request.getParameterNames();
+                    String h="";
+                    while (test.hasMoreElements()){
+                        h= test.nextElement();
+                        System.out.println("T_PARAMETER: "+h+" : "+request.getParameter(h));
+                    }
                 }
                 else{
                     forward = "/crud/crud.jsp";
@@ -203,16 +220,48 @@ public class User extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String forward="/login-failed.html";
+        Cookie[] cookies = request.getCookies();
+        
+        String sessionName = null;
+        String sessionPass = null;
+        
         Enumeration<String> test = request.getParameterNames();
         String h="";
+        
         while (test.hasMoreElements()){
             h= test.nextElement();
             System.out.println("PARAMETER: "+h+" : "+request.getParameter(h));
         }
+        
     	String action = request.getParameter("action");
     	System.out.println("Post action is: " + action);
-    	if(action.equals("Login")){
+        
+        String forward="/login-failed.html";
+        
+        if (action!=null){
+            System.out.println("Get action is: " + action);
+        }
+        for (Cookie cookie : cookies) {
+            if(cookie.getName().equals("JSESSION_USERNAME")){
+                sessionName=cookie.getValue();
+            }
+            else if(cookie.getName().equals("JSESSION_PASSWORD")){
+                sessionPass=cookie.getValue();
+            }
+        }
+        int Role =-1;
+        int UserId =-1;
+        if(sessionPass!=null && sessionName != null){
+            Role = UserDao.GetRole(sessionName, sessionPass);
+            UserId = UserDao.GetUserId(sessionName);
+            forward = "/login.jsp";
+        }
+        else{
+            forward = "/Home.jsp";
+        }
+        //LOGIC HERE
+        
+        if(action.equals("Login")){
             forward="/login.jsp";
             String Username=request.getParameter("UserName");
             String Password = request.getParameter("Password");
@@ -243,7 +292,37 @@ public class User extends HttpServlet {
             Connection con= DbUtil.getConnection();
             UserDao.SafeAddUser(Username, FirstName, LastName, Email, Password);
             forward="/Home.jsp";
-    	}
+    	} // Things that require ID :
+        else if(Role == -1 || UserId == -1){
+            forward="/Home.jsp";
+        }
+        else if(action.equals("crud")){
+            request.setAttribute("buttons", LessonDao.getButtonBean());
+            request.setAttribute("general", new GeneralBean(sessionName,Role));
+            if(Role>1){
+                String CRUDaction = request.getParameter("crudaction");
+                if(CRUDaction == null || CRUDaction.equals("home")){
+                    forward = "/crud/crud.jsp";
+                }
+                else if(CRUDaction.equals("editUser")){
+                    int editUserID = Integer.parseInt(request.getParameter("editUserID"));
+                    String editUserName = request.getParameter("editUsername");
+                    String editFirstName = request.getParameter("editFirst Name");
+                    String editLastName = request.getParameter("editLast Name");
+                    String editPassword = request.getParameter("editPassword");
+                    String editEmail = request.getParameter("editEmail");
+                    int editRole = Integer.parseInt(request.getParameter("editUserID"));
+                    UserDao.UpdateUser(editUserID,editUserName, editFirstName, editLastName, editEmail, editPassword, editRole);
+                    forward="/crud/users.jsp";
+                }
+                else{
+                    forward = "/crud/crud.jsp";
+                }
+            }
+            else{
+                forward = "/permission-denied.jsp";
+            }
+        }
     	RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }

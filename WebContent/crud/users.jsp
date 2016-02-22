@@ -1,7 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:if test="${empty general}">
-    <c:redirect url="/User?action=crud"/>
+    <c:redirect url="/User?action=crud&crudaction=users"/>
+</c:if>
+<c:if test="${empty users}">
+    <c:redirect url="/User?action=crud&crudaction=users"/>
 </c:if>
 <html>
     <head>
@@ -110,28 +113,28 @@
                     <table border=1 style="margin: 0px auto;">
                         <thead>
                             <tr>
-                                <th style='padding:10px;'>User ID</th>
-                                <th style='padding:10px;'>Username</th>
-                                <th style='padding:10px;'>First Name</th>
-                                <th style='padding:10px;'>Last Name</th>
-                                <th style='padding:10px;'>Password</th>
-                                <th style='padding:10px;'>Email</th>
-                                <th style='padding:10px;'>Role</th>
-                                <th style='padding:10px;' colspan=2>Action</th>
+                                <th>User ID</th>
+                                <th>Username</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Password</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th colspan=2>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach items="${users}" var="user">
                                 <tr>
-                                    <td style='padding:10px;'><c:out value="${user.GetUserId()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetUserName()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetFirstName()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetLastName()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetPassword()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetEmail()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetRole()}" /></td>
-                                    <td style='padding:10px;'><a href="User?action=crud&crudaction=updateform&userid=<c:out value="${user.GetUserId()}"/>">Update</a></td>
-                                    <td style='padding:10px;'><a href="User?action=crud&crudaction=deleteform&userid=<c:out value="${user.GetUserId()}"/>">Delete</a></td>
+                                    <td><c:out value="${user.GetUserId()}" /></td>
+                                    <td><c:out value="${user.GetUserName()}" /></td>
+                                    <td><c:out value="${user.GetFirstName()}" /></td>
+                                    <td><c:out value="${user.GetLastName()}" /></td>
+                                    <td><c:out value="${user.GetPassword()}" /></td>
+                                    <td><c:out value="${user.GetEmail()}" /></td>
+                                    <td><c:out value="${user.GetRole()}" /></td>
+                                    <td><a href="User?action=crud&crudaction=edituserform&userId=<c:out value="${user.GetUserId()}"/>">Update</a></td>
+                                    <td><a href="User?action=crud&crudaction=deleteuserform&userId=<c:out value="${user.GetUserId()}"/>">Delete</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>

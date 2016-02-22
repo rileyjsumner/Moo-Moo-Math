@@ -1,3 +1,18 @@
+th{
+    padding: 10px;
+}
+
+td{
+    padding: 10px;
+}
+input[type=text].tableform{
+    background: #fff;
+    display: inline-block;
+    border: 0px solid;
+    border-top: 0px solid;
+    border-radius: 0px;
+    box-sizing: border-box;
+}
 form input[type=text]{
     background: #fff;
     display: inline-block;
@@ -14,6 +29,7 @@ form input[type=password]{
     border-radius: 2px;
     box-sizing: border-box;
 }
+
 p.form-error{
     color: #F00!important;
     font-size: 86%;
@@ -207,9 +223,6 @@ optgroup {
 table {
     border-collapse: collapse;
     border-spacing: 0;
-}
-td, th {
-    padding: 0;
 }
 @media print {
     * {

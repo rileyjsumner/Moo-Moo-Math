@@ -8,6 +8,7 @@ import java.util.Random;
 public class Questions {
     static Random random = new Random();
     public static QuestionBean getNewQuestion(int UserId, int grade,int lesson){
+        int a,b,c;
         QuestionBean bean= new QuestionBean();
         bean.Grade= grade;
         bean.Lesson = lesson;
@@ -15,35 +16,44 @@ public class Questions {
             case 1:
                 switch(lesson){
                     case 1:
-                        int kek = random.nextInt(2);
-                        switch(kek)
+                        a = random.nextInt(3);
+                        switch(a)
                         {
                             case 0:
                                 bean.Title="Next Number";
-                                int a = random.nextInt(100);
+                                b = random.nextInt(100);
                                 // What number comes after x?
-                                bean.HTML="<p>What number comes after "+a+"?</p>\n";
+                                bean.HTML="<p>What number comes after "+b+"?</p>\n";
                                 bean.Apply(true, "TEXT");
-                                a++;
-                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(a),2);
+                                b++;
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(b),2);
                                 break;
                             case 1:
-                                bean.Title="Counting Intervals";
-                                int b = random.nextInt(100);
-                                int c = random.nextInt(9) + 1;
-                                bean.HTML = "<p>When counting by " + c + "'s, what number comes after "+b+"? </p>\n";
+                                bean.Title="Previous Number";
+                                b = random.nextInt(100);
+                                // What number comes after x?
+                                bean.HTML="<p>What number comes before "+b+"?</p>\n";
                                 bean.Apply(true, "TEXT");
-                                b+=c;
-                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(b), 3);
+                                b--;
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(b),3);
                                 break;
                             case 2:
-                                bean.Title="Counting Patterns";
-                                int d = random.nextInt(100);
-                                int e = random.nextInt(9) + 1;
-                                bean.HTML = "<p>What number comes next in the sequence? \n" + d + ", " + (d + e) + ", " + (d + e * 2) + ", " + (d + e * 3) + ", " + (d + e * 4) + "</p>\n";
+                                bean.Title="Counting Intervals";
+                                c = random.nextInt(5) + 2;
+                                b = random.nextInt(4) + 1;
+                                bean.HTML = "<p>When counting by " + c + "'s, what number comes after "+(c*b)+"? </p>\n";
                                 bean.Apply(true, "TEXT");
-                                d = (d + e * 5);
-                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(d), 4);
+                                c=c*(b+1);
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(c), 4);
+                                break;
+                            case 3:
+                                bean.Title="Counting Patterns";
+                                b = random.nextInt(100);
+                                c = random.nextInt(9) + 1;
+                                bean.HTML = "<p>What number comes next in the sequence? \n" + b + ", " + (b + c) + ", " + (b + c * 2) + ", " + (b + c * 3) + ", " + (b + c * 4) + "</p>\n";
+                                bean.Apply(true, "TEXT");
+                                c = (b + c * 5);
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(c), 5);
                                 break;
                         }
                     case 2:

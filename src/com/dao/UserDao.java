@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.Beans.GeneralBean;
+import com.Bits.EditBit;
 import com.Bits.UserBit;
 import com.DbUtil.DbUtil;
 
@@ -26,6 +27,30 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
+    }
+    public static List<EditBit> GetUserProperties(int UserId){
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        List<EditBit> users = new ArrayList<>();
+        try {
+            preparedStatement = con.prepareStatement("SELECT * FROM users WHERE UserId = ?");
+            preparedStatement.setInt(1, UserId);
+            ResultSet set = preparedStatement.executeQuery();
+            if(set.first()){
+                users.add(new EditBit("UserID",Integer.toString(set.getInt(1)),false));
+                users.add(new EditBit("Username",set.getString(2),true));
+                users.add(new EditBit("First Name",set.getString(3),true));
+                users.add(new EditBit("Last Name",set.getString(4),true));
+                users.add(new EditBit("Password",set.getString(5),true));
+                users.add(new EditBit("Email",set.getString(6),true));
+                users.add(new EditBit("Role",Integer.toString(set.getInt(7)),true));
+                
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return users;
     }
     public static List<UserBit> GetAllUsers(){
         Connection con =DbUtil.getConnection();
@@ -85,7 +110,24 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    public static void UpdateUser(int UserId, String Username,String Name,String LastName,String Email,String Password,int Role){
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = con.prepareStatement("UPDATE users SET Username= ?,Name=?,LastName=?,Email=?,Password=?, Role =? WHERE UserId = ?");
+            preparedStatement.setString(1, Username);
+            preparedStatement.setString(2, Name);
+            preparedStatement.setString(3, LastName);
+            preparedStatement.setString(4, Email);
+            preparedStatement.setString(5, Password);
+            preparedStatement.setInt(6, Role);
+            preparedStatement.setInt(7, UserId);
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public static int GetRole(String Username,String Password){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
