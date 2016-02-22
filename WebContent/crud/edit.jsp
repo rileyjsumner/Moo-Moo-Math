@@ -127,8 +127,8 @@ ${buttons.GetData()}
                     <p></p>
                     <input type = "button" style = "background-color:#81C6C9; border: 4px solid #489194" onclick = "document.location.href = 'Home.jsp'" value = "Home"/>
                     <script>
-                        var grades = ["lessons","progress","questions","users"];
-                        var gradeNames = ["Lessons","Progress","Questions","Users"];
+                        var grades = ["users"];
+                        var gradeNames = ["Users"];
                         var element;
                         for(i=0;i<4;i++){
                             element = document.createElement("input");

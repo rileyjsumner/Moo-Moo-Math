@@ -6,6 +6,9 @@
 <c:if test="${empty general}">
     <c:redirect url="User?action=next"/>
 </c:if>
+<c:if test="${empty redir}">
+    <c:redirect url="User?action=next"/>
+</c:if>
 <html>
     <head>
         <title>Help</title>
@@ -187,7 +190,7 @@
                 button = document.createElement("input");
                 button.setAttribute("type", "button");
                 button.setAttribute("value", "Continue");
-                button.setAttribute('onclick', "document.location.href='User?action=next&lesson=${data.GetGrade()}.${data.GetLesson()}'");
+                button.setAttribute('onclick', "document.location.href='User?action=next&lesson=${redir}'");
                 button.style.backgroundColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02,.7,.5);
                 button.style.borderColor = hslToRgb((${data.GetGrade()}-1)*.1+(${data.GetLesson()}-1)*.02,.7,.3);
                 button.style.borderWidth = "4px";

@@ -190,6 +190,7 @@ public class User extends HttpServlet {
                     }
                     bean.UserAnswer = request.getParameter("answer");
                     request.setAttribute("data", bean);
+                    request.setAttribute("redir", grade+"."+lesson);
                     forward = "/help.jsp";
                 }
                 else{

@@ -44,7 +44,7 @@ public class Questions {
                                 int e = random.nextInt(9) + 1;
                                 bean.HTML = "<p>What number comes next in the sequence? \n" + d + ", " + (d + e) + ", " + (d + e * 2) + ", " + (d + e * 3) + ", " + (d + e * 4) + "</p>\n";
                                 bean.Apply(true, "TEXT");
-                                d = (d + e * 5);
+                                d = (d + (e * 5));
                                 AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(d), 6);
                                 break;
 			     case 3:
@@ -52,7 +52,7 @@ public class Questions {
 				int f = random.nextInt(100) + 1;
 				double a1 = f%2;
 				boolean a2 = false;
-				bean.HTML = "<p>Is this number even? (yes or no) " + f + "</p>\n";
+				bean.HTML = "<p>This number is even: (true or false) " + f + "</p>\n";
 				bean.Apply(true, "TEXT");
 				if (a1 == 0) 
                                 {a2 = true;}
@@ -158,7 +158,7 @@ public class Questions {
 				  int aa = random.nextInt(100) + 1;
 		  		  double b1 = aa%2;
 				  boolean c2 = false;
-				  bean.HTML = "<p>Is this number even? (yes or no) " + aa + "</p>\n";
+				  bean.HTML = "<p>This number is even: (true or false) " + aa + "</p>\n";
 				  bean.Apply(true, "TEXT");
 				  if (b1 == 0) {c2 = true;}
 				  AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(c2), 5);
@@ -230,7 +230,7 @@ public class Questions {
 			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(p3), 8);
 			break; 
 		    case 4:
-			int kekhoon = random.nextInt(2);
+			int kekhoon = random.nextInt(1);
 			switch(kekhoon) {
 			    case 0:
 				bean.Title="Highest Number";
@@ -247,7 +247,7 @@ public class Questions {
 				String q3 = ""+az[0]+az[1]+az[2]+az[3]+az[4]+az[5];
 				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(q3), 13);
 				break;
-			    case 1:
+			    /*case 1:
 				bean.Title="Guess My Number";
 				int ba = random.nextInt(15);
 				int bb = random.nextInt(15);
@@ -257,8 +257,8 @@ public class Questions {
 				bean.HTML="<p>The sum of 2 numbers is "+bc+". The difference of 2 numbers is "+bd+".\nWhat are the two numbers?</p>\n";
 				bean.Apply(true, "TEXT(2)");
 				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(ba)+","+String.valueOf(bb), 0);
-				break;
-			    case 2:
+				break;*/
+			    case 1:
 				bean.Title="Guess My Number";
 				int be = random.nextInt(150);
 				int bf = random.nextInt(10) + 5;
@@ -323,10 +323,8 @@ public class Questions {
 			int bv = bs+bt;
 			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(bv), 11);
 			break;
-		     case 2:
-		     case 3:
-		     case 4:
-			int hoonkek = random.nextInt(1);
+		    case 2:
+			int hoonkek = random.nextInt(2);
 			switch (hoonkek)
 			{
 			    case 0:
@@ -345,53 +343,47 @@ public class Questions {
 				bean.Apply(true, "TEXT");
 				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(cc[cd]), 12);
 				break;
-			    case 1:
-				int kekkek = random.nextInt(1);
-				switch(kekkek)
-				{
-				    case 0:
-					bean.Title="Greater Than, Less Than";
-					int ce = random.nextInt(9);
-					int cf = random.nextInt(9);
-					int cg = random.nextInt(9);
-					int ch = random.nextInt(9);
-					int ci = random.nextInt(9);
-					int cj = random.nextInt(9);
-					double g1 = ((double)ce/10) + ((double)cf/100) + ((double)cg/1000);
-					g1 = Math.round(g1*1000d);
-					double h1 = ((double)ch/10) + ((double)ci/100) + ((double)cj/1000);
-					h1 = Math.round(h1*1000d);
-					bean.HTML="<p>What number is larger?\n" +g1+ " or " +h1+"</p>\n";
-					bean.Apply(true, "TEXT");
-					boolean d2;
-					if (g1>h1) {d2=true;}
-					else {d2=false;}
-					AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(d2), 13);
-					break;
-				  case 1:
-					bean.Title="Greater Than, Less Than";
-					int ck = random.nextInt(9);
-					int cl = random.nextInt(9);
-					int cm = random.nextInt(9);
-					int cn = random.nextInt(9);
-					int co = random.nextInt(9);
-					int cp = random.nextInt(9);
-					double j1 = ((double)ck/10) + ((double)cl/100) + ((double)cm/1000);
-					j1 = Math.round(j1*1000d);
-					double k1 = ((double)cn/10) + ((double)co/100) + ((double)cp/1000);
-					k1 = Math.round(k1*1000d);
-					bean.HTML="<p>What number is smaller?\n" +j1+ " or " +k1+"</p>\n";
-					bean.Apply(true, "TEXT");
-					boolean e2;
-					if (j1>k1) {e2=true;}
-					else {e2=false;}
-					AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(e2), 13);
-					break;
-				}
-				break;
+                            case 1:
+                                bean.Title="Greater Than, Less Than";
+                                int ce = random.nextInt(9);
+                                int cf = random.nextInt(9);
+                                int cg = random.nextInt(9);
+                                int ch = random.nextInt(9);
+                                int ci = random.nextInt(9);
+                                int cj = random.nextInt(9);
+                                double g1 = ((double)ce/10) + ((double)cf/100) + ((double)cg/1000);
+                                g1 = Math.round(g1*1000d);
+                                double h1 = ((double)ch/10) + ((double)ci/100) + ((double)cj/1000);
+                                h1 = Math.round(h1*1000d);
+                                bean.HTML="<p>What number is larger?\n" +g1+ " or " +h1+"</p>\n";
+                                bean.Apply(true, "TEXT");
+                                boolean d2;
+                                if (g1>h1) {d2=true;}
+                                else {d2=false;}
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(d2), 13);
+                                break;
+                          case 2:
+                                bean.Title="Greater Than, Less Than";
+                                int ck = random.nextInt(9);
+                                int cl = random.nextInt(9);
+                                int cm = random.nextInt(9);
+                                int cn = random.nextInt(9);
+                                int co = random.nextInt(9);
+                                int cp = random.nextInt(9);
+                                double j1 = ((double)ck/10) + ((double)cl/100) + ((double)cm/1000);
+                                j1 = Math.round(j1*1000d);
+                                double k1 = ((double)cn/10) + ((double)co/100) + ((double)cp/1000);
+                                k1 = Math.round(k1*1000d);
+                                bean.HTML="<p>What number is smaller?\n" +j1+ " or " +k1+"</p>\n";
+                                bean.Apply(true, "TEXT");
+                                boolean e2;
+                                if (j1>k1) {e2=true;}
+                                else {e2=false;}
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(e2), 13);
+                                break;
 			}
 			break;
-		     case 5:
+		    case 3:
 			bean.Title="Geometry";
 			String v3[] = {"Joe", "Steve", "Billy", "Jack", "Bob", "Ben", "Sarah", "Sally", "Amelia", "Susan", "Madison", "Hannah"};
 			int cq = random.nextInt(11);
@@ -428,10 +420,8 @@ public class Questions {
 			bean.HTML="<p>Are these two ratios equivalent?:\n" + cw+":"+db+" and "+cx+":"+dc+"?</p>\n";
 			bean.Apply(true, "TEXT");
 			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(f2[da]), 14);
-			break;			
+			break;
 		    case 2:
-		    case 3:
-		    case 4:
 			bean.Title="Add Decimals";
 			int df = random.nextInt(10);
 			int dg = random.nextInt(10);
@@ -443,7 +433,7 @@ public class Questions {
 			bean.Apply(true, "TEXT");
 			double n1 = l1+m1;
 			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(n1), 1);
-		    case 5:
+		    case 3:
 			bean.Title="Subtract Decimals";
 			int dj = random.nextInt(4)+5;
 			int dk = random.nextInt(4);
@@ -455,7 +445,7 @@ public class Questions {
 			bean.Apply(true, "TEXT");
 			double q1 = p1-o1;
 			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(q1), 2);
-		    case 6:
+		    case 4:
 			bean.Title="Multiply Decimals";
 			int dn = random.nextInt(10);
 			int dr = random.nextInt(10);
