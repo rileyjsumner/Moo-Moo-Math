@@ -110,28 +110,26 @@
                     <table border=1 style="margin: 0px auto;">
                         <thead>
                             <tr>
-                                <th style='padding:10px;'>User ID</th>
-                                <th style='padding:10px;'>Username</th>
-                                <th style='padding:10px;'>First Name</th>
-                                <th style='padding:10px;'>Last Name</th>
-                                <th style='padding:10px;'>Password</th>
-                                <th style='padding:10px;'>Email</th>
-                                <th style='padding:10px;'>Role</th>
+                                <th style='padding:10px;'>Question ID</th>
+                                <th style='padding:10px;'>Grade</th>
+                                <th style='padding:10px;'>Lesson</th>
+                                <th style='padding:10px;'>Points</th>
+                                <th style='padding:10px;'>Question Text</th>
+                                <th style='padding:10px;'>Answer</th>
                                 <th style='padding:10px;' colspan=2>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${users}" var="user">
+                            <c:forEach items="${questions}" var="question">
                                 <tr>
-                                    <td style='padding:10px;'><c:out value="${user.GetUserId()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetUserName()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetFirstName()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetLastName()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetPassword()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetEmail()}" /></td>
-                                    <td style='padding:10px;'><c:out value="${user.GetRole()}" /></td>
-                                    <td style='padding:10px;'><a href="User?action=crud&crudaction=updateform&userid=<c:out value="${user.GetUserId()}"/>">Update</a></td>
-                                    <td style='padding:10px;'><a href="User?action=crud&crudaction=deleteform&userid=<c:out value="${user.GetUserId()}"/>">Delete</a></td>
+                                    <td style='padding:10px;'><c:out value="${question.GetId()}" /></td>
+                                    <td style='padding:10px;'><c:out value="${question.GetGrade()}" /></td>
+                                    <td style='padding:10px;'><c:out value="${question.GetLesson()}" /></td>
+                                    <td style='padding:10px;'><c:out value="${question.GetPoints()}" /></td>
+                                    <td style='padding:10px;'><a href="User?action=crud&crudaction=updatequestionform&id=<c:out value="${user.GetId()}"/>">View HTML</a></td>
+                                    <td style='padding:10px;'><c:out value="${question.GetAnswer()}" /></td>
+                                    <td style='padding:10px;'><a href="User?action=crud&crudaction=updatequestionform&id=<c:out value="${user.GetId()}"/>">Update</a></td>
+                                    <td style='padding:10px;'><a href="User?action=crud&crudaction=deletequestion&id=<c:out value="${user.GetId()}"/>">Delete</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>

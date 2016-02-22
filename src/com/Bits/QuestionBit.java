@@ -3,40 +3,44 @@ package com.Bits;
  * @author owner
  */
 public class QuestionBit {
-    public int UserId;
-    public String UserName;
-    public String FirstName;
-    public String LastName;
-    public String Password;
-    public String Email;
-    public int Role;
+    public int Id;
+    public int Grade;
+    public int Lesson;
+    public int Points;
+    public int HelpType;
+    public String Text;
+    public String Answer;
     public QuestionBit(){
         
     }
-    public int GetUserId(){
-        return UserId;
+    public QuestionBit(int id,int grade,int points, int lesson,String text, String answer,int helpType){
+        Id=id;
+        Grade=grade;
+        Points=points;
+        Lesson=lesson;
+        Text=text;
+        Answer=answer;
+        HelpType=helpType;
     }
-    public String GetUserName(){
-        return UserName;
+    public int GetId(){
+        return Id;
     }
-    public String GetFirstName(){
-        return FirstName;
+    public int GetGrade(){
+        return Grade;
     }
-    public String GetLastName(){
-        return LastName;
+    public int GetHelpType(){
+        return HelpType;
     }
-    public String GetPassword(){
-        return Password;
+    public int GetPoints(){
+        return Points;
     }
-    public String GetEmail(){
-        return Email;
+    public int GetLesson(){
+        return Lesson;
     }
-    public String GetRole(){
-        if(Role==2){
-            return "Admin";
-        }
-        else{
-            return "User";
-        }
+    public String GetText(){
+        return Text;
+    }
+    public String GetAnswer(){
+        return Answer;
     }
 }

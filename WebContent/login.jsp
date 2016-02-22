@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <c:if test="${empty buttons}">
-    <c:redirect url="User?action=login"/>
+    <c:redirect url="User?action=Home"/>
 </c:if>
 <html>
     <head>

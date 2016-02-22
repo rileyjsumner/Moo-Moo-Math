@@ -46,7 +46,7 @@ ${buttons.GetData()}
                     element.style.borderWidth = "4px";
                     element.style.borderStyle = "solid";
                     document.getElementById("LessonButtonContainer").appendChild(element);
-                    if(i != grades-1){
+                    if(i !== grades-1){
                         element = document.createElement("div");
                         element.setAttribute("class","divider");
                         document.getElementById("LessonButtonContainer").appendChild(element);
