@@ -12,7 +12,7 @@ public class GeneralBean {
     }
     public String GetCRUD(){
         if(Role==2){
-            return "<li><a href = \"/crud/crud.jsp\">C.R.U.D.</a></li>";
+            return "<li><a href = \"crud/crud.jsp\">C.R.U.D.</a></li>";
         }
         return "";
     }

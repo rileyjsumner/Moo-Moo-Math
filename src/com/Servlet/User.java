@@ -86,50 +86,50 @@ public class User extends HttpServlet {
             if(Role>1){
                 String CRUDaction = request.getParameter("crudaction");
                 if(CRUDaction == null || CRUDaction.equals("home")){
-                    forward = "/crud/crud.jsp";
+                    forward = "crud/crud.jsp";
                 }
                 else if(CRUDaction.equals("lessons")){
-                    forward = "/crud/lessons.jsp";
+                    forward = "crud/lessons.jsp";
                     
                 }
                 else if(CRUDaction.equals("progress")){
-                    forward = "/crud/progress.jsp";
+                    forward = "crud/progress.jsp";
                     
                 }
                 else if(CRUDaction.equals("questions")){
-                    forward = "/crud/questions.jsp";
+                    forward = "crud/questions.jsp";
                     request.setAttribute("questions", QuestionDao.getAllQuestions());
                 }
                 else if(CRUDaction.equals("editquestionform")){
-                    forward = "/crud/edit.jsp";
+                    forward = "crud/edit.jsp";
                     request.setAttribute("editList",QuestionDao.GetQuestion(Integer.parseInt(request.getParameter("Id"))));
                     request.setAttribute("editType", "Question");
                 }
                 else if(CRUDaction.equals("deletequestion")){
-                    forward = "/crud/questions.jsp";
+                    forward = "crud/questions.jsp";
                     QuestionDao.deleteQuestion(Integer.parseInt(request.getParameter("Id")));
                     request.setAttribute("questions", QuestionDao.getAllQuestions());
                 }
                 else if(CRUDaction.equals("users")){
-                    forward = "/crud/users.jsp";
+                    forward = "crud/users.jsp";
                     request.setAttribute("users", UserDao.GetAllUsers());
                 }
                 else if(CRUDaction.equals("adduserform")){
-                    forward = "/crud/add.jsp";
+                    forward = "crud/add.jsp";
                     request.setAttribute("addList",Arrays.asList("Username","First Name","Last Name","Password","Email","Role"));
                     request.setAttribute("addType", "User");
                 }
                 else if(CRUDaction.equals("edituserform")){
-                    forward = "/crud/edit.jsp";
+                    forward = "crud/edit.jsp";
                     request.setAttribute("editList",UserDao.GetUserProperties(Integer.parseInt(request.getParameter("userId"))));
                     request.setAttribute("editType", "User");
                 }
                 else if(CRUDaction.equals("deleteuser")){
-                    forward = "/crud/users.jsp";
+                    forward = "crud/users.jsp";
                     UserDao.DeleteUser(Integer.parseInt(request.getParameter("userId")));
                 }
                 else{
-                    forward = "/crud/crud.jsp";
+                    forward = "crud/crud.jsp";
                 }
             }
             else{
@@ -303,7 +303,7 @@ public class User extends HttpServlet {
             if(Role>1){
                 String CRUDaction = request.getParameter("crudaction");
                 if(CRUDaction == null || CRUDaction.equals("home")){
-                    forward = "/crud/crud.jsp";
+                    forward = "crud/crud.jsp";
                 }
                 else if(CRUDaction.equals("editUser")){
                     int editUserID = Integer.parseInt(request.getParameter("editUserID"));
@@ -320,7 +320,7 @@ public class User extends HttpServlet {
                         
                     }
                     UserDao.UpdateUser(editUserID,editUserName, editFirstName, editLastName, editEmail, editPassword, editRole);
-                    forward="/crud/users.jsp";
+                    forward="crud/users.jsp";
                 }
                 else if(CRUDaction.equals("editQuestion")){
                     int editUserID = Integer.parseInt(request.getParameter("editUserID"));
@@ -337,7 +337,7 @@ public class User extends HttpServlet {
                         
                     }
                     UserDao.UpdateUser(editUserID,editUserName, editFirstName, editLastName, editEmail, editPassword, editRole);
-                    forward="/crud/users.jsp";
+                    forward="crud/users.jsp";
                 }
                 else if(CRUDaction.equals("addUser")){
                     String editUserName = request.getParameter("addUsername");
@@ -353,10 +353,10 @@ public class User extends HttpServlet {
                         
                     }
                     UserDao.SafeAddUser(editUserName, editFirstName, editLastName, editEmail, editPassword,editRole);
-                    forward="/crud/users.jsp";
+                    forward="crud/users.jsp";
                 }
                 else{
-                    forward = "/crud/crud.jsp";
+                    forward = "crud/crud.jsp";
                 }
             }
             else{
