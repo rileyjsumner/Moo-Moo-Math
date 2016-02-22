@@ -77,7 +77,7 @@ public class UserDao {
         }
         return users;
     }
-    public static boolean SafeAddUser(String Username,String Name,String LastName,String Email,String Password){
+    public static boolean SafeAddUser(String Username,String Name,String LastName,String Email,String Password,int Role){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
@@ -85,7 +85,7 @@ public class UserDao {
             preparedStatement.setString(1, Username);
             ResultSet set = preparedStatement.executeQuery();
             if(!set.first()){
-                AddUser(Username, Name, LastName, Email, Password);
+                AddUser(Username, Name, LastName, Email, Password,Role);
                 return true;
             }
         }
@@ -94,16 +94,29 @@ public class UserDao {
         }
         return false;
     }
-    public static void AddUser(String Username,String Name,String LastName,String Email,String Password){
+    public static void AddUser(String Username,String Name,String LastName,String Email,String Password,int Role){
         Connection con =DbUtil.getConnection();
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = con.prepareStatement("INSERT INTO users (Username,Name,LastName,Email,Password) values(?,?,?,?,?)");
+            preparedStatement = con.prepareStatement("INSERT INTO users (Username,Name,LastName,Email,Password,Role) values(?,?,?,?,?,?)");
             preparedStatement.setString(1, Username);
             preparedStatement.setString(2, Name);
             preparedStatement.setString(3, LastName);
             preparedStatement.setString(4, Email);
             preparedStatement.setString(5, Password);
+            preparedStatement.setInt(6, Role);
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public static void DeleteUser(int UserId){
+        Connection con =DbUtil.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = con.prepareStatement("DELETE FROM users WHERE UserId = ?");
+            preparedStatement.setInt(1, UserId);
             preparedStatement.executeUpdate();
         }
         catch (SQLException ex) {

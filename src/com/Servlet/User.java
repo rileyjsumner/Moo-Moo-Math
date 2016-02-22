@@ -104,18 +104,19 @@ public class User extends HttpServlet {
                     forward = "/crud/users.jsp";
                     request.setAttribute("users", UserDao.GetAllUsers());
                 }
+                else if(CRUDaction.equals("adduserform")){
+                    forward = "/crud/add.jsp";
+                    request.setAttribute("addList",Arrays.asList("Username","First Name","Last Name","Password","Email","Role"));
+                    request.setAttribute("addType", "User");
+                }
                 else if(CRUDaction.equals("edituserform")){
                     forward = "/crud/edit.jsp";
                     request.setAttribute("editList",UserDao.GetUserProperties(Integer.parseInt(request.getParameter("userId"))));
                     request.setAttribute("editType", "User");
                 }
-                else if(CRUDaction.equals("edituser")){
-                    Enumeration<String> test = request.getParameterNames();
-                    String h="";
-                    while (test.hasMoreElements()){
-                        h= test.nextElement();
-                        System.out.println("T_PARAMETER: "+h+" : "+request.getParameter(h));
-                    }
+                else if(CRUDaction.equals("deleteuser")){
+                    forward = "/crud/users.jsp";
+                    UserDao.DeleteUser(Integer.parseInt(request.getParameter("userId")));
                 }
                 else{
                     forward = "/crud/crud.jsp";
@@ -290,7 +291,7 @@ public class User extends HttpServlet {
             String Email=request.getParameter("Email");
             String Password=request.getParameter("Password");
             Connection con= DbUtil.getConnection();
-            UserDao.SafeAddUser(Username, FirstName, LastName, Email, Password);
+            UserDao.SafeAddUser(Username, FirstName, LastName, Email, Password,0);
             forward="/Home.jsp";
     	} // Things that require ID :
         else if(Role == -1 || UserId == -1){
@@ -311,8 +312,30 @@ public class User extends HttpServlet {
                     String editLastName = request.getParameter("editLast Name");
                     String editPassword = request.getParameter("editPassword");
                     String editEmail = request.getParameter("editEmail");
-                    int editRole = Integer.parseInt(request.getParameter("editUserID"));
+                    int editRole=0;
+                    try{
+                        editRole = Integer.parseInt(request.getParameter("editRole"));
+                    }
+                    catch (NumberFormatException ex){
+                        
+                    }
                     UserDao.UpdateUser(editUserID,editUserName, editFirstName, editLastName, editEmail, editPassword, editRole);
+                    forward="/crud/users.jsp";
+                }
+                else if(CRUDaction.equals("addUser")){
+                    String editUserName = request.getParameter("addUsername");
+                    String editFirstName = request.getParameter("addFirst Name");
+                    String editLastName = request.getParameter("addLast Name");
+                    String editPassword = request.getParameter("addPassword");
+                    String editEmail = request.getParameter("addEmail");
+                    int editRole=0;
+                    try{
+                        editRole = Integer.parseInt(request.getParameter("addRole"));
+                    }
+                    catch (NumberFormatException ex){
+                        
+                    }
+                    UserDao.SafeAddUser(editUserName, editFirstName, editLastName, editEmail, editPassword,editRole);
                     forward="/crud/users.jsp";
                 }
                 else{

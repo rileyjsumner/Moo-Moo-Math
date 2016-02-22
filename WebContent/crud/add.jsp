@@ -1,14 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<c:if test="${empty general}">
-    <c:redirect url="/User?action=crud&crudaction=users"/>
+<c:if test="${empty buttons}">
+    <c:redirect url="User?action=crud"/>
 </c:if>
-<c:if test="${empty users}">
-    <c:redirect url="/User?action=crud&crudaction=users"/>
+<c:if test="${empty general}">
+    <c:redirect url="User?action=crud"/>
+</c:if>
+<c:if test="${empty addList}">
+    <c:redirect url="User?action=crud"/>
+</c:if>
+<c:if test="${empty addType}">
+    <c:redirect url="User?action=crud"/>
 </c:if>
 <html>
     <head>
-        <title>Edit Users</title>
+        <title>Add ${addType}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" href = "main.css">
@@ -17,6 +23,43 @@
     </head>
     <body>
         <script>
+            Object.size = function(obj) {
+                var size = 0, key;
+                for (key in obj) {
+                    if (obj.hasOwnProperty(key)) size++;
+                }
+                return size;
+            };
+            function getLessons(grade){
+                switch(grade){
+${buttons.GetData()}
+                }
+            }
+            function viewGrade(grade){
+                var myNode = document.getElementById("LessonButtonContainer");
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.firstChild);
+                }
+                var lessons = getLessons(grade);
+                var element;
+                for(i =0;i<Object.size(lessons);i++){
+                    element = document.createElement("input");
+                    element.setAttribute("type", "button");
+                    element.setAttribute("value", lessons[i]);
+                    element.setAttribute('onclick', "document.location.href = 'User?action=next&lesson="+grade+"."+(i+1)+"'");
+                    element.style.backgroundColor = hslToRgb((grade-1)*.1+i*.02, .8, .6);
+                    element.style.borderColor = hslToRgb((grade-1)*.1+i*.02, .8, .4);
+                    element.style.borderWidth = "4px";
+                    element.style.borderStyle = "solid";
+                    document.getElementById("LessonButtonContainer").appendChild(element);
+                }
+            }
+            function toLesson(grade,lesson){
+                document.location.href = 'User?action=next&lesson='+grade+'.'+lesson;
+            }
+            function toGrade(grade){
+                document.location.href = 'User?action=viewLessons&grade='+grade;
+            }
             function rgbToHex(r, g, b) {
                 if(r < 0 || r > 255) alert("r is out of bounds; "+r);
                 if(g < 0 || g > 255) alert("g is out of bounds; "+g);
@@ -110,37 +153,26 @@
             </div>
             <div class = "content">
                 <div class ="text-center">
-                    <table border=1 style="margin: 0px auto;">
-                        <thead>
-                            <tr>
-                                <th>User ID</th>
-                                <th>Username</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Password</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th colspan=2>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${users}" var="user">
+                    <form method="POST" action="User?action=crud&crudaction=add${addType}" name = "Add">
+                        <table border=1 style="margin: 0px auto;">
+                            <thead>
                                 <tr>
-                                    <td><c:out value="${user.GetUserId()}" /></td>
-                                    <td><c:out value="${user.GetUserName()}" /></td>
-                                    <td><c:out value="${user.GetFirstName()}" /></td>
-                                    <td><c:out value="${user.GetLastName()}" /></td>
-                                    <td><c:out value="${user.GetPassword()}" /></td>
-                                    <td><c:out value="${user.GetEmail()}" /></td>
-                                    <td><c:out value="${user.GetRole()}" /></td>
-                                    <td><a href="User?action=crud&crudaction=edituserform&userId=<c:out value="${user.GetUserId()}"/>">Update</a></td>
-                                    <td><a href="User?action=crud&crudaction=deleteuser&userId=<c:out value="${user.GetUserId()}"/>">Delete</a></td>
+                                    <c:forEach items="${addList}" var="name">
+                                        <th><c:out value="${name}" /></th>
+                                    </c:forEach>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                    <p></p>
-                    <input type = "button" style = "background-color:#81C6C9; border: 4px solid #489194" onclick = "document.location.href = 'User?action=crud&crudaction=adduserform'" value = "New User"/>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <c:forEach items="${addList}" var="name">
+                                        <td><input class ='tableform' name='add<c:out value="${name}" />' type='text' value="" /></td>
+                                    </c:forEach>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p></p>
+                        <input style ="border-color: #31B531;background-color: #028F02;" type="submit" value="Add ${addType}"/>
+                    </form>
                 </div>
             </div>
         </div>
