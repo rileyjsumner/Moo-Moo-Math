@@ -26,7 +26,7 @@
             };
             function getLessons(grade){
                 switch(grade){
-${buttons.GetData()}
+                    ${buttons.GetData()}
                 }
             }
             function viewGrade(grade){
