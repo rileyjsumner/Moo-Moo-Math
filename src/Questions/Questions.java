@@ -26,7 +26,7 @@ public class Questions {
                                 bean.HTML="<p>What number comes after "+a+"?</p>\n";
                                 bean.Apply(true, "TEXT");
                                 a++;
-                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(a), 2);
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(a), 1);
                                 break;
                             case 1:
                                 bean.Title="Counting Intervals";
@@ -36,7 +36,7 @@ public class Questions {
                                 bean.HTML = "<p>When counting by " + c + "'s, what number comes after "+b+"? </p>\n";
                                 bean.Apply(true, "TEXT");
                                 b+=c;
-                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(b), 3);
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(b), 6);
                                 break;
                             case 2:
                                 bean.Title="Counting Patterns";
@@ -45,7 +45,7 @@ public class Questions {
                                 bean.HTML = "<p>What number comes next in the sequence? \n" + d + ", " + (d + e) + ", " + (d + e * 2) + ", " + (d + e * 3) + ", " + (d + e * 4) + "</p>\n";
                                 bean.Apply(true, "TEXT");
                                 d = (d + e * 5);
-                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(d), 4);
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(d), 6);
                                 break;
 			     case 3:
 				bean.Title="Odd or Even";
@@ -76,7 +76,7 @@ public class Questions {
 			bean.HTML = "<p>What is " + g + " + " + h + "?</p>\n";
 			bean.Apply(true, "TEXT");
 			int i = g + h;
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(i), 6);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(i), 1);
 			break;
 		     case 3:
 			bean.Title="Subtraction";
@@ -85,7 +85,7 @@ public class Questions {
 			bean.HTML = "<p>What is " + j + " - " + k + "?</p>\n";
 			bean.Apply(true, "TEXT");
 			int l = j - k;
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(l), 7);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(l), 2);
 			break;
 		    case 4:
 			bean.Title="Measurement";
@@ -107,7 +107,7 @@ public class Questions {
 			else if (o == 3){p = n / 4;}
 			else if (o == 4){p = n / 2;}
 			else if (o == 5){p = n / 16;}
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(p), 8);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(p), 0);
 			break;
                 }
 		break;
@@ -120,7 +120,7 @@ public class Questions {
 			bean.HTML="<p>What is " + q + " + " + r + "?</p>\n";
 			bean.Apply(true, "TEXT");
 			int s = q + r;
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(s), 9);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(s), 1);
 			break;
 		     case 2:
 		     	bean.Title = "3 digit Subtraction";
@@ -129,7 +129,7 @@ public class Questions {
 			bean.HTML="<p>What is " + t + " - " + u + "?</p>\n";
 			bean.Apply(true, "TEXT");
 			int v = t - u;
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(v), 10);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(v), 2);
 			break; 
 		     case 3:
 		     	int hoon = random.nextInt(2);
@@ -142,7 +142,7 @@ public class Questions {
                                 bean.HTML = "<p>When counting by " + x + "'s, what number comes after "+w+"? </p>\n";
                                 bean.Apply(true, "TEXT");
                                 w+=x;
-                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(w), 11);
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(w), 6);
                                 break;
 			     case 1:
 				  bean.Title="Counting Patterns";
@@ -151,7 +151,7 @@ public class Questions {
                                 bean.HTML = "<p>What number comes next in the sequence? \n" + y + ", " + (y + z) + ", " + (y + z * 2) + ", " + (y + z * 3) + ", " + (y + z * 4) + "</p>\n";
                                 bean.Apply(true, "TEXT");
                                 y = (y + z * 5);
-                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(y), 12);
+                                AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(y), 6);
                                 break;
 			     case 2:
 				  bean.Title="Odd or Even";
@@ -161,7 +161,7 @@ public class Questions {
 				  bean.HTML = "<p>Is this number even? (yes or no) " + aa + "</p>\n";
 				  bean.Apply(true, "TEXT");
 				  if (b1 == 0) {c2 = true;}
-				  AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(c2), 13);
+				  AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(c2), 5);
 				  break;
 			}
 			break;
@@ -184,7 +184,7 @@ public class Questions {
 			{k3 = ac + "/" + af;}
 			else if (ae == 2);
 			{k3 = ad + "/" + af;}
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(k3), 13);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(k3), 7);
 			break;
                 }
                 break;
@@ -197,7 +197,7 @@ public class Questions {
 			bean.HTML="<p>What is " + ag + " x " + ah + "?</p>\n";
 			bean.Apply(true, "TEXT");
 			int ai = ag * ah;
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(ai), 14);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(ai), 3);
 			break;
 		    case 2:
 			bean.Title="Division";
@@ -209,7 +209,7 @@ public class Questions {
 			bean.HTML="<p>What is " + al + " / " + am[an] + "?</p>\n";
 			bean.Apply(true, "TEXT");
 			int ao = al / am[an];
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(ao), 15);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(ao), 4);
 			break;
 		    case 3:
 			bean.Title="Fractions";
@@ -227,7 +227,7 @@ public class Questions {
 			bean.HTML="<p>" + o3 + "</p>\n";
 			bean.Apply(true, "TEXT");
 			String p3 = ap + "/" + aq;
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(p3), 16);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(p3), 8);
 			break; 
 		    case 4:
 			int kekhoon = random.nextInt(2);
@@ -245,7 +245,7 @@ public class Questions {
 				int az[] = {at, au, av, aw, ax, ay};
 				Arrays.sort(az);
 				String q3 = ""+az[0]+az[1]+az[2]+az[3]+az[4]+az[5];
-				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(q3), 17);
+				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(q3), 13);
 				break;
 			    case 1:
 				bean.Title="Guess My Number";
@@ -255,10 +255,8 @@ public class Questions {
 				    if (ba > bb){bd = ba - bb;}
 				    else if (ba < bb){bd = bb - ba;}
 				bean.HTML="<p>The sum of 2 numbers is "+bc+". The difference of 2 numbers is "+bd+".\nWhat are the two numbers?</p>\n";
-				bean.Apply(true, "TEXT");
-				bean.Apply(true, "TEXT");
-				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(ba), 18);
-				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(bb), 19);
+				bean.Apply(true, "TEXT(2)");
+				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(ba)+","+String.valueOf(bb), 0);
 				break;
 			    case 2:
 				bean.Title="Guess My Number";
@@ -280,7 +278,7 @@ public class Questions {
 				int bj = be - bh; int bk = be+bh;
 				bean.HTML="<p>I am greater than "+bj+", but less than "+bk+".</p>\n";
 				bean.Apply(true, "TEXT");
-				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(be), 20);
+				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(be), 0);
 				break;
 			    }
 			break;
@@ -299,7 +297,7 @@ public class Questions {
 			bean.HTML="<p>"+q3+r3+"</p>\n";
 			bean.Apply(true, "TEXT");
 			double f1 = b1+c1+d1+e1;
-			AnswersDao.safeCreateAnswer(UserId, grade,lesson, String.valueOf(f1), 21);
+			AnswersDao.safeCreateAnswer(UserId, grade,lesson, String.valueOf(f1), 9);
 			break;
 		    case 6:
 			bean.Title="Geometry";
@@ -308,7 +306,7 @@ public class Questions {
 			bean.HTML="<p>A rectangle is "+bp+" inches by "+bq+" inches. What is the area in inches squared?</p>\n";
 			bean.Apply(true, "TEXT");
 			int br = bp*bq;
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(br), 22);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(br), 10);
 			break;
                 }
                 break;
@@ -323,7 +321,7 @@ public class Questions {
 			bean.HTML="<p>What is "+bs+" + "+s3[bu]+" if "+s3[bu]+" = "+bt+"?</p>\n";
 			bean.Apply(true, "TEXT");
 			int bv = bs+bt;
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(bv), 23);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(bv), 11);
 			break;
 		     case 2:
 		     case 3:
@@ -345,7 +343,7 @@ public class Questions {
 				int cd = random.nextInt(5);
 				bean.HTML="<p>"+t3+"\nWhat number is in the "+ u3[cd]+"’s place?";
 				bean.Apply(true, "TEXT");
-				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(cc[cd]), 24);
+				AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(cc[cd]), 12);
 				break;
 			    case 1:
 				int kekkek = random.nextInt(1);
@@ -368,7 +366,7 @@ public class Questions {
 					boolean d2;
 					if (g1>h1) {d2=true;}
 					else {d2=false;}
-					AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(d2), 25);
+					AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(d2), 13);
 					break;
 				  case 1:
 					bean.Title="Greater Than, Less Than";
@@ -387,7 +385,7 @@ public class Questions {
 					boolean e2;
 					if (j1>k1) {e2=true;}
 					else {e2=false;}
-					AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(e2), 26);
+					AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(e2), 13);
 					break;
 				}
 				break;
@@ -408,7 +406,7 @@ public class Questions {
 			String x3 = v3[cq]+" wants to put tile in "+w3+" house. The room is "+cs+ " by "+ct+" feet. Tile is $"+cr+" a square foot. How much will the entire room cost?";
 			bean.HTML="<p>"+x3+"</p>\n";
 			bean.Apply(true, "TEXT");
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(cv), 27);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(cv), 10);
 			break;
                 }
                 break;
@@ -429,7 +427,7 @@ public class Questions {
 			int de = cx * dc;
 			bean.HTML="<p>Are these two ratios equivalent?:\n" + cw+":"+db+" and "+cx+":"+dc+"?</p>\n";
 			bean.Apply(true, "TEXT");
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(f2[da]), 28);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(f2[da]), 14);
 			break;			
 		    case 2:
 		    case 3:
@@ -444,7 +442,7 @@ public class Questions {
 			bean.HTML="<p>What is "+l1+" + "+m1+"?</p>\n";
 			bean.Apply(true, "TEXT");
 			double n1 = l1+m1;
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(n1), 29);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(n1), 1);
 		    case 5:
 			bean.Title="Subtract Decimals";
 			int dj = random.nextInt(4)+5;
@@ -456,7 +454,7 @@ public class Questions {
 			bean.HTML="<p>What is "+o1+" - "+p1+"?</p>\n";
 			bean.Apply(true, "TEXT");
 			double q1 = p1-o1;
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(q1), 30);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(q1), 2);
 		    case 6:
 			bean.Title="Multiply Decimals";
 			int dn = random.nextInt(10);
@@ -468,7 +466,7 @@ public class Questions {
 			bean.HTML="<p>What is "+r1+" x "+s1+"?</p>\n";
 			bean.Apply(true, "TEXT");
 			double t1 = r1*s1;
-			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(t1), 31);
+			AnswersDao.safeCreateAnswer(UserId, grade, lesson, String.valueOf(t1), 3);
                 }
                 break;
             default:
